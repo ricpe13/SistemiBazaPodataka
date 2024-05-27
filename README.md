@@ -1,5 +1,3 @@
-# SistemiBazaPodataka
-
 Zadatak 29 - Baza podataka ZELENE POVRŠINE 
 
 Za potrebe gradske uprave potrebno je projektovati bazu za vođenje evidencije o zelenim površinama koje se nalaze na teritoriji grada Niša. Za svaku zelenu površinu se pamti jedinstveni identifikacioni broj, naziv gradske opštine na čijoj teritoriji se zelena površina nalazi i informacija o zoni ugroženosti od zagađenja kojoj zelena površina pripada. Za parkove se pamti naziv parka i površina parka u hektarima. Za drvorede se pamti ulica u kojoj se drvored nalazi, dužina drvoreda u metrima, broj stabala i vrsta drveta 
