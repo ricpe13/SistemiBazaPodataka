@@ -1,0 +1,93 @@
+INSERT INTO ZASTITA VALUES (0, 'Institut za zastitu prirode', '15-MAR-2015', 50000, 'Stablo sa istorijskim znacajem');
+
+INSERT INTO ZASTITA VALUES (1, 'Institut za zastitu kulturnog nasledja', '03-JAN-2005', 400000, 'Spomenik poznate licnosti');
+
+INSERT INTO ZASTITA VALUES (2, 'Zavod za zastitu spomenika kulture', '16-FEB-2007', 350000, 'Skulptura od izuzetnog umetnickog znacaja');
+
+INSERT INTO ZASTITA VALUES (3, 'Zavod za zastitu fontana', '14-MAY-2009', 300000, 'Stara fontana sa istorijskim znacajem');
+
+INSERT INTO ZELENA_POVRSINA VALUES (0, 'Medijana', 'A', 'park');
+
+INSERT INTO ZELENA_POVRSINA VALUES (1, 'Palilula', 'B', 'drvored');
+
+INSERT INTO ZELENA_POVRSINA VALUES (2, 'Crveni Krst', 'C', 'travnjak');
+
+INSERT INTO ZELENA_POVRSINA VALUES (3, 'Pantelej', 'A', 'park');
+
+INSERT INTO ZELENA_POVRSINA VALUES (4, 'Palilula', '2A', 'park');
+
+INSERT INTO ZELENA_POVRSINA VALUES (5, 'Crveni Krst', 'D', 'park');
+
+INSERT INTO ZELENA_POVRSINA VALUES (6, 'Medijana', 'C', 'drvored')
+
+INSERT INTO ZELENA_POVRSINA VALUES (7, 'Medijana', '2B', 'travnjak');
+
+INSERT INTO PARK VALUES (0, 'Svetog Save', 5);
+
+INSERT INTO PARK VALUES (3, 'Vijetnam', 3);
+
+INSERT INTO PARK VALUES (4, 'Boston', 6);
+
+INSERT INTO PARK VALUES (5, 'Cara Konstantina', 4);
+
+INSERT INTO GRUPA_RADNIKA VALUES (0, 'Kosaci', 0);
+
+INSERT INTO GRUPA_RADNIKA VALUES (1, 'Zeleni momci', 3);
+
+INSERT INTO GRUPA_RADNIKA VALUES (2, 'Opaki', 4);
+
+INSERT INTO GRUPA_RADNIKA VALUES (3, 'NOV', 5);
+
+INSERT INTO RADNIK VALUES (0, 'Nikola', 'Petrovic', 2012987730034, 'Koste Stamenkovica 2A', 123, 'Petar', 'III stepen', '20-DEC-1987', 1, 0, 0, 0, 1);
+
+INSERT INTO RADNIK VALUES (1, 'Milan', 'Nikolic', 1910986730132, 'Nikole Pasica 6', 143, 'Bojan', 'IV stepen', '19-OCT-1986', 0, 1, 0, 1, null);
+
+INSERT INTO RADNIK VALUES (2, 'Jovan', 'Milosavljevic', '0503990720914', 'Bulevar Nemanjica 73/12', 225, 'Uros', 'VI stepen', '05-MAR-1990', 0, 0, 1, 3, 0);
+
+INSERT INTO RADNIK VALUES (3, 'Aleksa', 'Jovic', '0901980730915', 'Alekse Santica 44/3', 160, 'Marko', 'VII stepen', '09-JAN-1980', 0, 1, 1, 4, 2);
+
+INSERT INTO RADNIK VALUES (4, 'Bojan', 'Stevanovic', 1104991760232, 'Bulevar Medijana 22/14', 378, 'Pavle', 'IV stepen', '11-APR-1991', 0, 1, 0, 2, null);
+
+INSERT INTO SEF VALUES (0, '2012987730034', 1);
+
+INSERT INTO SEF VALUES (2, '0503990720914', 0);
+
+INSERT INTO DRVORED VALUES (1, 'Svetog Pantelejmona', 50, 'bukva', 10);
+
+INSERT INTO DRVORED VALUES (6, 'Bulevar Medijana', 70, 'hrast', 15);
+
+INSERT INTO TRAVNJAK VALUES (2, 'Sremska 15', 3);
+
+INSERT INTO TRAVNJAK VALUES (7, 'Miroslava Santica 3', 2);
+
+INSERT INTO KLUPA VALUES (1, 0);
+
+INSERT INTO KLUPA VALUES (2, 3);
+
+INSERT INTO DRVO VALUES (3, 5, 'bor', '15-MAR-2015', 20, 30, 0, 0);
+
+INSERT INTO DRVO VALUES (5, 6, 'hrast', '15-MAR-2015', 30, 20, 0, 0);
+
+INSERT INTO ZASTICENI_OBJEKAT VALUES (1, 1);
+
+INSERT INTO ZASTICENI_OBJEKAT VALUES (2, 2);
+
+INSERT INTO SKULPTURA VALUES (4, 'Jovan Stanimirovic', 1, 0);
+
+INSERT INTO SKULPTURA VALUES (5, 'Petar Petrovic', 1, 4);
+
+INSERT INTO SPOMENIK VALUES (6, 'Vuk Karadzic', 2, 0);
+
+INSERT INTO SPOMENIK VALUES (7, 'Aleksandar Karadjordjevic', 2, 3);
+
+INSERT INTO DECIJE_IGRALISTE VALUES (8, 10, 1, 15, 3);
+
+INSERT INTO DECIJE_IGRALISTE VALUES (9, 5, 0, 12, 4);
+
+INSERT INTO SVETILJKA VALUES (10, 0);
+
+INSERT INTO SVETILJKA VALUES (11, 3);
+
+INSERT INTO FONTANA VALUES (12, 3);
+
+INSERT INTO FONTANA VALUES (13, 4);
