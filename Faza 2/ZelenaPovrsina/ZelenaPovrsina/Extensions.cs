@@ -1,4 +1,4 @@
-﻿namespace ProdavnicaIgracaka;
+﻿namespace ZelenaPovrsina;
 
 public static class Extensions
 {
