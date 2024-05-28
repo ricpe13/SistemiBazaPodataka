@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentNHibernate.Mapping;
-using ZelenaPovrsina.Entiteti;
-
-namespace ZelenaPovrsina.Mapiranja
+﻿namespace ZelenaPovrsina.Mapiranja
 {
     internal class TravnjakMapiranja : SubclassMap<Travnjak>
     {
