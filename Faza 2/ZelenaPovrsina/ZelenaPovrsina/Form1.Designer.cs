@@ -28,87 +28,86 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmdUcitavanjeRadnika = new System.Windows.Forms.Button();
-            this.cmdDodavanjeRadnika = new System.Windows.Forms.Button();
-            this.cmdManyToOneRadnikGrupa = new System.Windows.Forms.Button();
-            this.cmdOneToManyGrupaRadnik = new System.Windows.Forms.Button();
-            this.cmdDodajRadnikaUGrupu = new System.Windows.Forms.Button();
-            this.cmdVratiPark = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            cmdUcitavanjeRadnika = new Button();
+            cmdDodavanjeRadnika = new Button();
+            cmdManyToOneRadnikGrupa = new Button();
+            cmdOneToManyGrupaRadnik = new Button();
+            cmdDodajRadnikaUGrupu = new Button();
+            cmdVratiPark = new Button();
+            SuspendLayout();
             // 
             // cmdUcitavanjeRadnika
             // 
-            this.cmdUcitavanjeRadnika.Location = new System.Drawing.Point(12, 12);
-            this.cmdUcitavanjeRadnika.Name = "cmdUcitavanjeRadnika";
-            this.cmdUcitavanjeRadnika.Size = new System.Drawing.Size(132, 23);
-            this.cmdUcitavanjeRadnika.TabIndex = 0;
-            this.cmdUcitavanjeRadnika.Text = "Ucitavanje radnika";
-            this.cmdUcitavanjeRadnika.UseVisualStyleBackColor = true;
-            this.cmdUcitavanjeRadnika.Click += new System.EventHandler(this.cmdUcitavanjeRadnika_Click);
+            cmdUcitavanjeRadnika.Location = new Point(12, 12);
+            cmdUcitavanjeRadnika.Name = "cmdUcitavanjeRadnika";
+            cmdUcitavanjeRadnika.Size = new Size(132, 23);
+            cmdUcitavanjeRadnika.TabIndex = 0;
+            cmdUcitavanjeRadnika.Text = "Ucitavanje radnika";
+            cmdUcitavanjeRadnika.UseVisualStyleBackColor = true;
+            cmdUcitavanjeRadnika.Click += cmdUcitavanjeRadnika_Click;
             // 
             // cmdDodavanjeRadnika
             // 
-            this.cmdDodavanjeRadnika.Location = new System.Drawing.Point(12, 41);
-            this.cmdDodavanjeRadnika.Name = "cmdDodavanjeRadnika";
-            this.cmdDodavanjeRadnika.Size = new System.Drawing.Size(132, 23);
-            this.cmdDodavanjeRadnika.TabIndex = 1;
-            this.cmdDodavanjeRadnika.Text = "Dodaj ili azuriraj radnika";
-            this.cmdDodavanjeRadnika.UseVisualStyleBackColor = true;
-            this.cmdDodavanjeRadnika.Click += new System.EventHandler(this.cmdDodavanjeRadnika_Click);
+            cmdDodavanjeRadnika.Location = new Point(12, 41);
+            cmdDodavanjeRadnika.Name = "cmdDodavanjeRadnika";
+            cmdDodavanjeRadnika.Size = new Size(132, 23);
+            cmdDodavanjeRadnika.TabIndex = 1;
+            cmdDodavanjeRadnika.Text = "Dodaj ili azuriraj radnika";
+            cmdDodavanjeRadnika.UseVisualStyleBackColor = true;
+            cmdDodavanjeRadnika.Click += cmdDodavanjeRadnika_Click;
             // 
             // cmdManyToOneRadnikGrupa
             // 
-            this.cmdManyToOneRadnikGrupa.Location = new System.Drawing.Point(12, 70);
-            this.cmdManyToOneRadnikGrupa.Name = "cmdManyToOneRadnikGrupa";
-            this.cmdManyToOneRadnikGrupa.Size = new System.Drawing.Size(132, 38);
-            this.cmdManyToOneRadnikGrupa.TabIndex = 2;
-            this.cmdManyToOneRadnikGrupa.Text = "Veza many-to-one (Radnik-Grupa)";
-            this.cmdManyToOneRadnikGrupa.UseVisualStyleBackColor = true;
-            this.cmdManyToOneRadnikGrupa.Click += new System.EventHandler(this.cmdManyToOneRadnikGrupa_Click);
+            cmdManyToOneRadnikGrupa.Location = new Point(12, 70);
+            cmdManyToOneRadnikGrupa.Name = "cmdManyToOneRadnikGrupa";
+            cmdManyToOneRadnikGrupa.Size = new Size(132, 38);
+            cmdManyToOneRadnikGrupa.TabIndex = 2;
+            cmdManyToOneRadnikGrupa.Text = "Veza many-to-one (Radnik-Grupa)";
+            cmdManyToOneRadnikGrupa.UseVisualStyleBackColor = true;
+            cmdManyToOneRadnikGrupa.Click += cmdManyToOneRadnikGrupa_Click;
             // 
             // cmdOneToManyGrupaRadnik
             // 
-            this.cmdOneToManyGrupaRadnik.Location = new System.Drawing.Point(12, 114);
-            this.cmdOneToManyGrupaRadnik.Name = "cmdOneToManyGrupaRadnik";
-            this.cmdOneToManyGrupaRadnik.Size = new System.Drawing.Size(132, 34);
-            this.cmdOneToManyGrupaRadnik.TabIndex = 3;
-            this.cmdOneToManyGrupaRadnik.Text = "Veza one-to-many (Grupa-Radnik)";
-            this.cmdOneToManyGrupaRadnik.UseVisualStyleBackColor = true;
-            this.cmdOneToManyGrupaRadnik.Click += new System.EventHandler(this.cmdOneToManyGrupaRadnik_Click);
+            cmdOneToManyGrupaRadnik.Location = new Point(12, 114);
+            cmdOneToManyGrupaRadnik.Name = "cmdOneToManyGrupaRadnik";
+            cmdOneToManyGrupaRadnik.Size = new Size(132, 45);
+            cmdOneToManyGrupaRadnik.TabIndex = 3;
+            cmdOneToManyGrupaRadnik.Text = "Veza one-to-many (Grupa-Radnik)";
+            cmdOneToManyGrupaRadnik.UseVisualStyleBackColor = true;
+            cmdOneToManyGrupaRadnik.Click += cmdOneToManyGrupaRadnik_Click;
             // 
             // cmdDodajRadnikaUGrupu
             // 
-            this.cmdDodajRadnikaUGrupu.Location = new System.Drawing.Point(12, 154);
-            this.cmdDodajRadnikaUGrupu.Name = "cmdDodajRadnikaUGrupu";
-            this.cmdDodajRadnikaUGrupu.Size = new System.Drawing.Size(132, 25);
-            this.cmdDodajRadnikaUGrupu.TabIndex = 4;
-            this.cmdDodajRadnikaUGrupu.Text = "Dodaj radnika u grupu";
-            this.cmdDodajRadnikaUGrupu.UseVisualStyleBackColor = true;
-            this.cmdDodajRadnikaUGrupu.Click += new System.EventHandler(this.cmdDodajRadnikaUGrupu_Click);
+            cmdDodajRadnikaUGrupu.Location = new Point(12, 165);
+            cmdDodajRadnikaUGrupu.Name = "cmdDodajRadnikaUGrupu";
+            cmdDodajRadnikaUGrupu.Size = new Size(132, 25);
+            cmdDodajRadnikaUGrupu.TabIndex = 4;
+            cmdDodajRadnikaUGrupu.Text = "Dodaj radnika u grupu";
+            cmdDodajRadnikaUGrupu.UseVisualStyleBackColor = true;
+            cmdDodajRadnikaUGrupu.Click += cmdDodajRadnikaUGrupu_Click;
             // 
             // cmdVratiPark
             // 
-            this.cmdVratiPark.Location = new System.Drawing.Point(209, 12);
-            this.cmdVratiPark.Name = "cmdVratiPark";
-            this.cmdVratiPark.Size = new System.Drawing.Size(174, 32);
-            this.cmdVratiPark.TabIndex = 5;
-            this.cmdVratiPark.Text = "Vrati park one-to-one (Park-Grupa)";
-            this.cmdVratiPark.UseVisualStyleBackColor = true;
-            this.cmdVratiPark.Click += new System.EventHandler(this.cmdVratiPark_Click);
+            cmdVratiPark.Location = new Point(209, 12);
+            cmdVratiPark.Name = "cmdVratiPark";
+            cmdVratiPark.Size = new Size(174, 32);
+            cmdVratiPark.TabIndex = 5;
+            cmdVratiPark.Text = "Vrati park one-to-one (Park-Grupa)";
+            cmdVratiPark.UseVisualStyleBackColor = true;
+            cmdVratiPark.Click += cmdVratiPark_Click;
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(942, 444);
-            this.Controls.Add(this.cmdVratiPark);
-            this.Controls.Add(this.cmdDodajRadnikaUGrupu);
-            this.Controls.Add(this.cmdOneToManyGrupaRadnik);
-            this.Controls.Add(this.cmdManyToOneRadnikGrupa);
-            this.Controls.Add(this.cmdDodavanjeRadnika);
-            this.Controls.Add(this.cmdUcitavanjeRadnika);
-            this.Name = "Form1";
-            this.Text = "Zelena Povrsina";
-            this.ResumeLayout(false);
-
+            ClientSize = new Size(942, 444);
+            Controls.Add(cmdVratiPark);
+            Controls.Add(cmdDodajRadnikaUGrupu);
+            Controls.Add(cmdOneToManyGrupaRadnik);
+            Controls.Add(cmdManyToOneRadnikGrupa);
+            Controls.Add(cmdDodavanjeRadnika);
+            Controls.Add(cmdUcitavanjeRadnika);
+            Name = "Form1";
+            Text = "Zelena Povrsina";
+            ResumeLayout(false);
         }
 
         #endregion

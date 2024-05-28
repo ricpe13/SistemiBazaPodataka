@@ -79,7 +79,7 @@ namespace ZelenaPovrsina
             {
                 ISession s = DataLayer.GetSession();
 
-                Radnik r = s.Load<Radnik>(0); //ovde se pise id radnika
+                Radnik r = s.Load<Radnik>(1); //ovde se pise id radnika
 
                 MessageBox.Show(r.Ime + " " + r.Prezime + " " + r.BrRadneKnjizice);
                 MessageBox.Show(r.PripadaGrupi.NazivG);
@@ -98,7 +98,7 @@ namespace ZelenaPovrsina
             {
                 ISession s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.GrupaRadnika gr = s.Load<ZelenaPovrsina.Entiteti.GrupaRadnika>(2);
+                ZelenaPovrsina.Entiteti.GrupaRadnika gr = s.Load<ZelenaPovrsina.Entiteti.GrupaRadnika>(1);
 
                 foreach (Radnik r in gr.RadniciGrupe)
                 {
