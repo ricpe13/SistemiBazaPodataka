@@ -6,7 +6,8 @@
         {
             Table("DRVO");
 
-            Abstract();
+            KeyColumn("IDO");
+
             Map(x => x.VisinaKrosnje, "VISINAKROSNJE");
             Map(x => x.Vrsta, "VRSTA");
             Map(x => x.DatumSadnje, "DATUMSADNJE");

@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 namespace ZelenaPovrsina.Mapiranja
 {
-    internal class ZasticeniObjekatMapiranja : ClassMap<ZelenaPovrsina.Entiteti.ZasticeniObjekat>
+    internal class ZasticeniObjekatMapiranja : SubclassMap<ObjekatMapiranja>
     {
         public ZasticeniObjekatMapiranja()
         {
-            Table("ZASTICENI_OBJEKAT");
+            
+            
 
-            Id(x => x.IdZO, "IDZO").GeneratedBy.TriggerIdentity();
-
-            //Map(x => x.IdZastite, "IDZASTITE");
-
-            References(x => x.PodZastitomZO).Column("IDZASTITE").LazyLoad();
+            //References(x => x.PodZastitomZO).Column("IDZASTITE").LazyLoad();
             
         }
+
+        
     }
 }

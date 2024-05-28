@@ -6,7 +6,7 @@
         {
             Table("KLUPA");
 
-            //Abstract();
+            KeyColumn("IDO");
             Map(x => x.Materijal, "MATERIJAL");
 
 

@@ -6,7 +6,7 @@
         {
             Table("DECIJE_IGRALISTE");
 
-            Abstract();
+            KeyColumn("IDO");
 
             Map(x => x.BrIgracaka, "BRIGRACAKKA");
             Map(x => x.Pesak, "PESAK");

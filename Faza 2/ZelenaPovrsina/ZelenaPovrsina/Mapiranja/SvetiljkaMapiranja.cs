@@ -6,7 +6,7 @@
         {
             Table("SVETILJKKA");
 
-            //Abstract();
+            KeyColumn("IDO");
             Map(x => x.BrSijalica, "BRSIJALICA");
 
         }
