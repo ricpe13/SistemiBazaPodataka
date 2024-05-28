@@ -14,6 +14,7 @@ namespace ZelenaPovrsina.Mapiranja
 
             KeyColumn("IDO");
             Map(x => x.Autor, "AUTOR");
+            References(x => x.Zastita).Column("IDZASTITE").LazyLoad();
 
 
         }

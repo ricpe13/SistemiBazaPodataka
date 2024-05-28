@@ -15,8 +15,8 @@
 
             // HasMany(x => x.ZasticeniObjekti).KeyColumn("IDZASTITE"); //najbolje je da se koristi ovo sto nije zakomentarisano
             // HasMany(x => x.ZasticeniObjekti).KeyColumn("IDZASTITE").LazyLoad().Cascade.All();
-            HasMany(x => x.ZasticeniObjekti).KeyColumn("IDZASTITE").LazyLoad().Cascade.All().Inverse();
-
+            HasMany(x => x.Spomenici).KeyColumn("IDZASTITE").LazyLoad().Cascade.All().Inverse();
+            HasMany(x => x.Skulpture).KeyColumn("IDZASTITE").LazyLoad().Cascade.All().Inverse();
             // HasMany(x => x.Drvece).KeyColumn("IDZASTITE"); //najbolje je da se koristi ovo sto nije zakomentarisano
             // HasMany(x => x.Drvece).KeyColumn("IDZASTITE").LazyLoad().Cascade.All();
             HasMany(x => x.Drvece).KeyColumn("IDZASTITE").LazyLoad().Cascade.All().Inverse();

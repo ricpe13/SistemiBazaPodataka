@@ -1,4 +1,5 @@
-﻿namespace ZelenaPovrsina.Entiteti
+﻿
+namespace ZelenaPovrsina.Entiteti
 {
     public class Zastita
     {
@@ -8,13 +9,17 @@
         public virtual int NovcanaSredstva { get; set; }
         public virtual string OpisZnacaja { get; set; }
 
-        public virtual IList<ZasticeniObjekat> ZasticeniObjekti { get; set; }
+        public virtual IList<Skulptura> Skulpture { get; set; }
+        public virtual IList<Spomenik> Spomenici { get; set; }
         public virtual IList<Drvo> Drvece { get; set; }
 
         public Zastita()
         {
-            ZasticeniObjekti = new List<ZasticeniObjekat>();
+            Skulpture = new List<Skulptura>();
+            Spomenici= new List<Spomenik>();
             Drvece = new List<Drvo>();
         }
+
+        
     }
 }

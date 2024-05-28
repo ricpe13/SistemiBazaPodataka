@@ -1,7 +1,9 @@
-﻿namespace ZelenaPovrsina.Entiteti
+﻿
+namespace ZelenaPovrsina.Entiteti
 {
-    internal class Skulptura : Objekat
+    public class Skulptura : Objekat
     {
-        public virtual string Autor { get; set; }
+        public required virtual string Autor { get; set; }
+        public virtual Zastita Zastita { get; set; }
     }
 }

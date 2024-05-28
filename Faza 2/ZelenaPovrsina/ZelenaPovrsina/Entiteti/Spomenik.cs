@@ -1,7 +1,9 @@
-﻿namespace ZelenaPovrsina.Entiteti
+﻿
+namespace ZelenaPovrsina.Entiteti
 {
-    internal class Spomenik : Objekat
+    public class Spomenik : Objekat
     {
-        public virtual string NazivS { get; set; }
+        public required virtual string NazivS { get; set; }
+        public virtual Zastita Zastita { get; set; }
     }
 }
