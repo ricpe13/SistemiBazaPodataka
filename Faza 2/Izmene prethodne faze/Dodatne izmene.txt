@@ -58,7 +58,7 @@ CONSTRAINT OBJP FOREIGN KEY (IDPARKA) REFERENCES PARK(IDZ)
 );
 
 ALTER TABLE OBJEKAT 
-ADD CONSTRAINT CHECK_TIP CHECK (TIP IN ('klupa', 'drvo', 'zasticeni objekat', 'decije igraliste', 'svetiljka', 'fontana'));
+ADD CONSTRAINT CHECK_TIP CHECK (TIP IN ('klupa', 'drvo', 'spomenik', 'skulptura', 'decije igraliste', 'svetiljka', 'fontana'));
 
 CREATE SEQUENCE OBJEKAT_ID_SEQ
     MINVALUE 1
