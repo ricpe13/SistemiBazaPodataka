@@ -8,5 +8,14 @@ namespace ZelenaPovrsina.Mapiranja
 {
     internal class SkulpturaMapiranja : SubclassMap<Skulptura>
     {
+        public SkulpturaMapiranja()
+        {
+            Table("SKULPTURA");
+
+            KeyColumn("IDO");
+            Map(x => x.Autor, "AUTOR");
+
+
+        }
     }
 }

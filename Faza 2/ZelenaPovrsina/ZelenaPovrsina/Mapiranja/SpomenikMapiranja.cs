@@ -8,5 +8,14 @@ namespace ZelenaPovrsina.Mapiranja
 {
     internal class SpomenikMapiranja : SubclassMap<Spomenik>
     {
+        public SpomenikMapiranja()
+        {
+            Table("SPOMENIK");
+
+            KeyColumn("IDO");
+            Map(x => x.NazivS, "NAZIVS");
+
+
+        }
     }
 }

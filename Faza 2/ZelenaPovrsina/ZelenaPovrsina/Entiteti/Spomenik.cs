@@ -2,5 +2,6 @@
 {
     internal class Spomenik : Objekat
     {
+        public virtual string NazivS { get; set; }
     }
 }
