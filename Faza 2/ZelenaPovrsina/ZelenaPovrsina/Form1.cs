@@ -25,7 +25,7 @@ namespace ZelenaPovrsina
                 ISession s = DataLayer.GetSession();
 
                 //Ucitavaju se podaci o radniku za zadatim id-jem
-                ZelenaPovrsina.Entiteti.Radnik r = s.Load<ZelenaPovrsina.Entiteti.Radnik>(0);
+                ZelenaPovrsina.Entiteti.Radnik r = s.Load<ZelenaPovrsina.Entiteti.Radnik>(1);
 
                 MessageBox.Show(r.Jmbg);
 
