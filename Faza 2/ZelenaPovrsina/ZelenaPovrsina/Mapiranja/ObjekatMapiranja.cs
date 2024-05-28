@@ -1,14 +1,13 @@
 ﻿namespace ZelenaPovrsina.Mapiranja
 {
-    public class ObjekatMapiranja : ClassMap<ZelenaPovrsina.Entiteti.Objekat>
+    public class ObjekatMapiranja : ClassMap<Objekat>
     {
         public ObjekatMapiranja()
         {
-            CompositeId()
-            .KeyReference(x => x.IdParka, "IdZ") //ovde mora ovako Reference, unutar navodnika mislim da je dobro
-            .KeyProperty(x => x.RedniBr); //ne znam da li ovde treba da se napise ,"RedniBr" unutar zagrada
-
-            References(x => x.Park).Column("IDPARKA").LazyLoad();
+            Table("OBJEKAT");
+            CompositeId(x => x.Id)
+                .KeyReference(x => x.Park, "IDPARKA")
+                .KeyProperty(x => x.RedniBr, "REDNIBR");
         }
         
     }
