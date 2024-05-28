@@ -10,7 +10,7 @@
 
             Map(x => x.NazivGradskeOpstine, "NAZIVGRADSKEOPSTINE");
             Map(x => x.ZonaUgrozenosti, "ZONAUGROZENOSTI");
-            Map(x => x.TipZ, "TIPZ");
+            Map(x => x.TipZ, "TIPZP");
 
 
             // HasMany(x => x.RadniciZP).KeyColumn("IDZP"); //najbolje je da se koristi ovo sto nije zakomentarisano

@@ -184,7 +184,7 @@ namespace ZelenaPovrsina
             {
                 ISession s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Park gr = s.Load<ZelenaPovrsina.Entiteti.Park>(2);
+                ZelenaPovrsina.Entiteti.Park gr = s.Load<ZelenaPovrsina.Entiteti.Park>(0);
 
 
                 MessageBox.Show($"{gr.GrupaRadnika.IdG}");
