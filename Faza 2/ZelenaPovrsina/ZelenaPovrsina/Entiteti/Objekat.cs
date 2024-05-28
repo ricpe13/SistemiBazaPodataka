@@ -1,4 +1,5 @@
-﻿namespace ZelenaPovrsina.Entiteti
+﻿
+namespace ZelenaPovrsina.Entiteti
 {
     public abstract class Objekat
     {

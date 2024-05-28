@@ -2,6 +2,6 @@
 {
     public class Klupa : Objekat
     {
-        public virtual string Materijal { get; set; }
+        public required virtual string Materijal { get; set; }
     }
 }

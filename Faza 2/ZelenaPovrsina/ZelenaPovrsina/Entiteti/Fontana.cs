@@ -2,7 +2,7 @@
 {
     public class Fontana : Objekat
     {
-        public virtual string BrPrskalica { get; set; }
-        public virtual string PovrsinaF { get; set; }
+        public required virtual string BrPrskalica { get; set; }
+        public required virtual string PovrsinaF { get; set; }
     }
 }
