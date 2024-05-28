@@ -25,7 +25,7 @@ namespace ZelenaPovrsina
                 ISession s = DataLayer.GetSession();
 
                 //Ucitavaju se podaci o radniku za zadatim id-jem
-                ZelenaPovrsina.Entiteti.Radnik r = s.Load<ZelenaPovrsina.Entiteti.Radnik>(3);
+                ZelenaPovrsina.Entiteti.Radnik r = s.Load<ZelenaPovrsina.Entiteti.Radnik>(0);
 
                 MessageBox.Show(r.Jmbg);
 
@@ -33,7 +33,8 @@ namespace ZelenaPovrsina
             }
             catch (Exception ec)
             {
-                MessageBox.Show(ec.Message);
+                MessageBox.Show(ec.FormatExceptionMessage());
+                //MessageBox.Show(ec.Message);
             }
         }
 
@@ -188,7 +189,6 @@ namespace ZelenaPovrsina
 
 
                 MessageBox.Show($"{gr.GrupaRadnika.IdG}");
-                
 
                 s.Close();
             }
