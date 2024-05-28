@@ -75,14 +75,14 @@ CREATE OR REPLACE TRIGGER BROJI_OBJEKTE
 AFTER INSERT OR DELETE ON OBJEKAT
 FOR EACH ROW
 DECLARE
-    JEDAN NUMBER := 1; -- Povećanje broja objekata
+    JEDAN NUMBER := 1;
 BEGIN
     IF INSERTING THEN
-        -- Ako je dodat novi objekat, povećaj brojobjekata u tabeli PARK
+        
         UPDATE PARK
         SET BROJOBJEKATA = BROJOBJEKATA + JEDAN;
     ELSIF DELETING THEN
-        -- Ako je obrisan objekat, smanji brojobjekata u tabeli PARK
+       
         UPDATE PARK
         SET BROJOBJEKATA = BROJOBJEKATA - JEDAN;
     END IF;
