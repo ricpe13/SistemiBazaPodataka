@@ -15,7 +15,7 @@
             Map(x => x.Prezime, "PREZIME");
             Map(x => x.Jmbg, "JMBG");
             Map(x => x.Adresa, "ADRESA");
-            Map(x => x.BrRadneKnjizice, "BRADNEKNJIZICE");
+            Map(x => x.BrRadneKnjizice, "BRRADNEKNJIZICE");
             Map(x => x.ImeRoditelja, "IMERODITELJA");
             Map(x => x.StrucnaSprema, "STRUCNASPREMA");
             Map(x => x.DatumRodj, "DATUMRODJ");
