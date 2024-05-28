@@ -14,7 +14,7 @@ namespace ZelenaPovrsina.Mapiranja
             //Map(x => x.IdZastite, "IDZASTITE");
 
             References(x => x.PodZastitomZO).Column("IDZASTITE").LazyLoad();
-            References(x => x.Objekat).Columns("IdParka", "RedniBr");
+            
         }
     }
 }
