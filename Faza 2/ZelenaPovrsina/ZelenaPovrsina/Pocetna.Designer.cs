@@ -33,6 +33,7 @@
             btnDrvoredi = new Button();
             btnTravnjaci = new Button();
             btnRadnici = new Button();
+            btnGrupeRadnika = new Button();
             SuspendLayout();
             // 
             // label1
@@ -86,11 +87,23 @@
             btnRadnici.UseVisualStyleBackColor = true;
             btnRadnici.Click += btnRadnici_Click;
             // 
+            // btnGrupeRadnika
+            // 
+            btnGrupeRadnika.Font = new Font("Segoe UI", 20F);
+            btnGrupeRadnika.Location = new Point(286, 263);
+            btnGrupeRadnika.Name = "btnGrupeRadnika";
+            btnGrupeRadnika.Size = new Size(250, 52);
+            btnGrupeRadnika.TabIndex = 5;
+            btnGrupeRadnika.Text = "Grupe radnika";
+            btnGrupeRadnika.UseVisualStyleBackColor = true;
+            btnGrupeRadnika.Click += btnGrupeRadnika_Click;
+            // 
             // Pocetna
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(915, 557);
+            Controls.Add(btnGrupeRadnika);
             Controls.Add(btnRadnici);
             Controls.Add(btnTravnjaci);
             Controls.Add(btnDrvoredi);
@@ -109,5 +122,6 @@
         private Button btnDrvoredi;
         private Button btnTravnjaci;
         private Button btnRadnici;
+        private Button btnGrupeRadnika;
     }
 }

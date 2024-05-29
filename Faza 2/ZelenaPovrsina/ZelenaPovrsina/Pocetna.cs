@@ -22,5 +22,11 @@ namespace ZelenaPovrsina
             RadniciForm forma = new RadniciForm();
             forma.ShowDialog();
         }
+
+        private void btnGrupeRadnika_Click(object sender, EventArgs e)
+        {
+            GrupeRadnikaForm forma = new GrupeRadnikaForm();
+            forma.ShowDialog();
+        }
     }
 }
