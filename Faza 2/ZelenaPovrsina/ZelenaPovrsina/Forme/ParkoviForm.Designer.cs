@@ -68,16 +68,19 @@
             // columnHeader2
             // 
             columnHeader2.Text = "Naziv";
+            columnHeader2.TextAlign = HorizontalAlignment.Center;
             columnHeader2.Width = 100;
             // 
             // columnHeader3
             // 
             columnHeader3.Text = "Povrsina";
+            columnHeader3.TextAlign = HorizontalAlignment.Center;
             columnHeader3.Width = 70;
             // 
             // columnHeader4
             // 
             columnHeader4.Text = "Broj objekata";
+            columnHeader4.TextAlign = HorizontalAlignment.Center;
             columnHeader4.Width = 100;
             // 
             // button1
@@ -102,7 +105,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1019, 629);
+            ClientSize = new Size(655, 629);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(groupBox1);

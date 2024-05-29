@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Forme
 {
-    partial class ZelenePovrsineForm
+    partial class DrvorediForm
     {
         /// <summary>
         /// Required designer variable.
@@ -34,9 +34,9 @@
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
+            columnHeader5 = new ColumnHeader();
             button1 = new Button();
             button2 = new Button();
-            button3 = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,19 +45,19 @@
             groupBox1.Controls.Add(listView1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(376, 640);
+            groupBox1.Size = new Size(419, 607);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Lista zelenih povrsina";
+            groupBox1.Text = "Lista drvoreda";
             // 
             // listView1
             // 
-            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5 });
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
             listView1.Location = new Point(6, 22);
             listView1.Name = "listView1";
-            listView1.Size = new Size(357, 612);
+            listView1.Size = new Size(394, 568);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -68,60 +68,55 @@
             // 
             // columnHeader2
             // 
-            columnHeader2.Text = "Gradska opstina";
+            columnHeader2.Text = "Ulica";
             columnHeader2.TextAlign = HorizontalAlignment.Center;
-            columnHeader2.Width = 100;
+            columnHeader2.Width = 110;
             // 
             // columnHeader3
             // 
-            columnHeader3.Text = "Zona ugrozenosti";
+            columnHeader3.Text = "Duzina";
             columnHeader3.TextAlign = HorizontalAlignment.Center;
-            columnHeader3.Width = 110;
             // 
             // columnHeader4
             // 
-            columnHeader4.Text = "Tip";
+            columnHeader4.Text = "Vrsta drveta";
             columnHeader4.TextAlign = HorizontalAlignment.Center;
             columnHeader4.Width = 80;
             // 
+            // columnHeader5
+            // 
+            columnHeader5.Text = "Broj stabala";
+            columnHeader5.TextAlign = HorizontalAlignment.Center;
+            columnHeader5.Width = 80;
+            // 
             // button1
             // 
-            button1.Location = new Point(442, 55);
+            button1.Location = new Point(505, 46);
             button1.Name = "button1";
-            button1.Size = new Size(161, 38);
+            button1.Size = new Size(185, 51);
             button1.TabIndex = 1;
-            button1.Text = "Parkovi";
+            button1.Text = "Dodaj drvored";
             button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            button2.Location = new Point(442, 123);
+            button2.Location = new Point(505, 128);
             button2.Name = "button2";
-            button2.Size = new Size(161, 36);
+            button2.Size = new Size(185, 45);
             button2.TabIndex = 2;
-            button2.Text = "Drvoredi";
+            button2.Text = "Obrisi drvored";
             button2.UseVisualStyleBackColor = true;
             // 
-            // button3
-            // 
-            button3.Location = new Point(442, 190);
-            button3.Name = "button3";
-            button3.Size = new Size(161, 37);
-            button3.TabIndex = 3;
-            button3.Text = "Travnjaci";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // ZelenePovrsineForm
+            // DrvorediForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(724, 664);
-            Controls.Add(button3);
+            ClientSize = new Size(759, 644);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(groupBox1);
-            Name = "ZelenePovrsineForm";
-            Text = "ZELENE POVRSINE";
+            Name = "DrvorediForm";
+            Text = "DRVOREDI";
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -134,8 +129,8 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
+        private ColumnHeader columnHeader5;
         private Button button1;
         private Button button2;
-        private Button button3;
     }
 }

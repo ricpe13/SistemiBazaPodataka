@@ -99,66 +99,79 @@
             // columnHeader2
             // 
             columnHeader2.Text = "Ime";
+            columnHeader2.TextAlign = HorizontalAlignment.Center;
             columnHeader2.Width = 90;
             // 
             // columnHeader3
             // 
             columnHeader3.Text = "Prezime";
+            columnHeader3.TextAlign = HorizontalAlignment.Center;
             columnHeader3.Width = 90;
             // 
             // columnHeader4
             // 
             columnHeader4.Text = "Jmbg";
+            columnHeader4.TextAlign = HorizontalAlignment.Center;
             columnHeader4.Width = 90;
             // 
             // columnHeader5
             // 
             columnHeader5.Text = "Adresa";
+            columnHeader5.TextAlign = HorizontalAlignment.Center;
             columnHeader5.Width = 100;
             // 
             // columnHeader6
             // 
             columnHeader6.Text = "Broj radne knjizice";
+            columnHeader6.TextAlign = HorizontalAlignment.Center;
             columnHeader6.Width = 110;
             // 
             // columnHeader7
             // 
             columnHeader7.Text = "Ime roditelja";
+            columnHeader7.TextAlign = HorizontalAlignment.Center;
             columnHeader7.Width = 80;
             // 
             // columnHeader8
             // 
             columnHeader8.Text = "Strucna sprema";
+            columnHeader8.TextAlign = HorizontalAlignment.Center;
             columnHeader8.Width = 100;
             // 
             // columnHeader9
             // 
             columnHeader9.Text = "Datum rodjenja";
+            columnHeader9.TextAlign = HorizontalAlignment.Center;
             columnHeader9.Width = 100;
             // 
             // columnHeader10
             // 
             columnHeader10.Text = "Za zelenilo";
+            columnHeader10.TextAlign = HorizontalAlignment.Center;
             columnHeader10.Width = 70;
             // 
             // columnHeader11
             // 
             columnHeader11.Text = "Za higijenu";
+            columnHeader11.TextAlign = HorizontalAlignment.Center;
             columnHeader11.Width = 80;
             // 
             // columnHeader12
             // 
             columnHeader12.Text = "Za objekat";
+            columnHeader12.TextAlign = HorizontalAlignment.Center;
             columnHeader12.Width = 70;
             // 
             // columnHeader13
             // 
             columnHeader13.Text = "ID zelene povrsine";
+            columnHeader13.TextAlign = HorizontalAlignment.Center;
             columnHeader13.Width = 110;
             // 
             // columnHeader14
             // 
             columnHeader14.Text = "ID grupe";
+            columnHeader14.TextAlign = HorizontalAlignment.Center;
             // 
             // button3
             // 
