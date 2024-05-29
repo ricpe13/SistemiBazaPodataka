@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            button1 = new Button();
-            button2 = new Button();
             listView1 = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
@@ -46,9 +44,7 @@
             columnHeader12 = new ColumnHeader();
             columnHeader13 = new ColumnHeader();
             columnHeader14 = new ColumnHeader();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
+            button2 = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -61,24 +57,6 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Lista radnika";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(1280, 34);
-            button1.Name = "button1";
-            button1.Size = new Size(135, 33);
-            button1.TabIndex = 1;
-            button1.Text = "Dodaj radnika";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(1280, 73);
-            button2.Name = "button2";
-            button2.Size = new Size(135, 41);
-            button2.TabIndex = 2;
-            button2.Text = "Obrisi radnika";
-            button2.UseVisualStyleBackColor = true;
             // 
             // listView1
             // 
@@ -174,43 +152,21 @@
             columnHeader14.Text = "ID grupe";
             columnHeader14.TextAlign = HorizontalAlignment.Center;
             // 
-            // button3
+            // button2
             // 
-            button3.Location = new Point(1280, 120);
-            button3.Name = "button3";
-            button3.Size = new Size(135, 30);
-            button3.TabIndex = 3;
-            button3.Text = "Izmeni radnika";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(1280, 210);
-            button4.Name = "button4";
-            button4.Size = new Size(135, 33);
-            button4.TabIndex = 4;
-            button4.Text = "Grupe radnika";
-            button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            button5.Location = new Point(1280, 259);
-            button5.Name = "button5";
-            button5.Size = new Size(135, 45);
-            button5.TabIndex = 5;
-            button5.Text = "Dodaj radnika u grupu";
-            button5.UseVisualStyleBackColor = true;
+            button2.Location = new Point(1283, 96);
+            button2.Name = "button2";
+            button2.Size = new Size(135, 41);
+            button2.TabIndex = 2;
+            button2.Text = "Obrisi radnika";
+            button2.UseVisualStyleBackColor = true;
             // 
             // RadniciForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1452, 618);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(button3);
             Controls.Add(button2);
-            Controls.Add(button1);
             Controls.Add(groupBox1);
             Name = "RadniciForm";
             Text = "RADNICI";
@@ -236,10 +192,6 @@
         private ColumnHeader columnHeader12;
         private ColumnHeader columnHeader13;
         private ColumnHeader columnHeader14;
-        private Button button1;
         private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
     }
 }
