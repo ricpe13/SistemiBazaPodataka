@@ -2,6 +2,6 @@
 {
     public class Svetiljka : Objekat
     {
-        public required virtual string BrSijalica { get; set; }
+        public required virtual int BrSijalica { get; set; }
     }
 }

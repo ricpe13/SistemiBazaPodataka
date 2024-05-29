@@ -1,5 +1,7 @@
 ﻿
 
+
+
 namespace ZelenaPovrsina
 {
     #region Prodavnica
@@ -213,46 +215,47 @@ namespace ZelenaPovrsina
     public class ObjekatBasic
     {
         public int IdO { get; set; }
-        public int IdParka { get; set; }
+        public ParkBasic PripadaParku { get; set; }
         public int RedniBr { get; set; }
         public string Tip { get; set; }
 
-        public ObjekatBasic(int ido, int idparka, int rednibr, string tip)
+        public ObjekatBasic(int ido, ParkBasic park, int rednibr, string tip)
         {
-            this.IdO = ido;
-            this.IdParka = idparka;
-            this.RedniBr = rednibr;
-            this.Tip = tip;
+            IdO = ido;
+            PripadaParku = park;
+            RedniBr = rednibr;
+            Tip = tip;
         }
         public ObjekatBasic()
         {
 
         }
 
-        public class ObjekatPregled
+        
+    }
+
+    public class ObjekatPregled
+    {
+        public int IdO { get; set; }
+        public ParkBasic PripadaParku { get; set; }
+        public int RedniBr { get; set; }
+        public string Tip { get; set; }
+
+        public ObjekatPregled(int ido, int rednibr, string tip)
         {
-            public int IdO { get; set; }
-            public int IdParka { get; set; }
-            public int RedniBr { get; set; }
-            public string Tip { get; set; }
+            IdO = ido;
+            RedniBr = rednibr;
+            Tip = tip;
+        }
+        public ObjekatPregled()
+        {
 
-            public ObjekatPregled(int ido, int idparka, int rednibr, string tip)
-            {
-                this.IdO = ido;
-                this.IdParka = idparka;
-                this.RedniBr = rednibr;
-                this.Tip = tip;
-            }
-            public ObjekatPregled()
-            {
-
-            }
         }
     }
+
     #endregion
 
     #region Drvo
-
 
     public class DrvoBasic : ObjekatBasic
     {
@@ -261,19 +264,40 @@ namespace ZelenaPovrsina
         public DateTime DatumSadnje;
         public double PovrsinaK;
         public double ObimDebla;
-        //fali IdZastite
+        public ZastitaBasic Zastita;
 
         public DrvoBasic()
         {
 
         }
-        public DrvoBasic(int id, int rednibr, string tip, int visinakrosnje, string vrsta, DateTime datumsadnje, double povrsinak, double obimdebla) : base(id, rednibr, tip)
+        public DrvoBasic(int id, ParkBasic park, int rednibr, string tip, int visinakrosnje, string vrsta, DateTime datumsadnje, double povrsinak, double obimdebla, ZastitaBasic zas) : base(id, park, rednibr, tip)
         {
-            this.VisinaKrosnje = visinakrosnje;
-            this.Vrsta = vrsta;
-            this.DatumSadnje = datumsadnje;
-            this.PovrsinaK = povrsinak;
-            this.ObimDebla = obimdebla;
+            VisinaKrosnje = visinakrosnje;
+            Vrsta = vrsta;
+            DatumSadnje = datumsadnje;
+            PovrsinaK = povrsinak;
+            ObimDebla = obimdebla;
+            Zastita = zas;
+        }
+    }
+
+    public class DrvoPregled : ObjekatPregled
+    {
+        public int VisinaKrosnje;
+        public string Vrsta;
+        public DateTime DatumSadnje;
+        public double PovrsinaK;
+        public double ObimDebla;
+
+        public DrvoPregled() { }
+
+        public DrvoPregled(int ido, int rednibr, string tip, int visinaKrosnje, string vrsta, DateTime datumSadnje, double povrsinaK, double obimDebla) : base(ido, rednibr, tip)
+        {
+            VisinaKrosnje = visinaKrosnje;
+            Vrsta = vrsta;
+            DatumSadnje = datumSadnje;
+            PovrsinaK = povrsinaK;
+            ObimDebla = obimDebla;
         }
     }
 
@@ -289,9 +313,9 @@ namespace ZelenaPovrsina
         {
 
         }
-        public KlupaBasic(int id, int rednibr, string tip, string materijal) : base(id, rednibr, tip)
+        public KlupaBasic(int id,ParkBasic park, int rednibr, string tip, string materijal) : base(id,park, rednibr, tip)
         {
-            this.Materijal = materijal;
+            Materijal = materijal;
         }
     }
 
@@ -304,7 +328,7 @@ namespace ZelenaPovrsina
 
         public KlupaPregled(int id, int rednibr, string tip, string materijal) : base(id, rednibr, tip)
         {
-            this.Materijal = materijal;
+            Materijal = materijal;
         }
     }
 
@@ -320,7 +344,7 @@ namespace ZelenaPovrsina
         {
 
         }
-        public SvetiljkaBasic(int id, int rednibr, string tip, int brsijalica) : base(id, rednibr, tip)
+        public SvetiljkaBasic(int id,ParkBasic park, int rednibr, string tip, int brsijalica) : base(id,park, rednibr, tip)
         {
             this.BrSijalica = brsijalica;
         }
@@ -352,7 +376,7 @@ namespace ZelenaPovrsina
         {
 
         }
-        public DecijeIgralisteBasic(int id, int rednibr, string tip, int brigracaka, int pesak, int starost) : base(id, rednibr, tip)
+        public DecijeIgralisteBasic(int id,ParkBasic park, int rednibr, string tip, int brigracaka, int pesak, int starost) : base(id,park, rednibr, tip)
         {
             this.BrIgracaka = brigracaka;
             this.Pesak = pesak;
@@ -394,10 +418,10 @@ namespace ZelenaPovrsina
         {
 
         }
-        public FontanaBasic(int id, int rednibr, string tip, int brprskalica, int povrsinaf) : base(id, rednibr, tip)
+        public FontanaBasic(int id,ParkBasic park, int rednibr, string tip, int brprskalica, int povrsinaf) : base(id,park, rednibr, tip)
         {
-            this.BrPrskalica = brprskalica;
-            this.PovrsinaF = povrsinaf;
+            BrPrskalica = brprskalica;
+            PovrsinaF = povrsinaf;
     
 
         }
@@ -413,8 +437,8 @@ namespace ZelenaPovrsina
             }
             public FontanaPregled(int id, int rednibr, string tip, int brprskalica, int povrsinaf) : base(id, rednibr, tip)
             {
-                this.BrPrskalica = brprskalica;
-                this.PovrsinaF = povrsinaf;
+                BrPrskalica = brprskalica;
+                PovrsinaF = povrsinaf;
 
 
             }
@@ -424,14 +448,115 @@ namespace ZelenaPovrsina
     #endregion
 
     #region Spomenik
+    
+    public class SpomenikBasic:ObjekatBasic
+    {
+        public string NazivS;
+        public ZastitaBasic Zastita;
 
+        public SpomenikBasic() { }  
+
+        public SpomenikBasic(int id,ParkBasic park, int rbr, string t, string naz,ZastitaBasic zastita):base(id,park,rbr,t)
+        {
+            NazivS = naz;
+            Zastita = zastita;
+        }
+    }
+
+    public class SpomenikPregled:ObjekatPregled
+    {
+        public string NazivS;
+
+        public SpomenikPregled() { }
+
+        public SpomenikPregled(int id,int rednibr, string tip, string naziv):base(id,rednibr,tip)
+        {
+            NazivS = naziv;
+        }
+    }
 
 
     #endregion
 
     #region Skulptura
 
+    public class SkulpturaBasic:ObjekatBasic
+    {
+        public string Autor;
+        public ZastitaBasic Zastita;
 
+        public SkulpturaBasic()
+        {
+
+        }
+        public SkulpturaBasic(int id,ParkBasic park,int rbr, string tip, string autor, ZastitaBasic zastita) : base(id,park,rbr,tip)
+        {
+            Autor = autor;
+            Zastita = zastita;
+        }
+    }
+
+    public class SkulpturaPregled:ObjekatPregled
+    {
+        public string Autor;
+
+        public SkulpturaPregled() { }
+
+        public SkulpturaPregled(int id,int rbr,string t,string autor) : base(id,rbr,t)
+        {
+            Autor = autor;
+        }
+    }
+
+
+
+    #endregion
+
+    #region Zastita
+
+    public class ZastitaBasic
+    {
+        public int IdZastite;
+        public string Institucija;
+        public DateTime DatumOd;
+        public int NovcanaSredstva;
+        public string OpisZnacaja;
+
+        public virtual IList<Skulptura> Skulpture { get; set; } = [];
+        public virtual IList<Spomenik> Spomenici { get; set; } = [];
+        public virtual IList<Drvo> Drvece { get; set; } = [];
+
+        public ZastitaBasic() { }
+        public ZastitaBasic(int idZastite, string institucija, DateTime datumOd, int novcanaSredstva, string opisZnacaja)
+        {
+            IdZastite = idZastite;
+            Institucija = institucija;
+            DatumOd = datumOd;
+            NovcanaSredstva = novcanaSredstva;
+            OpisZnacaja = opisZnacaja;
+        }
+    }
+
+    public class ZastitaPregled
+    {
+        public int IdZastite;
+        public string Institucija;
+        public DateTime DatumOd;
+        public int NovcanaSredstva;
+        public string OpisZnacaja;
+
+        
+        public ZastitaPregled() { }
+        public ZastitaPregled(int id, string ins, DateTime dat, int nov, string opis)
+        {
+            IdZastite = id;
+            Institucija = ins;
+            DatumOd = dat;
+            NovcanaSredstva=nov;
+            OpisZnacaja = opis;
+        }
+
+    }
 
     #endregion
 
