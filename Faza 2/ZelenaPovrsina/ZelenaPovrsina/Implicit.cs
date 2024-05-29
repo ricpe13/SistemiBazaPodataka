@@ -14,3 +14,4 @@ global using NHibernate.Linq;
 global using ZelenaPovrsina.Entiteti;
 global using ZelenaPovrsina.Mapiranja;
 global using ZelenaPovrsina.DTO;
+global using ZelenaPovrsina.Forme;

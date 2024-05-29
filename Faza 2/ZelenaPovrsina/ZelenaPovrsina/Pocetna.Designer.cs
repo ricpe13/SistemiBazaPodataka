@@ -29,82 +29,73 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
+            btnParkovi = new Button();
+            btnDrvoredi = new Button();
+            btnTravnjaci = new Button();
+            btnRadnici = new Button();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 40F);
-            label1.Location = new Point(307, 15);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(215, 9);
             label1.Name = "label1";
-            label1.Size = new Size(598, 106);
+            label1.Size = new Size(404, 72);
             label1.TabIndex = 0;
             label1.Text = "Zelene Povrsine";
             // 
-            // button1
+            // btnParkovi
             // 
-            button1.Font = new Font("Segoe UI", 20F);
-            button1.Location = new Point(413, 267);
-            button1.Margin = new Padding(4, 5, 4, 5);
-            button1.Name = "button1";
-            button1.Size = new Size(384, 97);
-            button1.TabIndex = 1;
-            button1.Text = "Radnici";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnParkovi.Font = new Font("Segoe UI", 20F);
+            btnParkovi.Location = new Point(286, 146);
+            btnParkovi.Name = "btnParkovi";
+            btnParkovi.Size = new Size(250, 52);
+            btnParkovi.TabIndex = 1;
+            btnParkovi.Text = "Parkovi";
+            btnParkovi.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnDrvoredi
             // 
-            button2.Font = new Font("Segoe UI", 20F);
-            button2.Location = new Point(413, 425);
-            button2.Margin = new Padding(4, 5, 4, 5);
-            button2.Name = "button2";
-            button2.Size = new Size(384, 97);
-            button2.TabIndex = 2;
-            button2.Text = "Zelene povrsine";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            btnDrvoredi.Font = new Font("Segoe UI", 20F);
+            btnDrvoredi.Location = new Point(12, 146);
+            btnDrvoredi.Name = "btnDrvoredi";
+            btnDrvoredi.Size = new Size(250, 52);
+            btnDrvoredi.TabIndex = 2;
+            btnDrvoredi.Text = "Drvoredi";
+            btnDrvoredi.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnTravnjaci
             // 
-            button3.Font = new Font("Segoe UI", 20F);
-            button3.Location = new Point(413, 582);
-            button3.Margin = new Padding(4, 5, 4, 5);
-            button3.Name = "button3";
-            button3.Size = new Size(384, 97);
-            button3.TabIndex = 3;
-            button3.Text = "Objekti";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            btnTravnjaci.Font = new Font("Segoe UI", 20F);
+            btnTravnjaci.Location = new Point(554, 146);
+            btnTravnjaci.Name = "btnTravnjaci";
+            btnTravnjaci.Size = new Size(250, 52);
+            btnTravnjaci.TabIndex = 3;
+            btnTravnjaci.Text = "Travnjaci";
+            btnTravnjaci.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnRadnici
             // 
-            button4.Font = new Font("Segoe UI", 20F);
-            button4.Location = new Point(413, 742);
-            button4.Margin = new Padding(4, 5, 4, 5);
-            button4.Name = "button4";
-            button4.Size = new Size(384, 97);
-            button4.TabIndex = 4;
-            button4.Text = "Zastite";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            btnRadnici.Font = new Font("Segoe UI", 20F);
+            btnRadnici.Location = new Point(12, 263);
+            btnRadnici.Name = "btnRadnici";
+            btnRadnici.Size = new Size(250, 52);
+            btnRadnici.TabIndex = 4;
+            btnRadnici.Text = "Radnici";
+            btnRadnici.UseVisualStyleBackColor = true;
+            btnRadnici.Click += btnRadnici_Click;
             // 
             // Pocetna
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1261, 928);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            ClientSize = new Size(915, 557);
+            Controls.Add(btnRadnici);
+            Controls.Add(btnTravnjaci);
+            Controls.Add(btnDrvoredi);
+            Controls.Add(btnParkovi);
             Controls.Add(label1);
-            Margin = new Padding(4, 5, 4, 5);
             Name = "Pocetna";
             Text = "Pocetna";
             ResumeLayout(false);
@@ -114,9 +105,9 @@
         #endregion
 
         private Label label1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
+        private Button btnParkovi;
+        private Button btnDrvoredi;
+        private Button btnTravnjaci;
+        private Button btnRadnici;
     }
 }
