@@ -147,7 +147,7 @@ namespace ZelenaPovrsina
         public SefBasic Sef;
         public virtual IList<RadnikBasic> RadniciGrupe { get; set; }
 
-        public GrupaRadnikaBasic() 
+        public GrupaRadnikaBasic()
         {
             RadniciGrupe = new List<RadnikBasic>();
         }
@@ -199,9 +199,129 @@ namespace ZelenaPovrsina
     }
 
     public class ParkPregled
-    { 
-        
+    {
+
     }
 
     #endregion
+
+    #region Objekat
+    public class Objekat
+    {
+
+    }
+    #region
+
+    #region Drvo
+
+
+    public class DrvoBasic : ObjekatBasic
+    {
+        public int VisinaKrosnje;
+        public string Vrsta;
+        public DateTime DatumSadnje;
+        public double PovrsinaK;
+        public double ObimDebla;
+
+        public DrvoBasic()
+        {
+
+        }
+        public DrvoBasic(int id, int rednibr, string tip, int visinakrosnje, string vrsta, DateTime datumsadnje, double povrsinak, double obimdebla) : base(id, rednibr, tip)
+        {
+            this.VisinaKrosnje = visinakrosnje;
+            this.Vrsta = vrsta;
+            this.DatumSadnje = datumsadnje;
+            this.PovrsinaK = povrsinak;
+            this.ObimDebla = obimdebla;
+        }
+    }
+
+    #endregion
+
+    #region Klupa
+
+    public class KlupaBasic : ObjekatBasic
+    {
+        public string Materijal;
+
+        public KlupaBasic()
+        {
+
+        }
+        public KlupaBasic(int id, int rednibr, string tip, string materijal) : base(id, rednibr, tip)
+        {
+            this.Materijal = materijal;
+        }
+    }
+
+
+    #endregion
+
+
+    #region Svetiljka
+
+    public class SvetiljkaBasic : ObjekatBasic
+    {
+        public int BrSijalica;
+        public SvetiljkaBasic()
+        {
+
+        }
+        public SvetijlkaBasic(int id, int rednibr, string tip, int brsijalica) : base(id, rednibr, tip)
+        {
+            this.BrSijalica = brsijalica;
+        }
+    }
+
+    #endregion
+
+    #region DecijeIgraliste
+
+    public class DecijeIgralisteBasic : ObjekatBasic
+    {
+        public int BrIgracaka;
+        public int Pesak;
+        public int Starost;
+        public DecijeIgralisteBasic()
+        {
+
+        }
+        public DecijeIgralisteBasic(int id, int rednibr, string tip, int brigracaka, int pesak, int starost) : base(id, rednibr, tip)
+        {
+            this.BrIgracaka = brigracaka;
+            this.Pesak = pesak;
+            this.Starost = starost;
+
+
+
+
+
+        }
+    }
+    #endregion
+
+    #region Fontana
+
+    public class FontanaBasic : ObjekatBasic
+    {
+        public int BrPrskalica;
+        public int PovrsinaF;
+
+        public FontanaBasic()
+        {
+
+        }
+        public FontanaBasic(int id, int rednibr, string tip, int brprskalica, int povrsinaf) : base(id, rednibr, tip)
+        {
+            this.BrPrskalica = brprskalica;
+            this.PovrsinaF = povrsinaf;
+    
+
+        }
+    }
+
+    #endregion
+
+
 }
