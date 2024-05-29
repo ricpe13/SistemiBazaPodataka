@@ -47,6 +47,7 @@
             columnHeader13 = new ColumnHeader();
             columnHeader14 = new ColumnHeader();
             button3 = new Button();
+            button4 = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -62,18 +63,18 @@
             // 
             // button1
             // 
-            button1.Location = new Point(1254, 35);
+            button1.Location = new Point(1277, 126);
             button1.Name = "button1";
-            button1.Size = new Size(130, 23);
+            button1.Size = new Size(135, 33);
             button1.TabIndex = 1;
             button1.Text = "Dodaj radnika";
             button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            button2.Location = new Point(1254, 83);
+            button2.Location = new Point(1277, 165);
             button2.Name = "button2";
-            button2.Size = new Size(130, 23);
+            button2.Size = new Size(135, 41);
             button2.TabIndex = 2;
             button2.Text = "Obrisi radnika";
             button2.UseVisualStyleBackColor = true;
@@ -161,18 +162,28 @@
             // 
             // button3
             // 
-            button3.Location = new Point(1254, 130);
+            button3.Location = new Point(1277, 212);
             button3.Name = "button3";
-            button3.Size = new Size(130, 23);
+            button3.Size = new Size(135, 30);
             button3.TabIndex = 3;
             button3.Text = "Izmeni radnika";
             button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(1277, 248);
+            button4.Name = "button4";
+            button4.Size = new Size(135, 33);
+            button4.TabIndex = 4;
+            button4.Text = "Grupe radnika";
+            button4.UseVisualStyleBackColor = true;
             // 
             // RadniciForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1424, 618);
+            Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -204,5 +215,6 @@
         private Button button1;
         private Button button2;
         private Button button3;
+        private Button button4;
     }
 }
