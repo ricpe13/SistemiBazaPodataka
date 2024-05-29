@@ -9,10 +9,11 @@ namespace ZelenaPovrsina.Entiteti
 
         public  virtual Park Park { get; set; } //zbog one to one se pise
         public  virtual Sef Sef { get; set; }
-        public virtual IList<Radnik> RadniciGrupe { get; set; } = [];
+        public virtual IList<Radnik> RadniciGrupe { get; set; }
 
-        //public GrupaRadnika() { 
-        //    RadniciGrupe = new List<Radnik>();
-        //}
+        public GrupaRadnika()
+        {
+            RadniciGrupe = new List<Radnik>();
+        }
     }
 }

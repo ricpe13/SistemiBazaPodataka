@@ -46,18 +46,18 @@ namespace ZelenaPovrsina
                 
                 Entiteti.ZelenaPovrsina z = new Entiteti.ZelenaPovrsina()
                 {
-                    NazivGradskeOpstine = "palilula",
-                    ZonaUgrozenosti = "A",
-                    TipZ = "Park"
+                    NazivGradskeOpstine = "crveni krst",
+                    ZonaUgrozenosti = "B",
+                    TipZ = "travnjak"
                 };
 
                 Entiteti.Radnik r = new Entiteti.Radnik();
                 
-                r.Ime = "Nikolaa";
-                r.Prezime = "Stamenkovic";
-                r.Jmbg = "5205995754829";
-                r.Adresa = "Somborski bulevar 12";
-                r.BrRadneKnjizice = 123;
+                r.Ime = "Mihajlo";
+                r.Prezime = "Jovic";
+                r.Jmbg = "1111111111111";
+                r.Adresa = "Bubanjska 55";
+                r.BrRadneKnjizice = 999;
                 r.ImeRoditelja = "Aleksa";
                 r.StrucnaSprema = "VI stepen";
                 r.DatumRodj = new DateTime(1995, 5, 12); 
@@ -129,19 +129,42 @@ namespace ZelenaPovrsina
 
                 GrupaRadnika gr = new GrupaRadnika()
                 {
-                    NazivG = "NovaGrupa",
+                    NazivG = "NovaGrupa"
                     
                 };
+                Park p = new Park()
+                {
+                    NazivP="Lelele"
+                };
+                Radnik radnik = new Radnik()
+                {
+                    Ime = "mmmm",
+                    Prezime = "A",
+                    Jmbg = "1234567891123",
+                    Adresa = "A",
+                    BrRadneKnjizice = 22,
+                    ImeRoditelja = "A",
+                    StrucnaSprema = "A",
+                    DatumRodj = new DateTime(),
+                    ZaZelenilo = 1,
+                    ZaHigijenu = 1,
+                    ZaObjekat = 0
+                };
+                Sef sef = new Sef()
+                {
+                    Matbr = "1111111111111"
+                };
+
 
                 Radnik r = new Radnik()
                 {
                     Ime = "Niša",
-                    Prezime = "",
+                    Prezime = "A",
                     Jmbg = "Da",
-                    Adresa = "",
+                    Adresa = "A",
                     BrRadneKnjizice = 1,
-                    ImeRoditelja = "",
-                    StrucnaSprema = "",
+                    ImeRoditelja = "A",
+                    StrucnaSprema = "A",
                     DatumRodj = new DateTime(),
                     ZaZelenilo = 1,
                     ZaHigijenu = 1,
@@ -151,27 +174,30 @@ namespace ZelenaPovrsina
                 Radnik r1 = new Radnik()
                 {
                     Ime = "Niš",
-                    Prezime = "",
-                    Jmbg = "Da",
-                    Adresa = "",
-                    BrRadneKnjizice = 1,
-                    ImeRoditelja = "",
-                    StrucnaSprema = "",
+                    Prezime = "J",
+                    Jmbg = "2222222222222",
+                    Adresa = "A",
+                    BrRadneKnjizice = 25,
+                    ImeRoditelja = "A",
+                    StrucnaSprema = "A",
                     DatumRodj = new DateTime(),
                     ZaZelenilo = 1,
                     ZaHigijenu = 1,
                     ZaObjekat = 0
                 };
 
-
-
-                s.Save(gr);
+                sef.GrupaRadnika = gr;
+                gr.Sef = sef;
+                gr.Park = p;
+                p.GrupaRadnika = gr;
 
                 r.PripadaGrupi = gr;
                 s.Save(r);
 
                 r1.PripadaGrupi = gr;
                 s.Save(r1);
+                
+                s.Save(gr);
 
                 gr.RadniciGrupe.Add(r);
                 gr.RadniciGrupe.Add(r1);
