@@ -28,5 +28,11 @@ namespace ZelenaPovrsina
             GrupeRadnikaForm forma = new GrupeRadnikaForm();
             forma.ShowDialog();
         }
+
+        private void btnParkovi_Click(object sender, EventArgs e)
+        {
+            ParkoviForm forma = new ParkoviForm();
+            forma.ShowDialog();
+        }
     }
 }

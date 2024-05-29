@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Forme
 {
-    partial class ParkoviForm
+    partial class TravnjaciForm
     {
         /// <summary>
         /// Required designer variable.
@@ -33,7 +33,6 @@
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
-            columnHeader4 = new ColumnHeader();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -42,19 +41,19 @@
             groupBox1.Controls.Add(listView1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(360, 593);
+            groupBox1.Size = new Size(507, 612);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Lista parkova";
+            groupBox1.Text = "Lista travnjaka";
             // 
             // listView1
             // 
-            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3 });
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
             listView1.Location = new Point(6, 22);
             listView1.Name = "listView1";
-            listView1.Size = new Size(336, 565);
+            listView1.Size = new Size(495, 584);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -65,30 +64,23 @@
             // 
             // columnHeader2
             // 
-            columnHeader2.Text = "Naziv";
+            columnHeader2.Text = "Adresa zgrade";
             columnHeader2.TextAlign = HorizontalAlignment.Center;
-            columnHeader2.Width = 100;
+            columnHeader2.Width = 150;
             // 
             // columnHeader3
             // 
             columnHeader3.Text = "Povrsina";
             columnHeader3.TextAlign = HorizontalAlignment.Center;
-            columnHeader3.Width = 70;
             // 
-            // columnHeader4
-            // 
-            columnHeader4.Text = "Broj objekata";
-            columnHeader4.TextAlign = HorizontalAlignment.Center;
-            columnHeader4.Width = 100;
-            // 
-            // ParkoviForm
+            // TravnjaciForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(810, 629);
+            ClientSize = new Size(800, 636);
             Controls.Add(groupBox1);
-            Name = "ParkoviForm";
-            Text = "PARKOVI";
+            Name = "TravnjaciForm";
+            Text = "TravnjaciForm";
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -100,6 +92,5 @@
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
-        private ColumnHeader columnHeader4;
     }
 }

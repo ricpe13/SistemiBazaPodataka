@@ -55,6 +55,7 @@
             btnParkovi.TabIndex = 1;
             btnParkovi.Text = "Parkovi";
             btnParkovi.UseVisualStyleBackColor = true;
+            btnParkovi.Click += btnParkovi_Click;
             // 
             // btnDrvoredi
             // 
