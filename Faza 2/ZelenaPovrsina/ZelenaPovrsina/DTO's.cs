@@ -7,10 +7,10 @@ namespace ZelenaPovrsina
     #region ZelenaPovrsina
     public class ZelenaPovrsinaPregled
     {
-        public int Id;
-        public string NazivGradskeOpstine;
-        public string ZonaUgrozenosti;
-        public string TipZ;
+        public int Id { get; set; }
+        public string NazivGradskeOpstine { get; set; }
+        public string ZonaUgrozenosti { get; set; }
+        public string TipZ { get; set; }
         public ZelenaPovrsinaPregled()
         {
 
@@ -26,10 +26,10 @@ namespace ZelenaPovrsina
     }
     public class ZelenaPovrsinaBasic
     {
-        public int Id;
-        public string NazivGradskeOpstine;
-        public string ZonaUgrozenosti;
-        public string TipZ;
+        public int Id { get; set; }
+        public string NazivGradskeOpstine { get; set; }
+        public string ZonaUgrozenosti { get; set; }
+        public string TipZ { get; set; }
         public virtual IList<RadnikBasic> RadniciZP { get; set; }
         public ZelenaPovrsinaBasic()
         {
@@ -234,22 +234,101 @@ namespace ZelenaPovrsina
             PovrsinaP = povrsinap;
         }
     }
-    
-        #endregion
 
-        #region Drvored
+    #endregion
+
+    #region Drvored
+
+    public class DrvoredPregled : ZelenaPovrsinaPregled
+    {
+
+        public string Ulica;
+        public double Duzina;
+        public string VrstaDrveta;
+        public int BrojStabala;
+
+        public DrvoredPregled()
+        {
+
+        }
+
+        public DrvoredPregled(int id, string naziv, string zona, string tipz, string ulica, double duzina, string vrstad, int brstabala) : base(id, naziv, zona, tipz)
+        {
+            Ulica = ulica;
+            Duzina = duzina;
+            VrstaDrveta = vrstad;
+            BrojStabala = brstabala;
+        }
+    }
+
+    public class DrvoredBasic : ZelenaPovrsinaBasic
+    {
+
+        public string Ulica;
+        public double Duzina;
+        public string VrstaDrveta;
+        public int BrojStabala;
+
+        public DrvoredBasic()
+        {
+
+        }
+
+        public DrvoredBasic(int id, string naziv, string zona, string tipz, string ulica, double duzina, string vrstad, int brstabala) : base(id, naziv, zona, tipz)
+        {
+            Ulica = ulica;
+            Duzina = duzina;
+            VrstaDrveta = vrstad;
+            BrojStabala = brstabala;
+        }
+    }
 
 
+    #endregion
 
-        #endregion
+    #region Travnjak
 
-        #region Travnjak
+    public class TravnjakPregled : ZelenaPovrsinaPregled
+    {
+
+        public string AdresaZgrade;
+        public int PovrsinaT;
+
+        public TravnjakPregled()
+        {
+
+        }
+
+        public TravnjakPregled(int id, string naziv, string zona, string tipz, string adresazgrade, int povrsinat) : base(id, naziv, zona, tipz)
+        {
+            AdresaZgrade = adresazgrade;
+            PovrsinaT = povrsinat;
+        }
+    }
+
+    public class TravnjakBasic : ZelenaPovrsinaBasic
+    {
+
+        public string AdresaZgrade;
+        public int PovrsinaT;
+
+        public TravnjakBasic()
+        {
+
+        }
+
+        public TravnjakBasic(int id, string naziv, string zona, string tipz, string adresazgrade, int povrsinat) : base(id, naziv, zona, tipz)
+        {
+            AdresaZgrade = adresazgrade;
+            PovrsinaT = povrsinat;
+        }
+    }
 
 
-        #endregion
+    #endregion
 
-        #region Objekat
-        public class ObjekatBasic
+    #region Objekat
+    public class ObjekatBasic
     {
         public int IdO { get; set; }
         public ParkBasic PripadaParku { get; set; }
