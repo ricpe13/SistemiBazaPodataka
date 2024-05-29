@@ -58,7 +58,7 @@
             // button2
             // 
             button2.Font = new Font("Segoe UI", 20F);
-            button2.Location = new Point(289, 258);
+            button2.Location = new Point(289, 255);
             button2.Name = "button2";
             button2.Size = new Size(269, 58);
             button2.TabIndex = 2;
