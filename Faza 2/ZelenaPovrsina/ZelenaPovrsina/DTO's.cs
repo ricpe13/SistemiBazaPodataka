@@ -217,21 +217,39 @@ namespace ZelenaPovrsina
         }
     }
 
-    #endregion
 
-    #region Drvored
+    public class ParkBasic : ZelenaPovrsinaBasic
+    {
+        public string NazivP;
+        public double PovrsinaP;
+
+        public ParkBasic()
+        {
+
+        }
+
+        public ParkBasic(int id, string naziv, string zona, string tipz, string nazivp, double povrsinap) : base(id, naziv, zona, tipz)
+        {
+            NazivP = nazivp;
+            PovrsinaP = povrsinap;
+        }
+    }
+    
+        #endregion
+
+        #region Drvored
 
 
 
-    #endregion
+        #endregion
 
-    #region Travnjak
+        #region Travnjak
 
 
-    #endregion
+        #endregion
 
-    #region Objekat
-    public class ObjekatBasic
+        #region Objekat
+        public class ObjekatBasic
     {
         public int IdO { get; set; }
         public ParkBasic PripadaParku { get; set; }
