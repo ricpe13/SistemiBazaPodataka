@@ -237,6 +237,7 @@ namespace ZelenaPovrsina
         public DateTime DatumSadnje;
         public double PovrsinaK;
         public double ObimDebla;
+        //fali IdZastite
 
         public DrvoBasic()
         {
