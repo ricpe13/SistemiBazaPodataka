@@ -4,7 +4,7 @@
 
 namespace ZelenaPovrsina
 {
-    #region Prodavnica
+    #region ZelenaPovrsina
     public class ZelenaPovrsinaPregled
     {
         public int Id;
@@ -199,15 +199,34 @@ namespace ZelenaPovrsina
     #endregion
 
     #region Park
-    public class ParkBasic
+    public class ParkPregled : ZelenaPovrsinaPregled
     {
+        
+        public string NazivP;
+        public double PovrsinaP;
+        
+        public ParkPregled()
+        {
 
+        }
+
+        public ParkPregled(int id, string naziv, string zona, string tipz, string nazivp, double povrsinap) : base(id,naziv,zona,tipz)
+        {
+            NazivP = nazivp;
+            PovrsinaP = povrsinap;
+        }
     }
 
-    public class ParkPregled
-    {
+    #endregion
 
-    }
+    #region Drvored
+
+
+
+    #endregion
+
+    #region Travnjak
+
 
     #endregion
 
