@@ -80,6 +80,8 @@
             // listView1
             // 
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7, columnHeader8, columnHeader9, columnHeader10, columnHeader11, columnHeader12, columnHeader13, columnHeader14 });
+            listView1.FullRowSelect = true;
+            listView1.GridLines = true;
             listView1.Location = new Point(6, 22);
             listView1.Name = "listView1";
             listView1.Size = new Size(1195, 566);
