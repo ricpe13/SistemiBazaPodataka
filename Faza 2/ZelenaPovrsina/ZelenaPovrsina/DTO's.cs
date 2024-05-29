@@ -189,6 +189,10 @@ namespace ZelenaPovrsina
         {
 
         }
+
+        
+
+        
     }
     #endregion
 
@@ -223,6 +227,26 @@ namespace ZelenaPovrsina
         public ObjekatBasic()
         {
 
+        }
+
+        public class ObjekatPregled
+        {
+            public int IdO { get; set; }
+            public int IdParka { get; set; }
+            public int RedniBr { get; set; }
+            public string Tip { get; set; }
+
+            public ObjekatPregled(int ido, int idparka, int rednibr, string tip)
+            {
+                this.IdO = ido;
+                this.IdParka = idparka;
+                this.RedniBr = rednibr;
+                this.Tip = tip;
+            }
+            public ObjekatPregled()
+            {
+
+            }
         }
     }
     #endregion
@@ -271,6 +295,19 @@ namespace ZelenaPovrsina
         }
     }
 
+    public class KlupaPregled : ObjekatPregled
+    {
+        public string Materijal;
+        public KlupaPregled() { 
+
+        }
+
+        public KlupaPregled(int id, int rednibr, string tip, string materijal) : base(id, rednibr, tip)
+        {
+            this.Materijal = materijal;
+        }
+    }
+
 
     #endregion
 
@@ -284,6 +321,19 @@ namespace ZelenaPovrsina
 
         }
         public SvetiljkaBasic(int id, int rednibr, string tip, int brsijalica) : base(id, rednibr, tip)
+        {
+            this.BrSijalica = brsijalica;
+        }
+    }
+
+    public class SvetiljkaPregled : ObjekatPregled
+    {
+        public int BrSijalica;
+        public SvetiljkaPregled()
+        {
+
+        }
+        public SvetiljkaPregled(int id, int rednibr, string tip, int brsijalica) : base(id, rednibr, tip)
         {
             this.BrSijalica = brsijalica;
         }
@@ -309,11 +359,28 @@ namespace ZelenaPovrsina
             this.Starost = starost;
 
 
+        }
+    }
 
+    public class DecijeIgralistePregled : ObjekatPregled
+    {
+        public int BrIgracaka;
+        public int Pesak;
+        public int Starost;
+        public DecijeIgralistePregled()
+        {
+
+        }
+        public DecijeIgralistePregled(int id, int rednibr, string tip, int brigracaka, int pesak, int starost) : base(id, rednibr, tip)
+        {
+            this.BrIgracaka = brigracaka;
+            this.Pesak = pesak;
+            this.Starost = starost;
 
 
         }
     }
+
     #endregion
 
     #region Fontana
@@ -333,6 +400,24 @@ namespace ZelenaPovrsina
             this.PovrsinaF = povrsinaf;
     
 
+        }
+
+        public class FontanaPregled : ObjekatPregled
+        {
+            public int BrPrskalica;
+            public int PovrsinaF;
+
+            public FontanaPregled()
+            {
+
+            }
+            public FontanaPregled(int id, int rednibr, string tip, int brprskalica, int povrsinaf) : base(id, rednibr, tip)
+            {
+                this.BrPrskalica = brprskalica;
+                this.PovrsinaF = povrsinaf;
+
+
+            }
         }
     }
 
