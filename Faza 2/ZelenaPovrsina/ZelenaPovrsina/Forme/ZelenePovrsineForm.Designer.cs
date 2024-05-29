@@ -45,9 +45,11 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(listView1);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Location = new Point(17, 20);
+            groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(376, 640);
+            groupBox1.Padding = new Padding(4, 5, 4, 5);
+            groupBox1.Size = new Size(537, 1067);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Lista zelenih povrsina";
@@ -57,9 +59,10 @@
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
-            listView1.Location = new Point(6, 22);
+            listView1.Location = new Point(9, 37);
+            listView1.Margin = new Padding(4, 5, 4, 5);
             listView1.Name = "listView1";
-            listView1.Size = new Size(357, 612);
+            listView1.Size = new Size(508, 1017);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -88,60 +91,69 @@
             // 
             // button1
             // 
-            button1.Location = new Point(488, 259);
+            button1.Location = new Point(697, 432);
+            button1.Margin = new Padding(4, 5, 4, 5);
             button1.Name = "button1";
-            button1.Size = new Size(161, 38);
+            button1.Size = new Size(230, 63);
             button1.TabIndex = 1;
             button1.Text = "Parkovi";
             button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            button2.Location = new Point(488, 327);
+            button2.Location = new Point(697, 545);
+            button2.Margin = new Padding(4, 5, 4, 5);
             button2.Name = "button2";
-            button2.Size = new Size(161, 36);
+            button2.Size = new Size(230, 60);
             button2.TabIndex = 2;
             button2.Text = "Drvoredi";
             button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            button3.Location = new Point(488, 394);
+            button3.Location = new Point(697, 657);
+            button3.Margin = new Padding(4, 5, 4, 5);
             button3.Name = "button3";
-            button3.Size = new Size(161, 37);
+            button3.Size = new Size(230, 62);
             button3.TabIndex = 3;
             button3.Text = "Travnjaci";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button4
             // 
-            button4.Location = new Point(488, 34);
+            button4.Location = new Point(697, 57);
+            button4.Margin = new Padding(4, 5, 4, 5);
             button4.Name = "button4";
-            button4.Size = new Size(161, 48);
+            button4.Size = new Size(230, 80);
             button4.TabIndex = 4;
             button4.Text = "Dodaj zelenu povrsinu";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button5
             // 
-            button5.Location = new Point(488, 99);
+            button5.Location = new Point(697, 165);
+            button5.Margin = new Padding(4, 5, 4, 5);
             button5.Name = "button5";
-            button5.Size = new Size(161, 48);
+            button5.Size = new Size(230, 80);
             button5.TabIndex = 5;
             button5.Text = "Obrisi zelenu povrsinu";
             button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // ZelenePovrsineForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(724, 664);
+            ClientSize = new Size(1034, 1107);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(groupBox1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "ZelenePovrsineForm";
             Text = "ZELENE POVRSINE";
             groupBox1.ResumeLayout(false);

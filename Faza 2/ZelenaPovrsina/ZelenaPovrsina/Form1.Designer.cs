@@ -38,9 +38,9 @@
             // 
             // cmdUcitavanjeRadnika
             // 
-            cmdUcitavanjeRadnika.Location = new Point(12, 12);
+            cmdUcitavanjeRadnika.Location = new Point(150, 50);
             cmdUcitavanjeRadnika.Name = "cmdUcitavanjeRadnika";
-            cmdUcitavanjeRadnika.Size = new Size(132, 23);
+            cmdUcitavanjeRadnika.Size = new Size(132, 86);
             cmdUcitavanjeRadnika.TabIndex = 0;
             cmdUcitavanjeRadnika.Text = "Ucitavanje radnika";
             cmdUcitavanjeRadnika.UseVisualStyleBackColor = true;
@@ -48,9 +48,9 @@
             // 
             // cmdDodavanjeRadnika
             // 
-            cmdDodavanjeRadnika.Location = new Point(12, 41);
+            cmdDodavanjeRadnika.Location = new Point(-2, 12);
             cmdDodavanjeRadnika.Name = "cmdDodavanjeRadnika";
-            cmdDodavanjeRadnika.Size = new Size(132, 23);
+            cmdDodavanjeRadnika.Size = new Size(132, 85);
             cmdDodavanjeRadnika.TabIndex = 1;
             cmdDodavanjeRadnika.Text = "Dodaj ili azuriraj radnika";
             cmdDodavanjeRadnika.UseVisualStyleBackColor = true;
@@ -58,9 +58,9 @@
             // 
             // cmdManyToOneRadnikGrupa
             // 
-            cmdManyToOneRadnikGrupa.Location = new Point(12, 70);
+            cmdManyToOneRadnikGrupa.Location = new Point(-2, 103);
             cmdManyToOneRadnikGrupa.Name = "cmdManyToOneRadnikGrupa";
-            cmdManyToOneRadnikGrupa.Size = new Size(132, 38);
+            cmdManyToOneRadnikGrupa.Size = new Size(146, 118);
             cmdManyToOneRadnikGrupa.TabIndex = 2;
             cmdManyToOneRadnikGrupa.Text = "Veza many-to-one (Radnik-Grupa)";
             cmdManyToOneRadnikGrupa.UseVisualStyleBackColor = true;
@@ -68,9 +68,9 @@
             // 
             // cmdOneToManyGrupaRadnik
             // 
-            cmdOneToManyGrupaRadnik.Location = new Point(12, 114);
+            cmdOneToManyGrupaRadnik.Location = new Point(-2, 227);
             cmdOneToManyGrupaRadnik.Name = "cmdOneToManyGrupaRadnik";
-            cmdOneToManyGrupaRadnik.Size = new Size(132, 45);
+            cmdOneToManyGrupaRadnik.Size = new Size(132, 90);
             cmdOneToManyGrupaRadnik.TabIndex = 3;
             cmdOneToManyGrupaRadnik.Text = "Veza one-to-many (Grupa-Radnik)";
             cmdOneToManyGrupaRadnik.UseVisualStyleBackColor = true;
@@ -78,9 +78,9 @@
             // 
             // cmdDodajRadnikaUGrupu
             // 
-            cmdDodajRadnikaUGrupu.Location = new Point(12, 165);
+            cmdDodajRadnikaUGrupu.Location = new Point(-2, 343);
             cmdDodajRadnikaUGrupu.Name = "cmdDodajRadnikaUGrupu";
-            cmdDodajRadnikaUGrupu.Size = new Size(132, 25);
+            cmdDodajRadnikaUGrupu.Size = new Size(132, 89);
             cmdDodajRadnikaUGrupu.TabIndex = 4;
             cmdDodajRadnikaUGrupu.Text = "Dodaj radnika u grupu";
             cmdDodajRadnikaUGrupu.UseVisualStyleBackColor = true;
@@ -88,7 +88,7 @@
             // 
             // cmdVratiPark
             // 
-            cmdVratiPark.Location = new Point(209, 12);
+            cmdVratiPark.Location = new Point(136, 12);
             cmdVratiPark.Name = "cmdVratiPark";
             cmdVratiPark.Size = new Size(174, 32);
             cmdVratiPark.TabIndex = 5;

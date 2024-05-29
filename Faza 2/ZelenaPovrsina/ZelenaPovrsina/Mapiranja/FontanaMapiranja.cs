@@ -6,7 +6,7 @@
         {
             Table("FONTANA");
 
-            //Abstract();
+            Abstract();
             Map(x => x.BrPrskalica, "BRPRSKALICA");
             Map(x => x.PovrsinaF, "POVRSINAF");
 

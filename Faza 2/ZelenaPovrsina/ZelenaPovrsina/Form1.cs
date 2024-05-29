@@ -43,27 +43,35 @@ namespace ZelenaPovrsina
             try
             {
                 ISession s = DataLayer.GetSession();
-
+                
+                Entiteti.ZelenaPovrsina z = new Entiteti.ZelenaPovrsina()
+                {
+                    NazivGradskeOpstine = "palilula",
+                    ZonaUgrozenosti = "A",
+                    TipZ = "Park"
+                };
 
                 Entiteti.Radnik r = new Entiteti.Radnik();
-
-                r.Ime = "Nemanja";
+                
+                r.Ime = "Nikolaa";
                 r.Prezime = "Stamenkovic";
-                r.Jmbg = "1205995734829";
+                r.Jmbg = "5205995754829";
                 r.Adresa = "Somborski bulevar 12";
-                r.BrRadneKnjizice = 978;
+                r.BrRadneKnjizice = 123;
                 r.ImeRoditelja = "Aleksa";
                 r.StrucnaSprema = "VI stepen";
-                r.DatumRodj = new DateTime(1995,5, 12); // videti da li moze drugacije da se napise //inace ovo je (godina,mesec,dan)
+                r.DatumRodj = new DateTime(1995, 5, 12); 
                 r.ZaZelenilo = 1;
                 r.ZaHigijenu = 0;
                 r.ZaObjekat = 0;
-                //r.IdZP = 5;
-                //r.IdGrupe = 1;
+                
+                s.Save(z);
+                
+                r.AngazovanZaZP = z;
+                
 
                 s.Save(r);
-                //s.SaveOrUpdate(r); //ima i ova mogucnost, ali sada je isto Save i SaveOrUpdate
-
+                
                 s.Flush();
                 s.Close();
             }

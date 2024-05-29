@@ -1,4 +1,5 @@
-﻿namespace ZelenaPovrsina.Entiteti
+﻿
+namespace ZelenaPovrsina.Entiteti
 {
     public class ZelenaPovrsina
     {
@@ -8,12 +9,12 @@
         public virtual string TipZ { get; set; }
 
 
-        public virtual IList<Radnik> RadniciZP { get; set; } = [];
+        public virtual IList<Radnik> RadniciZP { get; set; }
 
-        //public ZelenaPovrsina()
-        //{
-        //    RadniciZP = new List<Radnik>();
-        //}
+        public ZelenaPovrsina()
+        {
+            RadniciZP = new List<Radnik>();
+        }
 
     }
 }

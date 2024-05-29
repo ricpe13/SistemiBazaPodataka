@@ -5,8 +5,8 @@
         public DrvoMapiranja()
         {
             Table("DRVO");
-
-            KeyColumn("IDO");
+            Abstract();
+            //KeyColumn("IDO");
 
             Map(x => x.VisinaKrosnje, "VISINAKROSNJE");
             Map(x => x.Vrsta, "VRSTA");

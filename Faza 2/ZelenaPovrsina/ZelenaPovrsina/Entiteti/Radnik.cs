@@ -21,9 +21,10 @@
         public virtual ZelenaPovrsina AngazovanZaZP { get; set; }
 
 
-        //public Radnik() {
+        public Radnik() 
+        {
 
-        //}
+        }
 
     }
 }

@@ -39,62 +39,72 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 40F);
-            label1.Location = new Point(215, 9);
+            label1.Location = new Point(307, 15);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(404, 72);
+            label1.Size = new Size(598, 106);
             label1.TabIndex = 0;
             label1.Text = "Zelene Povrsine";
             // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 20F);
-            button1.Location = new Point(289, 160);
+            button1.Location = new Point(413, 267);
+            button1.Margin = new Padding(4, 5, 4, 5);
             button1.Name = "button1";
-            button1.Size = new Size(269, 58);
+            button1.Size = new Size(384, 97);
             button1.TabIndex = 1;
             button1.Text = "Radnici";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
             button2.Font = new Font("Segoe UI", 20F);
-            button2.Location = new Point(289, 255);
+            button2.Location = new Point(413, 425);
+            button2.Margin = new Padding(4, 5, 4, 5);
             button2.Name = "button2";
-            button2.Size = new Size(269, 58);
+            button2.Size = new Size(384, 97);
             button2.TabIndex = 2;
             button2.Text = "Zelene povrsine";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
             button3.Font = new Font("Segoe UI", 20F);
-            button3.Location = new Point(289, 349);
+            button3.Location = new Point(413, 582);
+            button3.Margin = new Padding(4, 5, 4, 5);
             button3.Name = "button3";
-            button3.Size = new Size(269, 58);
+            button3.Size = new Size(384, 97);
             button3.TabIndex = 3;
             button3.Text = "Objekti";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button4
             // 
             button4.Font = new Font("Segoe UI", 20F);
-            button4.Location = new Point(289, 445);
+            button4.Location = new Point(413, 742);
+            button4.Margin = new Padding(4, 5, 4, 5);
             button4.Name = "button4";
-            button4.Size = new Size(269, 58);
+            button4.Size = new Size(384, 97);
             button4.TabIndex = 4;
             button4.Text = "Zastite";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // Pocetna
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(883, 557);
+            ClientSize = new Size(1261, 928);
             Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "Pocetna";
             Text = "Pocetna";
             ResumeLayout(false);

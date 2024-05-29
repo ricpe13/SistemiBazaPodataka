@@ -11,8 +11,8 @@ namespace ZelenaPovrsina.Mapiranja
         public SpomenikMapiranja()
         {
             Table("SPOMENIK");
-
-            KeyColumn("IDO");
+            Abstract();
+            //KeyColumn("IDO");
             Map(x => x.NazivS, "NAZIVS");
             References(x => x.Zastita).Column("IDZASTITE").LazyLoad();
 

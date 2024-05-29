@@ -5,8 +5,8 @@
         public SvetiljkaMapiranja()
         {
             Table("SVETILJKKA");
-
-            KeyColumn("IDO");
+            Abstract();
+            //KeyColumn("IDO");
             Map(x => x.BrSijalica, "BRSIJALICA");
 
         }
