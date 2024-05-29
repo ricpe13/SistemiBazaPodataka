@@ -206,9 +206,24 @@ namespace ZelenaPovrsina
     #endregion
 
     #region Objekat
-    public class Objekat
+    public class ObjekatBasic
     {
+        public int IdO { get; set; }
+        public int IdParka { get; set; }
+        public int RedniBr { get; set; }
+        public string Tip { get; set; }
 
+        public ObjekatBasic(int ido, int idparka, int rednibr, string tip)
+        {
+            this.IdO = ido;
+            this.IdParka = idparka;
+            this.RedniBr = rednibr;
+            this.Tip = tip;
+        }
+        public ObjekatBasic()
+        {
+
+        }
     }
     #region
 
@@ -268,7 +283,7 @@ namespace ZelenaPovrsina
         {
 
         }
-        public SvetijlkaBasic(int id, int rednibr, string tip, int brsijalica) : base(id, rednibr, tip)
+        public SvetiljkaBasic(int id, int rednibr, string tip, int brsijalica) : base(id, rednibr, tip)
         {
             this.BrSijalica = brsijalica;
         }
