@@ -12,3 +12,4 @@ global using System.Configuration;
 global using NHibernate.Criterion;
 global using NHibernate.Linq;
 global using ZelenaPovrsina.Entiteti;
+global using ZelenaPovrsina.DTO;
