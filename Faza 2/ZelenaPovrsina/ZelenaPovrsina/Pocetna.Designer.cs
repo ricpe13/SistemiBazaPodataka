@@ -58,7 +58,7 @@
             // button2
             // 
             button2.Font = new Font("Segoe UI", 20F);
-            button2.Location = new Point(289, 355);
+            button2.Location = new Point(289, 258);
             button2.Name = "button2";
             button2.Size = new Size(269, 58);
             button2.TabIndex = 2;
@@ -68,7 +68,7 @@
             // button3
             // 
             button3.Font = new Font("Segoe UI", 20F);
-            button3.Location = new Point(289, 252);
+            button3.Location = new Point(289, 349);
             button3.Name = "button3";
             button3.Size = new Size(269, 58);
             button3.TabIndex = 3;

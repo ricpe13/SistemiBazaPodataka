@@ -46,6 +46,7 @@
             columnHeader12 = new ColumnHeader();
             columnHeader13 = new ColumnHeader();
             columnHeader14 = new ColumnHeader();
+            button3 = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -158,16 +159,26 @@
             // 
             columnHeader14.Text = "ID grupe";
             // 
+            // button3
+            // 
+            button3.Location = new Point(1254, 130);
+            button3.Name = "button3";
+            button3.Size = new Size(130, 23);
+            button3.TabIndex = 3;
+            button3.Text = "Izmeni radnika";
+            button3.UseVisualStyleBackColor = true;
+            // 
             // RadniciForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1424, 618);
+            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(groupBox1);
             Name = "RadniciForm";
-            Text = "LISTA RADNIKA";
+            Text = "RADNICI";
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -192,5 +203,6 @@
         private ColumnHeader columnHeader14;
         private Button button1;
         private Button button2;
+        private Button button3;
     }
 }
