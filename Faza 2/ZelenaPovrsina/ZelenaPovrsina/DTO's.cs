@@ -94,11 +94,11 @@ namespace ZelenaPovrsina
         public int ZaHigijenu;
         public int ZaObjekat;
         public string StrucnaSprema;
-        public string DatumRodj;
+        public DateTime DatumRodj;
         public ZelenaPovrsinaBasic ZelenaPovrsina;
         public GrupaRadnikaBasic GrupaRadnika;
 
-        public RadnikBasic(int idR, string ime, string prezime, string jmbg, string adresa, int brRadneKnjizice, string imeRoditelja, int zaZelenilo, int zaHigijenu, int zaObjekat, string strucnaSprema, string datumRodj)
+        public RadnikBasic(int idR, string ime, string prezime, string jmbg, string adresa, int brRadneKnjizice, string imeRoditelja, int zaZelenilo, int zaHigijenu, int zaObjekat, string strucnaSprema, DateTime datumRodj)
         {
             IdR = idR;
             Ime = ime;

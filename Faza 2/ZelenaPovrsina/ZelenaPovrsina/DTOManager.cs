@@ -16,14 +16,14 @@ namespace ZelenaPovrsina.DTO
                 ISession s = DataLayer.GetSession();
 
                 ZelenaPovrsina.Entiteti.Radnik o = new ZelenaPovrsina.Entiteti.Radnik();
-                o.Idr = r.Idr;
+          
                 o.Ime = r.Ime;
                 o.Prezime = r.Prezime;
                 o.Jmbg = r.Jmbg;
                 o.Adresa = r.Adresa;
-                o.BrRadniKnjizice = r.BrRadniKnjizice;
+                o.BrRadneKnjizice = r.BrRadneKnjizice;
                 o.ImeRoditelja = r.ImeRoditelja;
-                o.StrucnaSpema = r.StrucnaSpema;
+                o.StrucnaSprema = r.StrucnaSprema;
                 o.DatumRodj = r.DatumRodj;
                 o.ZaZelenilo = r.ZaZelenilo;
                 o.ZaZelenilo = r.ZaZelenilo;
