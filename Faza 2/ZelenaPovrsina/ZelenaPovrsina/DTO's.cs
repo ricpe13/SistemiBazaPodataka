@@ -273,7 +273,6 @@ namespace ZelenaPovrsina
 
     #endregion
 
-
     #region Svetiljka
 
     public class SvetiljkaBasic : ObjekatBasic
@@ -338,5 +337,16 @@ namespace ZelenaPovrsina
 
     #endregion
 
+    #region Spomenik
+
+
+
+    #endregion
+
+    #region Skulptura
+
+
+
+    #endregion
 
 }
