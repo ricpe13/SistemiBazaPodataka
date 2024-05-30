@@ -71,7 +71,26 @@ namespace ZelenaPovrsina.DTO
                 //handle exceptions
             }
 
-            return prodavnice;
+            return radnici;
+        }
+
+        public static void obrisiRadnika(int id)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                ZelenaPovrsina.Entiteti.Radnik r = s.Load<ZelenaPovrsina.Entiteti.Radnik>(id);
+
+                s.Delete(r);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
         }
 
 
