@@ -342,7 +342,7 @@ namespace ZelenaPovrsina.DTO
 
                 foreach (ZelenaPovrsina.Entiteti.Travnjak r in sviTravnjaci)
                 {
-                    travnjaci.Add(new TravnjacPregled(r.IdZ, r.AdresaZgrade, r.PovrsinaT));
+                    travnjaci.Add(new TravnjakPregled(r.IdZ, r.AdresaZgrade, r.PovrsinaT));
                 }
 
                 s.Close();
