@@ -57,7 +57,29 @@ namespace ZelenaPovrsina.Forme
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite zaposlenog koga zelite da obrisete!");
+                return;
+            }
 
+            int idZaposleni = Int32.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+            string poruka = "Da li zelite da obrisete izabranog radnika?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiRadnika(idZaposleni);
+                MessageBox.Show("Brisanje zaposlenog je uspesno obavljeno!");
+                this.popuniPodacimaRadnici();
+            }
+            else
+            {
+
+            }
         }
+    }
     }
 }
