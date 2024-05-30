@@ -2,7 +2,7 @@
 {
     public class Park : ZelenaPovrsina
     {
-        public required virtual string NazivP { get; set; }
+        public virtual string NazivP { get; set; }
         public virtual double PovrsinaP { get; set; }
 
         public virtual GrupaRadnika? GrupaRadnika { get; set; } //za one to one

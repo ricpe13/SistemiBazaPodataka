@@ -32,11 +32,10 @@ namespace ZelenaPovrsina.Forme
             radnik.BrRadneKnjizice = Int32.Parse(textBoxBrRad.Text);
             radnik.ImeRoditelja = textBoxRod.Text;
             radnik.DatumRodj = datumRodjenja.Value;
+            radnik.StrucnaSprema=textBoxStrucnaSprema.Text;
             radnik.ZaHigijenu=Int32.Parse(textBoxHig.Text);
             radnik.ZaZelenilo = Int32.Parse(textBoxZel.Text);
             radnik.ZaObjekat = Int32.Parse(textBoxObj.Text);
-            radnik.ZelenaPovrsina = Int32.Parse(textBoxZP.Text);
-            //radnik.GrupaRadnika = null;
             DTOManager.dodajRadnika(radnik);
             MessageBox.Show("Uspesno ste dodali novog radnika");
 

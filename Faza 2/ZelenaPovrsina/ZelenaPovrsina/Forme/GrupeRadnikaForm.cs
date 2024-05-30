@@ -19,7 +19,8 @@ namespace ZelenaPovrsina.Forme
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            DodajGrupuForma forma = new DodajGrupuForma();
+            forma.ShowDialog();
         }
 
         private void GrupeRadnikaForm_Load(object sender, EventArgs e)

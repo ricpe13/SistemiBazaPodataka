@@ -10,17 +10,16 @@ using System.Windows.Forms;
 
 namespace ZelenaPovrsina.Forme
 {
-    public partial class ParkoviForm : Form
+    public partial class DodajGrupuForma : Form
     {
-        public ParkoviForm()
+        public DodajGrupuForma()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void cmdDodajGrupuRadnika_Click(object sender, EventArgs e)
         {
-            DodajParkForma form = new DodajParkForma();
-            form.ShowDialog();
+
         }
     }
 }

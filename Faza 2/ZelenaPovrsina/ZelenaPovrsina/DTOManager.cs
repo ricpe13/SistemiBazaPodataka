@@ -29,8 +29,8 @@ namespace ZelenaPovrsina.DTO
                 o.ZaZelenilo = r.ZaZelenilo;
                 o.ZaHigijenu = r.ZaHigijenu;
                 o.ZaObjekat = r.ZaObjekat;
-                ZelenaPovrsina.Entiteti.ZelenaPovrsina zp = s.Load<ZelenaPovrsina.Entiteti.ZelenaPovrsina>(r.ZelenaPovrsina.Id);
-                o.AngazovanZaZP = zp;
+               // ZelenaPovrsina.Entiteti.ZelenaPovrsina zp = s.Load<ZelenaPovrsina.Entiteti.ZelenaPovrsina>(r.ZelenaPovrsina.Id);
+               // o.AngazovanZaZP = zp;
 
                 s.SaveOrUpdate(o);
 
@@ -43,8 +43,37 @@ namespace ZelenaPovrsina.DTO
             catch (Exception ec)
             {
                 MessageBox.Show(ec.FormatExceptionMessage());
+                
             }
         }
+        #endregion
+
+        #region Park
+
+        public static void dodajPark(ParkBasic park)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                ZelenaPovrsina.Entiteti.Park p = new Park();
+
+                p.NazivP = park.NazivP;
+                p.TipZ=park.TipZ;
+                p.ZonaUgrozenosti = park.ZonaUgrozenosti;
+                p.PovrsinaP=park.PovrsinaP;
+                p.NazivGradskeOpstine = park.NazivGradskeOpstine;
+
+                s.Save(p); s.Flush(); s.Close();
+
+                
+            }
+            catch(Exception e) 
+            {
+                MessageBox.Show(e.FormatExceptionMessage());
+            }
+        }
+
         #endregion
     }
 }
