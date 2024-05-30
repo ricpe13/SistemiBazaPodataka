@@ -216,16 +216,16 @@ namespace ZelenaPovrsina.DTO
 
         #region GrupaRadnika
 
-        public static void dodajGrupuRadnika(GrupaRadnikaBasic r)
+        public static void dodajGrupuRadnika(GrupaRadnikaBasic grupaRadnika)
         {
             try
             {
                 ISession s = DataLayer.GetSession();
-                ZelenaPovrsina.Entiteti.GrupaRadnika g = new GrupaRadnika();
+                ZelenaPovrsina.Entiteti.GrupaRadnika g = new ZelenaPovrsina.Entiteti.GrupaRadnika();
 
-                g.NazivG = r.NazivG;
-                //ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(g.Park.IdZ);
-                //g.Park = p;
+                g.NazivG = grupaRadnika.NazivG;
+                ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(grupaRadnika.Park.Id);
+                g.Park = p;
                 s.Save(g); s.Flush(); s.Close();
             }
             catch (Exception e)
