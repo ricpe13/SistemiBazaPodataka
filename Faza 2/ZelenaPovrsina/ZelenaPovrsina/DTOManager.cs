@@ -124,6 +124,25 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static void obrisiPark(int id)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(id);
+
+                s.Delete(p);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
         #endregion
 
 
