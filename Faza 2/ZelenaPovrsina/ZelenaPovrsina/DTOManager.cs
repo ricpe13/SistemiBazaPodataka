@@ -170,27 +170,29 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-        public static List<ParkBasic> vratiSveParkoveBasic()
+        public static List<RadnikPregled> vratiSveParkove()
         {
-            List<ParkBasic> parkBasic = new List<ParkBasic>();
+            List<ParkPregled> parkovi = new List<ParkPregled>();
             try
             {
                 ISession s = DataLayer.GetSession();
-                IEnumerable<Park> parkovi = from o in s.Query<ZelenaPovrsina.Entiteti.Park>()
-                                            select o;
-                foreach (Park p in parkovi)
+
+                IEnumerable<ZelenaPovrsina.Entiteti.Park> sviParkovi = from o in s.Query<ZelenaPovrsina.Entiteti.Park>()
+                                                                         select o;
+
+                foreach (ZelenaPovrsina.Entiteti.Park r in sviParkovi)
                 {
-                    ParkBasic park = DTOManager.vratiPark(p.IdZ);
-                    parkBasic.Add(park);
+                    parkovi.Add(new ParkPregled(r.IdZ, r.NazivP, r.PovrsinaP));
                 }
+
                 s.Close();
             }
-            catch (Exception e)
+            catch (Exception ec)
             {
-                MessageBox.Show(e.FormatExceptionMessage());
+                //handle exceptions
             }
 
-            return parkBasic;
+            return parkovi;
         }
 
         public static ParkBasic vratiPark(int id)

@@ -35,17 +35,16 @@
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             button1 = new Button();
+            btnObrisiPark = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(listView1);
-            groupBox1.Location = new Point(17, 20);
-            groupBox1.Margin = new Padding(4, 5, 4, 5);
+            groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(4, 5, 4, 5);
-            groupBox1.Size = new Size(514, 988);
+            groupBox1.Size = new Size(360, 593);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Lista parkova";
@@ -55,10 +54,9 @@
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
-            listView1.Location = new Point(9, 37);
-            listView1.Margin = new Padding(4, 5, 4, 5);
+            listView1.Location = new Point(6, 22);
             listView1.Name = "listView1";
-            listView1.Size = new Size(478, 939);
+            listView1.Size = new Size(336, 565);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -87,22 +85,32 @@
             // 
             // button1
             // 
-            button1.Location = new Point(568, 98);
+            button1.Location = new Point(398, 59);
+            button1.Margin = new Padding(2, 2, 2, 2);
             button1.Name = "button1";
-            button1.Size = new Size(136, 34);
+            button1.Size = new Size(95, 29);
             button1.TabIndex = 1;
             button1.Text = "Dodaj park";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // btnObrisiPark
+            // 
+            btnObrisiPark.Location = new Point(393, 110);
+            btnObrisiPark.Name = "btnObrisiPark";
+            btnObrisiPark.Size = new Size(126, 26);
+            btnObrisiPark.TabIndex = 2;
+            btnObrisiPark.Text = "Obrisi park";
+            btnObrisiPark.UseVisualStyleBackColor = true;
+            // 
             // ParkoviForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1157, 1048);
+            ClientSize = new Size(810, 629);
+            Controls.Add(btnObrisiPark);
             Controls.Add(button1);
             Controls.Add(groupBox1);
-            Margin = new Padding(4, 5, 4, 5);
             Name = "ParkoviForm";
             Text = "PARKOVI";
             groupBox1.ResumeLayout(false);
@@ -118,5 +126,6 @@
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
         private Button button1;
+        private Button btnObrisiPark;
     }
 }
