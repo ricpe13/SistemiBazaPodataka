@@ -47,6 +47,36 @@ namespace ZelenaPovrsina.DTO
 
             }
         }
+
+        public static List<RadnikPregled> vratiSveRadnike()
+        {
+            List<RadnikPregled> radnici = new List<RadnikPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<ZelenaPovrsina.Entiteti.Radnik> sviRadnici = from o in s.Query<ZelenaPovrsina.Entiteti.Radnik>()
+                                                                            select o;
+
+                foreach (ZelenaPovrsina.Entiteti.Radnik r in sviRadnici)
+                {
+                    radnici.Add(new RadnikPregled(r.IdR, r.Ime, r.Prezime, r.Jmbg, r.Adresa, r.BrRadneKnjizice, r.ImeRoditelja, 
+                        r.StrucnaSprema, r.DatumRodj, r.ZaZelenilo, r.ZaHigijenu, r.ZaObjekat));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return prodavnice;
+        }
+
+
+
+
         #endregion
 
         #region Park
@@ -108,7 +138,7 @@ namespace ZelenaPovrsina.DTO
             #endregion
 
 
-            #region Drvored
+        #region Drvored
 
             public static void dodajDrvored(DrvoredBasic drvored)
             {
