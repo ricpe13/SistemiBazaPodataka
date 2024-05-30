@@ -170,7 +170,7 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-        public static List<RadnikPregled> vratiSveParkove()
+        public static List<ParkPregled> vratiSveParkove()
         {
             List<ParkPregled> parkovi = new List<ParkPregled>();
             try
@@ -182,7 +182,7 @@ namespace ZelenaPovrsina.DTO
 
                 foreach (ZelenaPovrsina.Entiteti.Park r in sviParkovi)
                 {
-                    parkovi.Add(new ParkPregled(r.IdZ, r.NazivP, r.PovrsinaP));
+                    parkovi.Add(new ParkPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti,r.TipZ,r.NazivP,r.PovrsinaP));
                 }
 
                 s.Close();
