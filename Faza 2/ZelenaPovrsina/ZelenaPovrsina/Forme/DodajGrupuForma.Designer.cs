@@ -31,6 +31,8 @@
             txtNaziv = new TextBox();
             label1 = new Label();
             cmdDodajGrupuRadnika = new Button();
+            parkovi = new ComboBox();
+            label2 = new Label();
             SuspendLayout();
             // 
             // txtNaziv
@@ -60,11 +62,30 @@
             cmdDodajGrupuRadnika.UseVisualStyleBackColor = false;
             cmdDodajGrupuRadnika.Click += cmdDodajGrupuRadnika_Click;
             // 
+            // parkovi
+            // 
+            parkovi.FormattingEnabled = true;
+            parkovi.Location = new Point(190, 108);
+            parkovi.Name = "parkovi";
+            parkovi.Size = new Size(182, 33);
+            parkovi.TabIndex = 3;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(89, 108);
+            label2.Name = "label2";
+            label2.Size = new Size(45, 25);
+            label2.TabIndex = 4;
+            label2.Text = "Park";
+            // 
             // DodajGrupuForma
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label2);
+            Controls.Add(parkovi);
             Controls.Add(cmdDodajGrupuRadnika);
             Controls.Add(label1);
             Controls.Add(txtNaziv);
@@ -79,5 +100,7 @@
         private TextBox txtNaziv;
         private Label label1;
         private Button cmdDodajGrupuRadnika;
+        private ComboBox parkovi;
+        private Label label2;
     }
 }
