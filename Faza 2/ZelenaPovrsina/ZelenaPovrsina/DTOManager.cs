@@ -99,10 +99,36 @@ namespace ZelenaPovrsina.DTO
             {
                 MessageBox.Show(e.FormatExceptionMessage());
             }
-
+        }
 
             #endregion
-        }
-    }
 
+
+            #region Drvored
+
+            public static void dodajDrvored(DrvoredBasic drvored)
+            {
+                try
+                {
+                    ISession s = DataLayer.GetSession();
+
+                    ZelenaPovrsina.Entiteti.Drvored d = new Drvored();
+
+                    d.Ulica = drvored.Ulica;
+                    d.Duzina = drvored.Duzina;
+                    d.VrstaDrveta = drvored.VrstaDrveta;
+                    d.BrojStabala = drvored.BrojStabala;
+
+
+                    s.Save(d); s.Flush(); s.Close();
+
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.FormatExceptionMessage());
+                }
+            }
+                #endregion
+    }
 }
