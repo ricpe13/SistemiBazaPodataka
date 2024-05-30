@@ -329,6 +329,35 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+
+        public static List<TravnjakPregled> vratiSveTravnjake()
+        {
+            List<TravnjakPregled> travnjaci = new List<TravnjakPregled>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<ZelenaPovrsina.Entiteti.Travnjak> sviTravnjaci = from o in s.Query<ZelenaPovrsina.Entiteti.Travnjak>()
+                                                                         select o;
+
+                foreach (ZelenaPovrsina.Entiteti.Travnjak r in sviTravnjaci)
+                {
+                    travnjaci.Add(new TravnjacPregled(r.IdZ, r.AdresaZgrade, r.PovrsinaT));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return travnjaci;
+        }
+
+
+
+
         #endregion
 
 
