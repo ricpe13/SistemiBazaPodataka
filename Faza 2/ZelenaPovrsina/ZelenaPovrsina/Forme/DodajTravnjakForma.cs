@@ -19,16 +19,16 @@ namespace ZelenaPovrsina.Forme
 
         private void btnDodajT_Click(object sender, EventArgs e)
         {
-            TravnjakBasic p = new TravnjakBasic();
-            p.TipZ = "travnjak";
-            p.NazivGradskeOpstine = txtOpstina.Text;
-            p.ZonaUgrozenosti = txtZona.Text;
-            p.AdresaZgrade = txtAdresa.Text;
-            p.PovrsinaT = Int32.Parse(txtPT.Text);
+            TravnjakBasic t = new TravnjakBasic();
+            t.TipZ = "travnjak";
+            t.NazivGradskeOpstine = txtOpstina.Text;
+            t.ZonaUgrozenosti = txtZona.Text;
+            t.AdresaZgrade = txtAdresa.Text;
+            t.PovrsinaT = Int32.Parse(txtPT.Text);
 
-            DTOManager.dodajTravnjak(p);
+            DTOManager.dodajTravnjak(t);
 
-            MessageBox.Show("Uspesno ste dodali Park!");
+            MessageBox.Show("Uspesno ste dodali travnjak!");
             this.Close();
         }
     }

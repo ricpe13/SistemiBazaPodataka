@@ -30,7 +30,7 @@ namespace ZelenaPovrsina.Forme
 
             DTOManager.dodajDrvored(d);
 
-            MessageBox.Show("Uspesno ste dodali Park!");
+            MessageBox.Show("Uspesno ste dodali drvored!");
             this.Close();
         }
     }

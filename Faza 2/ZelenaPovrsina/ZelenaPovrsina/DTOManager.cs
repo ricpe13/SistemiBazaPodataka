@@ -88,9 +88,11 @@ namespace ZelenaPovrsina.DTO
 
                 ZelenaPovrsina.Entiteti.Travnjak t = new Travnjak();
 
+                t.TipZ = travnjak.TipZ;
                 t.AdresaZgrade = travnjak.AdresaZgrade;
                 t.PovrsinaT = travnjak.PovrsinaT;
                 t.NazivGradskeOpstine = travnjak.NazivGradskeOpstine;
+                t.ZonaUgrozenosti = travnjak.ZonaUgrozenosti;
 
 
                 s.Save(t); s.Flush(); s.Close();
@@ -115,15 +117,17 @@ namespace ZelenaPovrsina.DTO
                     ISession s = DataLayer.GetSession();
 
                     ZelenaPovrsina.Entiteti.Drvored d = new Drvored();
-
+                    
+                    d.TipZ = drvored.TipZ;
                     d.Ulica = drvored.Ulica;
                     d.Duzina = drvored.Duzina;
                     d.VrstaDrveta = drvored.VrstaDrveta;
                     d.BrojStabala = drvored.BrojStabala;
                     d.NazivGradskeOpstine = drvored.NazivGradskeOpstine;
+                    d.ZonaUgrozenosti = drvored.ZonaUgrozenosti;
 
 
-                    s.Save(d); s.Flush(); s.Close();
+                s.Save(d); s.Flush(); s.Close();
 
 
                 }
