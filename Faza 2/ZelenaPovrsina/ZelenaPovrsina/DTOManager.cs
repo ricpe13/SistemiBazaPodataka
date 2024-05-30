@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZelenaPovrsina.Entiteti;
 
 namespace ZelenaPovrsina.DTO
 {
@@ -89,6 +90,7 @@ namespace ZelenaPovrsina.DTO
 
                 t.AdresaZgrade = travnjak.AdresaZgrade;
                 t.PovrsinaT = travnjak.PovrsinaT;
+                t.NazivGradskeOpstine = travnjak.NazivGradskeOpstine;
 
 
                 s.Save(t); s.Flush(); s.Close();
@@ -118,6 +120,7 @@ namespace ZelenaPovrsina.DTO
                     d.Duzina = drvored.Duzina;
                     d.VrstaDrveta = drvored.VrstaDrveta;
                     d.BrojStabala = drvored.BrojStabala;
+                    d.NazivGradskeOpstine = drvored.NazivGradskeOpstine;
 
 
                     s.Save(d); s.Flush(); s.Close();
