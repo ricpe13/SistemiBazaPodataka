@@ -100,7 +100,7 @@ namespace ZelenaPovrsina
         public ZelenaPovrsinaBasic ZelenaPovrsina;
         public GrupaRadnikaBasic GrupaRadnika;
 
-        public RadnikBasic(int idR, string ime, string prezime, string jmbg, string adresa, int brRadneKnjizice, string imeRoditelja, int zaZelenilo, int zaHigijenu, int zaObjekat, string strucnaSprema, DateTime datumRodj)
+        public RadnikBasic(int idR, string ime, string prezime, string jmbg, string adresa, int brRadneKnjizice, string imeRoditelja, int zaZelenilo, int zaHigijenu, int zaObjekat, string strucnaSprema, DateTime datumRodj, ZelenaPovrsinaBasic zp, GrupaRadnikaBasic gr)
         {
             IdR = idR;
             Ime = ime;
@@ -114,6 +114,9 @@ namespace ZelenaPovrsina
             ZaObjekat = zaObjekat;
             StrucnaSprema = strucnaSprema;
             DatumRodj = datumRodj;
+            ZelenaPovrsina = zp;
+            GrupaRadnika = gr;
+
         }
 
         public RadnikBasic()
@@ -154,10 +157,12 @@ namespace ZelenaPovrsina
             RadniciGrupe = new List<RadnikBasic>();
         }
 
-        public GrupaRadnikaBasic(int idg, string nazivG)
+        public GrupaRadnikaBasic(int idg, string nazivG, ParkBasic p, SefBasic s)
         {
             NazivG = nazivG;
             IdG = idg;
+            Park = p;
+            Sef = s;
         }
     }
     #endregion
@@ -170,10 +175,12 @@ namespace ZelenaPovrsina
         public string Matbr;
         public GrupaRadnikaBasic GrupaRadnika;
 
-        public SefBasic(int idRad, string matbr)
+        public SefBasic() { }
+        public SefBasic(int idRad, string matbr, GrupaRadnikaBasic gr)
         {
             IdRad = idRad;
             Matbr = matbr;
+            GrupaRadnika = gr;
         }
     }
 
@@ -222,16 +229,18 @@ namespace ZelenaPovrsina
     {
         public string NazivP;
         public double PovrsinaP;
+        public GrupaRadnikaBasic GrupaRadnika;
 
         public ParkBasic()
         {
 
         }
 
-        public ParkBasic(int id, string naziv, string zona, string tipz, string nazivp, double povrsinap) : base(id, naziv, zona, tipz)
+        public ParkBasic(int id, string naziv, string zona, string tipz, string nazivp, double povrsinap, GrupaRadnikaBasic grupa) : base(id, naziv, zona, tipz)
         {
             NazivP = nazivp;
             PovrsinaP = povrsinap;
+            GrupaRadnika = grupa;
         }
     }
 

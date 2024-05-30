@@ -170,9 +170,75 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static List<ParkBasic> vratiSveParkoveBasic()
+        {
+            List<ParkBasic> parkBasic = new List<ParkBasic>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                IEnumerable<Park> parkovi = from o in s.Query<ZelenaPovrsina.Entiteti.Park>()
+                                            select o;
+                foreach (Park p in parkovi)
+                {
+                    ParkBasic park = DTOManager.vratiPark(p.IdZ);
+                    parkBasic.Add(park);
+                }
+                s.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.FormatExceptionMessage());
+            }
+
+            return parkBasic;
+        }
+
+        public static ParkBasic vratiPark(int id)
+        {
+            ParkBasic pb = new ParkBasic();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(id);
+                pb = new ParkBasic(p.IdZ, p.NazivGradskeOpstine, p.ZonaUgrozenosti, p.TipZ, p.NazivP, p.PovrsinaP);
+
+                s.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.FormatExceptionMessage());
+            }
+
+            return pb;
+        }
+
         #endregion
 
+        #region GrupaRadnika
 
+        public static void dodajGrupuRadnika(GrupaRadnikaBasic r)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                ZelenaPovrsina.Entiteti.GrupaRadnika g = new GrupaRadnika();
+
+                g.NazivG = r.NazivG;
+                ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(g.Park.IdZ);
+                g.Park = p;
+                s.Save(g); s.Flush(); s.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.FormatExceptionMessage());
+
+
+            }
+        }
+
+        #endregion
+        
+        
         #region Travnjak
 
         public static void dodajTravnjak(TravnjakBasic travnjak)
