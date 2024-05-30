@@ -59,7 +59,7 @@ namespace ZelenaPovrsina.Forme
         {
             if (listView1.SelectedItems.Count == 0)
             {
-                MessageBox.Show("Izaberite zaposlenog koga zelite da obrisete!");
+                MessageBox.Show("Izaberite radnika koga zelite da obrisete!");
                 return;
             }
 
@@ -72,7 +72,7 @@ namespace ZelenaPovrsina.Forme
             if (result == DialogResult.OK)
             {
                 DTOManager.obrisiRadnika(idRadnik);
-                MessageBox.Show("Brisanje zaposlenog je uspesno obavljeno!");
+                MessageBox.Show("Brisanje radnika je uspesno obavljeno!");
                 this.popuniPodacimaRadnici();
             }
             else
