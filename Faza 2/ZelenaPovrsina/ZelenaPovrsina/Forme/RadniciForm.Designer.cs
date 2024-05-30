@@ -155,7 +155,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(1254, 55);
+            button2.Location = new Point(1254, 177);
             button2.Name = "button2";
             button2.Size = new Size(135, 41);
             button2.TabIndex = 2;
