@@ -26,21 +26,22 @@ namespace ZelenaPovrsina.Forme
         {
 
 
-            listaRadnika.Items.Clear();
+            listView1.Items.Clear();
             List<RadnikPregled> podaci = DTOManager.vratiSveRadnike();
 
 
 
             foreach (RadnikPregled r in podaci)
             {
-                ListViewItem item = new ListViewItem(new string[] { p.Id.ToString(), p.Naziv, p.Adresa, p.BrojTelefona, p.RadniDan, p.Subota, p.Nedelja });
-                listaRadnika.Items.Add(item);
+                ListViewItem item = new ListViewItem(new string[] { r.IdR.ToString(), r.Ime, r.Prezime, r.Jmbg, r.Adresa, r.BrRadneKnjizice.ToString(), r.ImeRoditelja, r.StrucnaSprema, r.DatumRodj.ToString(), r.ZaZelenilo.ToString(), r.ZaHigijenu.ToString(), r.ZaObjekat.ToString()});
+                //NE ZNAM KAKO ZA IDGRUPE I ZELENE POVRSINE
+                listView1.Items.Add(item);
 
             }
 
 
 
-            listaRadnika.Refresh();
+            listView1.Refresh();
         }
 
 
