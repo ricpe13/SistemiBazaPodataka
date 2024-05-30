@@ -342,7 +342,7 @@ namespace ZelenaPovrsina.DTO
 
                 foreach (ZelenaPovrsina.Entiteti.Travnjak r in sviTravnjaci)
                 {
-                    travnjaci.Add(new TravnjakPregled(r.IdZ, r.AdresaZgrade, r.PovrsinaT));
+                    travnjaci.Add(new TravnjakPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti, r.TipZ, r.AdresaZgrade, r.PovrsinaT));
                 }
 
                 s.Close();
@@ -448,7 +448,7 @@ namespace ZelenaPovrsina.DTO
 
                     foreach (ZelenaPovrsina.Entiteti.Drvored r in sviDrvoredi)
                     {
-                        drvoredi.Add(new DrvoredPregled(r.IdZ, r.Ulica, r.Duzina, r.VrstaDrveta, r.BrojStabala));
+                        drvoredi.Add(new DrvoredPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti, r.TipZ, r.Ulica, r.Duzina, r.VrstaDrveta, r.BrojStabala));
                     }
 
                     s.Close();
