@@ -52,6 +52,7 @@ namespace ZelenaPovrsina.Forme
         {
             DodajRanikaForma forma = new DodajRanikaForma();
             forma.ShowDialog();
+            popuniPodacimaRadnici();
         }
 
         private void button2_Click(object sender, EventArgs e)
