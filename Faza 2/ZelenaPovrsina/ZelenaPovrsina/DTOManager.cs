@@ -224,8 +224,8 @@ namespace ZelenaPovrsina.DTO
                 ZelenaPovrsina.Entiteti.GrupaRadnika g = new GrupaRadnika();
 
                 g.NazivG = r.NazivG;
-                ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(g.Park.IdZ);
-                g.Park = p;
+                //ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(g.Park.IdZ);
+                //g.Park = p;
                 s.Save(g); s.Flush(); s.Close();
             }
             catch (Exception e)
@@ -236,9 +236,51 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static List<GrupaRadnikaBasic> vratiSveGrupe()
+        {
+            List<GrupaRadnikaBasic> grupaBasic = new List<GrupaRadnikaBasic>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                IEnumerable<GrupaRadnika> grupe = from o in s.Query<ZelenaPovrsina.Entiteti.GrupaRadnika>()
+                                            select o;
+                foreach (GrupaRadnika g in grupe)
+                {
+                    GrupaRadnikaBasic grupa = DTOManager.vratiGrupu(g.IdG);
+                    grupaBasic.Add(grupa);
+                }
+                s.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.FormatExceptionMessage());
+            }
+
+            return grupaBasic;
+        }
+
+        public static GrupaRadnikaBasic vratiGrupu(int id)
+        {
+            GrupaRadnikaBasic pb = new GrupaRadnikaBasic();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+                ZelenaPovrsina.Entiteti.GrupaRadnika p = s.Load<ZelenaPovrsina.Entiteti.GrupaRadnika>(id);
+                pb = new GrupaRadnikaBasic(p.IdG, p.NazivG);
+
+                s.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.FormatExceptionMessage());
+            }
+
+            return pb;
+        }
+
         #endregion
-        
-        
+
+
         #region Travnjak
 
         public static void dodajTravnjak(TravnjakBasic travnjak)
