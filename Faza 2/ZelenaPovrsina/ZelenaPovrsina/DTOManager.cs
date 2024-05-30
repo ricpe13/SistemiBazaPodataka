@@ -185,6 +185,27 @@ namespace ZelenaPovrsina.DTO
                     MessageBox.Show(e.FormatExceptionMessage());
                 }
             }
-                #endregion
+
+
+
+            public static void obrisiDrvored(int id)
+            {
+                try
+                {
+                    ISession s = DataLayer.GetSession();
+
+                    ZelenaPovrsina.Entiteti.Drvored d = s.Load<ZelenaPovrsina.Entiteti.Drvored>(id);
+
+                    s.Delete(d);
+                    s.Flush();
+
+                    s.Close();
+                }
+                catch (Exception ec)
+                {
+                    //handle exceptions
+                }
+            }
+        #endregion
     }
 }
