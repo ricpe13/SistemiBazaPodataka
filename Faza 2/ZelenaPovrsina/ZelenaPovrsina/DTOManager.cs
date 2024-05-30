@@ -407,6 +407,34 @@ namespace ZelenaPovrsina.DTO
             }
 
 
+            public static List<DrvoredPregled> vratiSveDrvorede()
+            {
+                List<DrvoredPregled> drvoredi = new List<DrvoredPregled>();
+                try
+                {
+                    ISession s = DataLayer.GetSession();
+
+                    IEnumerable<ZelenaPovrsina.Entiteti.Drvored> sviDrvoredi = from o in s.Query<ZelenaPovrsina.Entiteti.Drvored>()
+                                                                           select o;
+
+                    foreach (ZelenaPovrsina.Entiteti.Drvored r in sviDrvoredi)
+                    {
+                        drvoredi.Add(new DrvoredPregled(r.IdZ, r.Ulica, r.Duzina, r.VrstaDrveta, r.BrojStabala));
+                    }
+
+                    s.Close();
+                }
+                catch (Exception ec)
+                {
+                    //handle exceptions
+                }
+
+                return drvoredi;
+            }
+
+
+
+
         #endregion
     }
 }
