@@ -117,7 +117,7 @@ namespace ZelenaPovrsina.DTO
                 //handle exceptions
             }
 
-            return p;
+            return r;
         }
 
 
