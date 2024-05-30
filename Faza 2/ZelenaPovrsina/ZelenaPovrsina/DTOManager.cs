@@ -271,6 +271,32 @@ namespace ZelenaPovrsina.DTO
                     //handle exceptions
                 }
             }
+
+
+            public static DrvoredBasic azurirajDrvored(DrvoredBasic d)
+            {
+                try
+                {
+                    ISession s = DataLayer.GetSession();
+
+                    ZelenaPovrsina.Entiteti.Drvored o = s.Load<ZelenaPovrsina.Entiteti.Drvored>(d.Id);
+                    o.VrstaDrveta = d.VrstaDrveta;
+                    o.BrojStabala = d.BrojStabala;
+
+                    s.Update(o);
+                    s.Flush();
+
+                    s.Close();
+                }
+                catch (Exception ec)
+                {
+                    //handle exceptions
+                }
+
+                return d;
+            }
+
+
         #endregion
     }
 }
