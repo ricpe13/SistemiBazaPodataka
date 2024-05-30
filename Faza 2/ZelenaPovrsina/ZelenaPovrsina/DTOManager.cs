@@ -154,12 +154,31 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-            #endregion
+        public static void obrisiTravnjak(int id)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                ZelenaPovrsina.Entiteti.Travnjak t = s.Load<ZelenaPovrsina.Entiteti.Travnjak>(id);
+
+                s.Delete(t);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        #endregion
 
 
         #region Drvored
 
-            public static void dodajDrvored(DrvoredBasic drvored)
+        public static void dodajDrvored(DrvoredBasic drvored)
             {
                 try
                 {
