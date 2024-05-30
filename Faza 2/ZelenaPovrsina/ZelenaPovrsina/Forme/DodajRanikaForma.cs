@@ -35,7 +35,7 @@ namespace ZelenaPovrsina.Forme
             radnik.ZaHigijenu=Int32.Parse(textBoxHig.Text);
             radnik.ZaZelenilo = Int32.Parse(textBoxZel.Text);
             radnik.ZaObjekat = Int32.Parse(textBoxObj.Text);
-            radnik.ZelenaPovrsina = zelenaPovrsina;
+            radnik.ZelenaPovrsina = Int32.Parse(textBoxZP.Text);
             //radnik.GrupaRadnika = null;
             DTOManager.dodajRadnika(radnik);
             MessageBox.Show("Uspesno ste dodali novog radnika");

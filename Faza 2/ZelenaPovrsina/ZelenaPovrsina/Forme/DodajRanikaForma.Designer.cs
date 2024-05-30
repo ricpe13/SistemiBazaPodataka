@@ -51,13 +51,15 @@
             label10 = new Label();
             label11 = new Label();
             datumRodjenja = new DateTimePicker();
+            textBoxZP = new TextBox();
+            label12 = new Label();
             SuspendLayout();
             // 
             // cmdUcitavanjeRadnika
             // 
             cmdUcitavanjeRadnika.BackColor = Color.FromArgb(255, 128, 0);
             cmdUcitavanjeRadnika.Location = new Point(372, 224);
-            cmdUcitavanjeRadnika.Margin = new Padding(2, 2, 2, 2);
+            cmdUcitavanjeRadnika.Margin = new Padding(2);
             cmdUcitavanjeRadnika.Name = "cmdUcitavanjeRadnika";
             cmdUcitavanjeRadnika.Size = new Size(78, 20);
             cmdUcitavanjeRadnika.TabIndex = 0;
@@ -68,7 +70,7 @@
             // textBoxIme
             // 
             textBoxIme.Location = new Point(177, 5);
-            textBoxIme.Margin = new Padding(2, 2, 2, 2);
+            textBoxIme.Margin = new Padding(2);
             textBoxIme.Name = "textBoxIme";
             textBoxIme.Size = new Size(106, 23);
             textBoxIme.TabIndex = 1;
@@ -76,7 +78,7 @@
             // textBoxPrezime
             // 
             textBoxPrezime.Location = new Point(177, 28);
-            textBoxPrezime.Margin = new Padding(2, 2, 2, 2);
+            textBoxPrezime.Margin = new Padding(2);
             textBoxPrezime.Name = "textBoxPrezime";
             textBoxPrezime.Size = new Size(106, 23);
             textBoxPrezime.TabIndex = 2;
@@ -84,7 +86,7 @@
             // textBoxRod
             // 
             textBoxRod.Location = new Point(177, 118);
-            textBoxRod.Margin = new Padding(2, 2, 2, 2);
+            textBoxRod.Margin = new Padding(2);
             textBoxRod.Name = "textBoxRod";
             textBoxRod.Size = new Size(106, 23);
             textBoxRod.TabIndex = 3;
@@ -92,7 +94,7 @@
             // textBoxHig
             // 
             textBoxHig.Location = new Point(177, 185);
-            textBoxHig.Margin = new Padding(2, 2, 2, 2);
+            textBoxHig.Margin = new Padding(2);
             textBoxHig.Name = "textBoxHig";
             textBoxHig.Size = new Size(106, 23);
             textBoxHig.TabIndex = 4;
@@ -100,7 +102,7 @@
             // textBoxStrucnaSprema
             // 
             textBoxStrucnaSprema.Location = new Point(177, 140);
-            textBoxStrucnaSprema.Margin = new Padding(2, 2, 2, 2);
+            textBoxStrucnaSprema.Margin = new Padding(2);
             textBoxStrucnaSprema.Name = "textBoxStrucnaSprema";
             textBoxStrucnaSprema.Size = new Size(106, 23);
             textBoxStrucnaSprema.TabIndex = 6;
@@ -108,7 +110,7 @@
             // textBoxObj
             // 
             textBoxObj.Location = new Point(177, 229);
-            textBoxObj.Margin = new Padding(2, 2, 2, 2);
+            textBoxObj.Margin = new Padding(2);
             textBoxObj.Name = "textBoxObj";
             textBoxObj.Size = new Size(106, 23);
             textBoxObj.TabIndex = 7;
@@ -116,7 +118,7 @@
             // textBoxZel
             // 
             textBoxZel.Location = new Point(177, 207);
-            textBoxZel.Margin = new Padding(2, 2, 2, 2);
+            textBoxZel.Margin = new Padding(2);
             textBoxZel.Name = "textBoxZel";
             textBoxZel.Size = new Size(106, 23);
             textBoxZel.TabIndex = 8;
@@ -124,7 +126,7 @@
             // textBoxBrRad
             // 
             textBoxBrRad.Location = new Point(177, 96);
-            textBoxBrRad.Margin = new Padding(2, 2, 2, 2);
+            textBoxBrRad.Margin = new Padding(2);
             textBoxBrRad.Name = "textBoxBrRad";
             textBoxBrRad.Size = new Size(106, 23);
             textBoxBrRad.TabIndex = 9;
@@ -132,7 +134,7 @@
             // textBoxJMBG
             // 
             textBoxJMBG.Location = new Point(177, 50);
-            textBoxJMBG.Margin = new Padding(2, 2, 2, 2);
+            textBoxJMBG.Margin = new Padding(2);
             textBoxJMBG.Name = "textBoxJMBG";
             textBoxJMBG.Size = new Size(106, 23);
             textBoxJMBG.TabIndex = 10;
@@ -140,7 +142,7 @@
             // textBoxAdresa
             // 
             textBoxAdresa.Location = new Point(177, 72);
-            textBoxAdresa.Margin = new Padding(2, 2, 2, 2);
+            textBoxAdresa.Margin = new Padding(2);
             textBoxAdresa.Name = "textBoxAdresa";
             textBoxAdresa.Size = new Size(106, 23);
             textBoxAdresa.TabIndex = 11;
@@ -260,17 +262,35 @@
             // datumRodjenja
             // 
             datumRodjenja.Location = new Point(177, 164);
-            datumRodjenja.Margin = new Padding(2, 2, 2, 2);
+            datumRodjenja.Margin = new Padding(2);
             datumRodjenja.Name = "datumRodjenja";
             datumRodjenja.Size = new Size(238, 23);
             datumRodjenja.TabIndex = 23;
             datumRodjenja.Value = new DateTime(2024, 5, 30, 1, 59, 10, 0);
             // 
+            // textBoxZP
+            // 
+            textBoxZP.Location = new Point(177, 266);
+            textBoxZP.Name = "textBoxZP";
+            textBoxZP.Size = new Size(101, 23);
+            textBoxZP.TabIndex = 24;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(67, 269);
+            label12.Name = "label12";
+            label12.Size = new Size(104, 15);
+            label12.TabIndex = 25;
+            label12.Text = "Zelena povrsina ID";
+            // 
             // DodajRanikaForma
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(560, 270);
+            ClientSize = new Size(560, 314);
+            Controls.Add(label12);
+            Controls.Add(textBoxZP);
             Controls.Add(datumRodjenja);
             Controls.Add(label11);
             Controls.Add(label10);
@@ -294,7 +314,7 @@
             Controls.Add(textBoxPrezime);
             Controls.Add(textBoxIme);
             Controls.Add(cmdUcitavanjeRadnika);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "DodajRanikaForma";
             Text = "Dodaj radnika";
             ResumeLayout(false);
@@ -326,5 +346,7 @@
         private Label label10;
         private Label label11;
         private DateTimePicker datumRodjenja;
+        private TextBox textBoxZP;
+        private Label label12;
     }
 }
