@@ -63,7 +63,7 @@ namespace ZelenaPovrsina.Forme
                 return;
             }
 
-            int idZaposleni = Int32.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+            int idRadnik = Int32.Parse(listView1.SelectedItems[0].SubItems[0].Text);
             string poruka = "Da li zelite da obrisete izabranog radnika?";
             string title = "Pitanje";
             MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
@@ -71,7 +71,7 @@ namespace ZelenaPovrsina.Forme
 
             if (result == DialogResult.OK)
             {
-                DTOManager.obrisiRadnika(idZaposleni);
+                DTOManager.obrisiRadnika(idRadnik);
                 MessageBox.Show("Brisanje zaposlenog je uspesno obavljeno!");
                 this.popuniPodacimaRadnici();
             }
