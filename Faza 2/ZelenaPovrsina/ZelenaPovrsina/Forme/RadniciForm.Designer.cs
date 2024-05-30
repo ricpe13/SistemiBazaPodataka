@@ -45,6 +45,7 @@
             columnHeader13 = new ColumnHeader();
             columnHeader14 = new ColumnHeader();
             button2 = new Button();
+            btnDodajRadnika = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -154,18 +155,29 @@
             // 
             // button2
             // 
-            button2.Location = new Point(1283, 96);
+            button2.Location = new Point(1254, 55);
             button2.Name = "button2";
             button2.Size = new Size(135, 41);
             button2.TabIndex = 2;
             button2.Text = "Obrisi radnika";
             button2.UseVisualStyleBackColor = true;
             // 
+            // btnDodajRadnika
+            // 
+            btnDodajRadnika.Location = new Point(1248, 114);
+            btnDodajRadnika.Name = "btnDodajRadnika";
+            btnDodajRadnika.Size = new Size(135, 34);
+            btnDodajRadnika.TabIndex = 3;
+            btnDodajRadnika.Text = "Dodaj radnika";
+            btnDodajRadnika.UseVisualStyleBackColor = true;
+            btnDodajRadnika.Click += btnDodajRadnika_Click;
+            // 
             // RadniciForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1452, 618);
+            Controls.Add(btnDodajRadnika);
             Controls.Add(button2);
             Controls.Add(groupBox1);
             Name = "RadniciForm";
@@ -193,5 +205,6 @@
         private ColumnHeader columnHeader13;
         private ColumnHeader columnHeader14;
         private Button button2;
+        private Button btnDodajRadnika;
     }
 }

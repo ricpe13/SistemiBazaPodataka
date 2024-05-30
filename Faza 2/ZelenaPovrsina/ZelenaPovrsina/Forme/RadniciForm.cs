@@ -16,5 +16,11 @@ namespace ZelenaPovrsina.Forme
         {
             InitializeComponent();
         }
+
+        private void btnDodajRadnika_Click(object sender, EventArgs e)
+        {
+            DodajRanikaForma forma = new DodajRanikaForma();
+            forma.ShowDialog();
+        }
     }
 }
