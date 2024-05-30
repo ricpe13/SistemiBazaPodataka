@@ -93,6 +93,7 @@
             btnBrisiTravnjak.TabIndex = 2;
             btnBrisiTravnjak.Text = "Obrisi travnjak";
             btnBrisiTravnjak.UseVisualStyleBackColor = true;
+            btnBrisiTravnjak.Click += btnBrisiTravnjak_Click;
             // 
             // TravnjaciForm
             // 

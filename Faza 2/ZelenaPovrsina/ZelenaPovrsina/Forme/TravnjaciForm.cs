@@ -34,7 +34,7 @@ namespace ZelenaPovrsina.Forme
             foreach (TravnjakPregled r in podaci)
             {
                 ListViewItem item = new ListViewItem(new string[] { r.Id.ToString(), r.AdresaZgrade, r.PovrsinaT.ToString() });
-                
+
                 listView1.Items.Add(item);
 
             }
@@ -55,5 +55,32 @@ namespace ZelenaPovrsina.Forme
             DodajTravnjakForma forma = new DodajTravnjakForma();
             forma.ShowDialog();
         }
+
+        private void btnBrisiTravnjak_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite travnjak koji zelite da obrisete!");
+                return;
+            }
+
+            int idTravnjak = Int32.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+            string poruka = "Da li zelite da obrisete izabrani travnjak?";
+            string title = "Pitanje";
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+            DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+            if (result == DialogResult.OK)
+            {
+                DTOManager.obrisiTravnjak(idTravnjak);
+                MessageBox.Show("Brisanje travnjaka je uspesno obavljeno!");
+                this.popuniPodacimaTravnjaci();
+            }
+            else
+            {
+
+            }
+        }
+    }
     }
 }
