@@ -29,8 +29,8 @@ namespace ZelenaPovrsina.DTO
                 o.ZaZelenilo = r.ZaZelenilo;
                 o.ZaHigijenu = r.ZaHigijenu;
                 o.ZaObjekat = r.ZaObjekat;
-                ZelenaPovrsina.Entiteti.GrupaRadnika gr = s.Load<ZelenaPovrsina.Entiteti.GrupaRadnika>(r.GrupaRadnika.IdG);
-                o.PripadaGrupi = gr;
+                ZelenaPovrsina.Entiteti.ZelenaPovrsina zp = s.Load<ZelenaPovrsina.Entiteti.ZelenaPovrsina>(r.ZelenaPovrsina.Id);
+                o.AngazovanZaZP = zp;
 
                 s.SaveOrUpdate(o);
 

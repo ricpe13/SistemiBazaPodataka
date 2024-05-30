@@ -42,9 +42,11 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(listView1);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Location = new Point(17, 20);
+            groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(225, 599);
+            groupBox1.Padding = new Padding(4, 5, 4, 5);
+            groupBox1.Size = new Size(321, 998);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Lista grupa radnika";
@@ -54,9 +56,10 @@
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3 });
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
-            listView1.Location = new Point(6, 22);
+            listView1.Location = new Point(9, 37);
+            listView1.Margin = new Padding(4, 5, 4, 5);
             listView1.Name = "listView1";
-            listView1.Size = new Size(205, 571);
+            listView1.Size = new Size(291, 949);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -78,42 +81,48 @@
             // 
             // button1
             // 
-            button1.Location = new Point(300, 46);
+            button1.Location = new Point(429, 77);
+            button1.Margin = new Padding(4, 5, 4, 5);
             button1.Name = "button1";
-            button1.Size = new Size(152, 37);
+            button1.Size = new Size(217, 62);
             button1.TabIndex = 1;
             button1.Text = "Dodaj grupu radnika";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(300, 103);
+            button2.Location = new Point(429, 172);
+            button2.Margin = new Padding(4, 5, 4, 5);
             button2.Name = "button2";
-            button2.Size = new Size(152, 32);
+            button2.Size = new Size(217, 53);
             button2.TabIndex = 2;
             button2.Text = "Obrisi grupu radnika";
             button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            button3.Location = new Point(300, 210);
+            button3.Location = new Point(429, 350);
+            button3.Margin = new Padding(4, 5, 4, 5);
             button3.Name = "button3";
-            button3.Size = new Size(152, 26);
+            button3.Size = new Size(217, 43);
             button3.TabIndex = 3;
             button3.Text = "Sefovi";
             button3.UseVisualStyleBackColor = true;
             // 
             // GrupeRadnikaForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(484, 623);
+            ClientSize = new Size(691, 1038);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(groupBox1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "GrupeRadnikaForm";
             Text = "Grupe radnika";
+            Load += GrupeRadnikaForm_Load;
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }
