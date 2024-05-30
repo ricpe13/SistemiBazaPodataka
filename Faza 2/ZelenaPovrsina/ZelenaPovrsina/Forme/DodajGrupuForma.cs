@@ -31,7 +31,10 @@ namespace ZelenaPovrsina.Forme
             gr.NazivG = txtNaziv.Text;
             DTOManager.dodajGrupuRadnika(gr);
 
-            park.
+            park.GrupaRadnika = DTOManager.vratiSveGrupe().OrderByDescending(x => x.IdG).First();
+            DTOManager.dodajPark(park);
+            MessageBox.Show("Uspesno je dodata grupa radnika");
+            Close();
         }
     }
 }

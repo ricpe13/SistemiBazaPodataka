@@ -150,6 +150,9 @@ namespace ZelenaPovrsina
         public string NazivG;
         public ParkBasic Park;
         public SefBasic Sef;
+        private Park park;
+        private Sef sef;
+
         public virtual IList<RadnikBasic> RadniciGrupe { get; set; }
 
         public GrupaRadnikaBasic()
@@ -157,13 +160,12 @@ namespace ZelenaPovrsina
             RadniciGrupe = new List<RadnikBasic>();
         }
 
-        public GrupaRadnikaBasic(int idg, string nazivG, ParkBasic p, SefBasic s)
+        public GrupaRadnikaBasic(int idg, string nazivG)
         {
             NazivG = nazivG;
             IdG = idg;
-            Park = p;
-            Sef = s;
         }
+
     }
     #endregion
 
@@ -236,11 +238,10 @@ namespace ZelenaPovrsina
 
         }
 
-        public ParkBasic(int id, string naziv, string zona, string tipz, string nazivp, double povrsinap, GrupaRadnikaBasic grupa) : base(id, naziv, zona, tipz)
+        public ParkBasic(int id, string naziv, string zona, string tipz, string nazivp, double povrsinap) : base(id, naziv, zona, tipz)
         {
             NazivP = nazivp;
             PovrsinaP = povrsinap;
-            GrupaRadnika = grupa;
         }
     }
 
