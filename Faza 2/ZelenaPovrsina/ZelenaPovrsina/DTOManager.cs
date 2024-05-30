@@ -93,6 +93,33 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static RadnikBasic azurirajRadnika(RadnikBasic r)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                ZelenaPovrsina.Entiteti.Radnik o = s.Load<ZelenaPovrsina.Entiteti.Radnik>(r.IdR);
+                o.Adresa = r.Adresa;
+                o.StrucnaSprema = r.StrucnaSprema;
+                o.ZaZelenilo = r.ZaZelenilo;
+                o.ZaHigijenu = r.ZaHigijenu;
+                o.ZaObjekat = r.ZaObjekat;
+                //treba i za izmenu Id zelene povrsine, ali ne znam kako
+
+                s.Update(o);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return p;
+        }
+
 
 
 
