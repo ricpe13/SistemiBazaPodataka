@@ -16,5 +16,11 @@ namespace ZelenaPovrsina.Forme
         {
             InitializeComponent();
         }
+
+        private void btnDodajTravnjak_Click(object sender, EventArgs e)
+        {
+            DodajTravnjakForma forma = new DodajTravnjakForma();
+            forma.ShowDialog();
+        }
     }
 }

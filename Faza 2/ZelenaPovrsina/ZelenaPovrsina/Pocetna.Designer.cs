@@ -66,6 +66,7 @@
             btnDrvoredi.TabIndex = 2;
             btnDrvoredi.Text = "Drvoredi";
             btnDrvoredi.UseVisualStyleBackColor = true;
+            btnDrvoredi.Click += btnDrvoredi_Click;
             // 
             // btnTravnjaci
             // 
@@ -76,6 +77,7 @@
             btnTravnjaci.TabIndex = 3;
             btnTravnjaci.Text = "Travnjaci";
             btnTravnjaci.UseVisualStyleBackColor = true;
+            btnTravnjaci.Click += btnTravnjaci_Click;
             // 
             // btnRadnici
             // 

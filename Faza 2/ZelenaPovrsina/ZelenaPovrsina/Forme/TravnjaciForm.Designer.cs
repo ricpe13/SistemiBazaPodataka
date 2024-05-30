@@ -33,6 +33,7 @@
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
+            btnDodajTravnjak = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -73,11 +74,22 @@
             columnHeader3.Text = "Povrsina";
             columnHeader3.TextAlign = HorizontalAlignment.Center;
             // 
+            // btnDodajTravnjak
+            // 
+            btnDodajTravnjak.Location = new Point(561, 78);
+            btnDodajTravnjak.Name = "btnDodajTravnjak";
+            btnDodajTravnjak.Size = new Size(154, 37);
+            btnDodajTravnjak.TabIndex = 1;
+            btnDodajTravnjak.Text = "Dodaj travnjak";
+            btnDodajTravnjak.UseVisualStyleBackColor = true;
+            btnDodajTravnjak.Click += btnDodajTravnjak_Click;
+            // 
             // TravnjaciForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 636);
+            Controls.Add(btnDodajTravnjak);
             Controls.Add(groupBox1);
             Name = "TravnjaciForm";
             Text = "TravnjaciForm";
@@ -92,5 +104,6 @@
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
+        private Button btnDodajTravnjak;
     }
 }

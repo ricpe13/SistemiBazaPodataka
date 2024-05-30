@@ -34,5 +34,17 @@ namespace ZelenaPovrsina
             ParkoviForm forma = new ParkoviForm();
             forma.ShowDialog();
         }
+
+        private void btnTravnjaci_Click(object sender, EventArgs e)
+        {
+            TravnjaciForm forma = new TravnjaciForm();
+            forma.ShowDialog();
+        }
+
+        private void btnDrvoredi_Click(object sender, EventArgs e)
+        {
+            DrvorediForm forma = new DrvorediForm();
+            forma.ShowDialog();
+        }
     }
 }
