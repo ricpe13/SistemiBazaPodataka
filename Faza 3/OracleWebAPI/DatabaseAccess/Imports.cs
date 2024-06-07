@@ -7,5 +7,6 @@ global using System.Text;
 global using DatabaseAccess.Entiteti;
 global using DatabaseAccess.DTOs;
 global using NHibernate;
+global using FluentNHibernate.Mapping;
 global using static DatabaseAccess.Extensions;
 global using System.Diagnostics.CodeAnalysis;
