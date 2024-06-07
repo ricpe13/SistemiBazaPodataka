@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DatabaseAccess.DTOs
+﻿namespace DatabaseAccess.DTOs
 {
-    internal class SvetiljkaPregled
+    public class SvetiljkaPregled : ObjekatPregled
     {
+        public int? BrSijalica { get; set; }
+        public SvetiljkaPregled()
+        {
+
+        }
+        internal SvetiljkaPregled(Svetiljka? s) : base(s)
+        {
+            if (s != null)
+            {
+                BrSijalica = s.BrSijalica;
+            }
+        }
     }
 }

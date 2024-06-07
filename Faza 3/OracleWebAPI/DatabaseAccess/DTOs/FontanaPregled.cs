@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DatabaseAccess.DTOs
+﻿namespace DatabaseAccess.DTOs
 {
-    internal class FontanaPregled
+    public class FontanaPregled : ObjekatPregled
     {
+        public int? BrPrskalica { get; set; }
+        public int? PovrsinaF { get; set; }
+
+        public FontanaPregled()
+        {
+
+        }
+        internal FontanaPregled(Fontana? f) : base(f)
+        {
+            BrPrskalica = f.BrPrskalica;
+            PovrsinaF = f.PovrsinaF;
+
+
+        }
     }
 }

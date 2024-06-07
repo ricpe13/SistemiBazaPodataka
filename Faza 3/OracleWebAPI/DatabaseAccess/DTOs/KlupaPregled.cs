@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DatabaseAccess.DTOs
+﻿namespace DatabaseAccess.DTOs
 {
-    internal class KlupaPregled
+    public class KlupaPregled : ObjekatPregled
     {
+        public string? Materijal { get; set; }
+
+        public KlupaPregled()
+        {
+
+        }
+        internal KlupaPregled(Klupa? k) : base(k)
+        {
+            if (k != null)
+            {
+                Materijal = k.Materijal;
+            }
+        }
     }
 }

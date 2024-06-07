@@ -1,5 +1,4 @@
-﻿
-namespace ZelenaPovrsina
+﻿namespace DatabaseAccess
 {
     #region ZelenaPovrsina
     public class ZelenaPovrsinaPregled

@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DatabaseAccess.Entiteti;
 
 namespace DatabaseAccess.DTOs
 {
-    internal class SpomenikPregled
+    public class SpomenikPregled : ObjekatPregled
     {
+        public string? NazivS { get; set; }
+        public ZastitaPregled? Zastita { get; set; }
+        public SpomenikPregled()
+        {
+
+        }
+        internal SpomenikPregled(Spomenik? s) : base(s)
+        {
+            if (s != null)
+            {
+                NazivS = s.NazivS;
+                Zastita = s.Zastita;
+            }
+        }
     }
 }

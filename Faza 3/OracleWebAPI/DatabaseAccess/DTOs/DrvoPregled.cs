@@ -1,12 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DatabaseAccess.DTOs
+﻿namespace DatabaseAccess.DTOs
 {
-    internal class DrvoPregled
+    public class DrvoPregled : ObjekatPregled
     {
+        public int? VisinaKrosnje { get; set; }
+        public string? Vrsta { get; set; }
+        public DateTime? DatumSadnje { get; set; }
+        public double? PovrsinaK { get; set; }
+        public double? ObimDebla { get; set; }
+        public ZastitaPregled? Zastita { get; set; }
+
+        public DrvoPregled()
+        {
+
+        }
+        internal DrvoPregled(Drvo? d) : base(d)
+        {
+            if (d != null)
+            {
+                VisinaKrosnje = d.VisinaKrosnje;
+                Vrsta = d.Vrsta;
+                DatumSadnje = d.DatumSadnje;
+                PovrsinaK = d.PovrsinaK;
+                ObimDebla = d.ObimDebla;
+                Zastita = d.Zastita;
+            }
+        }
     }
 }

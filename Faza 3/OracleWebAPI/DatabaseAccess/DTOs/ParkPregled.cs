@@ -1,12 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DatabaseAccess.DTOs
+﻿namespace DatabaseAccess.DTOs
 {
-    internal class ParkPregled
+    public class ParkPregled : ZelenaPovrsinaPregled
     {
+        public string? NazivP;
+        public double? PovrsinaP;
+        public GrupaRadnikaPregled? GrupaRadnika;
+
+        public ParkPregled()
+        {
+
+        }
+
+        internal ParkPregled(Park? p) : base(p)
+        {
+            if (p != null)
+            {
+                NazivP = p.NazivP;
+                PovrsinaP = p.PovrsinaP;
+            }
+            
+        }
     }
 }

@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DatabaseAccess.DTOs
+﻿namespace DatabaseAccess.DTOs
 {
-    internal class SefPregled
+    public class SefPregled
     {
+        public int IdRad { get; set; }
+        public string? Matbr { get; set; }
+        public GrupaRadnikaPregled? GrupaRadnika { get; set; }
+
+        public SefPregled() { }
+        public SefPregled(Sef? s)
+        {
+            if (s != null)
+            {
+                IdRad = s.IdRad;
+                Matbr = s.Matbr;
+                GrupaRadnika = s.GrupaRadnika;
+            }
+        }
     }
 }

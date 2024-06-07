@@ -1,12 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DatabaseAccess.Entiteti;
 
 namespace DatabaseAccess.DTOs
 {
-    internal class SkulpturaPregled
+    public class SkulpturaPregled : ObjekatPregled
     {
+        public string? Autor { get; set; }
+        public ZastitaPregled? Zastita { get; set; }
+
+        public SkulpturaPregled()
+        {
+
+        }
+        internal SkulpturaPregled(Skulptura? s) : base(s)
+        {
+            if (s != null)
+            {
+                Autor = s.Autor;
+                Zastita = s.Zastita;
+            }
+        }
     }
 }
