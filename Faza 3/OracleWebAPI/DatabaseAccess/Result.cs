@@ -1,4 +1,4 @@
-﻿namespace ProdavnicaLibrary;
+﻿namespace DatabaseAccess;
 
 public readonly struct Result<TValue, TError>
 {

@@ -41,27 +41,38 @@
             }
         }
 
-        public static List<RadnikPregled> vratiSveRadnike()
+        public static Result<List<RadnikPregled>, ErrorMessage> vratiSveRadnike()
         {
-            List<RadnikPregled> radnici = new List<RadnikPregled>();
+
+            List<RadnikPregled> radnici = new();
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                IEnumerable<ZelenaPovrsina.Entiteti.Radnik> sviRadnici = from o in s.Query<ZelenaPovrsina.Entiteti.Radnik>()
-                                                                            select o;
-
-                foreach (ZelenaPovrsina.Entiteti.Radnik r in sviRadnici)
+                if (!(s?.IsConnected ?? false))
                 {
-                    radnici.Add(new RadnikPregled(r.IdR, r.Ime, r.Prezime, r.Jmbg, r.Adresa, r.BrRadneKnjizice, r.ImeRoditelja, 
-                        r.StrucnaSprema, r.DatumRodj, r.ZaZelenilo, r.ZaHigijenu, r.ZaObjekat));
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
                 }
 
-                s.Close();
+                IEnumerable<Entiteti.Radnik> sviRadnici = from o in s.Query<Entiteti.Radnik>()
+                                                                            select o;
+
+                foreach (Entiteti.Radnik r in sviRadnici)
+                {
+                    radnici.Add(new RadnikPregled(r));
+                }
+
             }
-            catch (Exception ec)
+            catch (Exception)
             {
-                //handle exceptions
+                return "Došlo je do greške prilikom prikupljanja informacija o radnicima.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return radnici;
@@ -188,23 +199,35 @@
             return parkovi;
         }
 
-        public static ParkBasic vratiPark(int id)
+        public static async Task <Result<ParkPregled, ErrorMessage>> vratiPark(int id)
         {
-            ParkBasic pb = new ParkBasic();
+            ParkPregled pp = new();
+
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
-                ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(id);
-                pb = new ParkBasic(p.IdZ, p.NazivGradskeOpstine, p.ZonaUgrozenosti, p.TipZ, p.NazivP, p.PovrsinaP);
+                s = DataLayer.GetSession();
 
-                s.Close();
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.Park p = await s.LoadAsync<Entiteti.Park>(id);
+                pp = new ParkPregled(p);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show(e.FormatExceptionMessage());
+                return "Došlo je do greške prilikom prikupljanja informacija o odeljenjima.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
-            return pb;
+            return pp;
         }
 
         #endregion
