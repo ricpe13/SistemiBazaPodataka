@@ -7,8 +7,7 @@
         public DateTime? DatumSadnje { get; set; }
         public double? PovrsinaK { get; set; }
         public double? ObimDebla { get; set; }
-        public int? IdZ { get; set; } //za ovo uopste nisam siguran
-        public ZastitaPregled? Zastita; //za ovo uopste nisam siguran
+        public ZastitaPregled? PodZastitomDrvo { get; set; }
 
         public DrvoPregled()
         {
@@ -23,7 +22,7 @@
                 DatumSadnje = d.DatumSadnje;
                 PovrsinaK = d.PovrsinaK;
                 ObimDebla = d.ObimDebla;
-                IdZ = d.PodZastitomDrvo.IdZastite; //za ovo uopste nisam siguran
+                PodZastitomDrvo = new ZastitaPregled(d.PodZastitomDrvo);
             }
         }
     }

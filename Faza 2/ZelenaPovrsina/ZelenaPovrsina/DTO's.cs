@@ -150,8 +150,8 @@ namespace ZelenaPovrsina
         public string NazivG;
         public ParkBasic Park;
         public SefBasic Sef;
-        private Park park;
-        private Sef sef;
+        //private Park park;
+        //private Sef sef;
 
         public virtual IList<RadnikBasic> RadniciGrupe { get; set; }
 

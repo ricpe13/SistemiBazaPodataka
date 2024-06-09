@@ -1,6 +1,4 @@
-﻿using ZelenaPovrsina;
-
-namespace DatabaseAccess.DTOs
+﻿namespace DatabaseAccess.DTOs
 {
     public class RadnikPregled
     {
@@ -16,8 +14,8 @@ namespace DatabaseAccess.DTOs
         public int? ZaObjekat { get; set; }
         public string? StrucnaSprema { get; set; }
         public DateTime? DatumRodj { get; set; }
-        public ZelenaPovrsinaBasic? ZelenaPovrsina { get; set; }
-        public GrupaRadnikaBasic? GrupaRadnika { get; set; }
+        public ZelenaPovrsinaPregled? AngazovanZaZP { get; set; }
+        public GrupaRadnikaPregled? PripadaGrupi { get; set; }
 
         public RadnikPregled()
         {
@@ -39,8 +37,8 @@ namespace DatabaseAccess.DTOs
                 ZaObjekat = r.ZaObjekat;
                 StrucnaSprema = r.StrucnaSprema;
                 DatumRodj = r.DatumRodj;
-                ZelenaPovrsina = r.ZelenaPovrsina;
-                GrupaRadnika = r.GrupaRadnika;
+                AngazovanZaZP = new ZelenaPovrsinaPregled(r.AngazovanZaZP);
+                PripadaGrupi = new GrupaRadnikaPregled(r.PripadaGrupi);
             }
         }
     }

@@ -1,6 +1,6 @@
-﻿namespace ZelenaPovrsina.Mapiranja
+﻿namespace DatabaseAccess.Mapiranja
 {
-    public class ObjekatMapiranja : ClassMap<Objekat>
+    internal class ObjekatMapiranja : ClassMap<Objekat>
     {
         public ObjekatMapiranja()
         {

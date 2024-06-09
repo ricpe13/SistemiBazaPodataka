@@ -8,12 +8,12 @@
         public int? NovcanaSredstva { get; set; }
         public string? OpisZnacaja { get; set; }
 
-        public virtual IList<Skulptura>? Skulpture { get; set; } = [];
-        public virtual IList<Spomenik>? Spomenici { get; set; } = [];
-        public virtual IList<Drvo>? Drvece { get; set; } = [];
+        public virtual IList<SkulpturaPregled>? Skulpture { get; set; } = [];
+        public virtual IList<SpomenikPregled>? Spomenici { get; set; } = [];
+        public virtual IList<DrvoPregled>? Drvece { get; set; } = [];
 
         public ZastitaPregled() { }
-        public ZastitaPregled(Zastita? z)
+        internal ZastitaPregled(Zastita? z)
         {
             if (z != null)
             {

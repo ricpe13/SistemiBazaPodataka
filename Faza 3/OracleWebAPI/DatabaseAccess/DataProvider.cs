@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ZelenaPovrsina.Entiteti;
-
-namespace ZelenaPovrsina.DTO
+﻿namespace DatabaseAccess
 {
-    internal class DTOManager
+    public static class DataProvider
     {
         #region Radnik
-        public static void dodajRadnika(RadnikBasic r)
+        public static void dodajRadnika(RadnikPregled r)
         {
             try
             {
                 ISession s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Radnik o = new ZelenaPovrsina.Entiteti.Radnik();
+                DatabaseAccess.Entiteti.Radnik o = new DatabaseAccess.Entiteti.Radnik();
 
                 o.Ime = r.Ime;
                 o.Prezime = r.Prezime;

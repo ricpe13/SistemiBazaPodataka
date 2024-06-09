@@ -7,13 +7,13 @@
         public GrupaRadnikaPregled? GrupaRadnika { get; set; }
 
         public SefPregled() { }
-        public SefPregled(Sef? s)
+        internal SefPregled(Sef? s)
         {
             if (s != null)
             {
                 IdRad = s.IdRad;
                 Matbr = s.Matbr;
-                GrupaRadnika = s.GrupaRadnika;
+                GrupaRadnika = new GrupaRadnikaPregled(s.GrupaRadnika);
             }
         }
     }

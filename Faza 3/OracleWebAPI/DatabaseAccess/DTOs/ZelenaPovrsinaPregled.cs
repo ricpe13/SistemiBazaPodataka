@@ -2,7 +2,7 @@
 {
     public class ZelenaPovrsinaPregled
     {
-        public int Id { get; set; }
+        public int IdZ { get; set; }
         public string? NazivGradskeOpstine { get; set; }
         public string? ZonaUgrozenosti { get; set; }
         public string? TipZ { get; set; }
@@ -11,11 +11,11 @@
         {
             RadniciZP = new List<RadnikPregled>();
         }
-        internal ZelenaPovrsinaPregled(ZelenaPovrsina? zp) : base(zp)
+        internal ZelenaPovrsinaPregled(ZelenaPovrsina? zp)
         {
             if (zp != null)
             {
-                Id = zp.Id;
+                IdZ = zp.IdZ;
                 NazivGradskeOpstine = zp.NazivGradskeOpstine;
                 ZonaUgrozenosti = zp.ZonaUgrozenosti;
                 TipZ = zp.TipZ;

@@ -14,12 +14,12 @@ namespace DatabaseAccess.DTOs
 
         }
 
-        public ObjekatPregled(Objekat? o)
+        internal ObjekatPregled(Objekat? o)
         {
             if (o != null)
             {
                 IdO = o.Id;
-                PripadaParku = o.PripadaParku;
+                PripadaParku = new ParkPregled(o.PripadaParku);
                 RedniBr = o.RedniBroj;
                 Tip = o.Tip;
             }

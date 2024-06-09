@@ -1,4 +1,4 @@
-﻿namespace ZelenaPovrsina.Mapiranja
+﻿namespace DatabaseAccess.Mapiranja
 {
     internal class DrvoredMapiranja : SubclassMap<Drvored>
     {

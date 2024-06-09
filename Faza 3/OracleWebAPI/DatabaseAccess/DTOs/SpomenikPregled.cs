@@ -15,7 +15,7 @@ namespace DatabaseAccess.DTOs
             if (s != null)
             {
                 NazivS = s.NazivS;
-                Zastita = s.Zastita;
+                Zastita = new ZastitaPregled(s.Zastita);
             }
         }
     }

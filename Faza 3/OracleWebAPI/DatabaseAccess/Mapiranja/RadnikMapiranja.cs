@@ -1,6 +1,4 @@
-﻿using FluentNHibernate.Mapping;
-
-namespace DatabaseAccess.Mapiranja
+﻿namespace DatabaseAccess.Mapiranja
 {
     internal class RadnikMapiranja : ClassMap<DatabaseAccess.Entiteti.Radnik>
     {

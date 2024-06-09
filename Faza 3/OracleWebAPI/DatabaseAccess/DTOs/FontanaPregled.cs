@@ -11,10 +11,11 @@
         }
         internal FontanaPregled(Fontana? f) : base(f)
         {
-            BrPrskalica = f.BrPrskalica;
-            PovrsinaF = f.PovrsinaF;
-
-
+            if (f != null)
+            {
+                BrPrskalica = f.BrPrskalica;
+                PovrsinaF = f.PovrsinaF;
+            }
         }
     }
 }

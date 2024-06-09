@@ -6,8 +6,6 @@
         public string? NazivG { get; set; }
         public ParkPregled? Park { get; set; }
         public SefPregled? Sef { get; set; }
-        private Park? park { get; set; }
-        private Sef? sef { get; set; }
 
         public virtual IList<RadnikPregled>? RadniciGrupe { get; set; }
 
@@ -16,11 +14,11 @@
             RadniciGrupe = new List<RadnikPregled>();
         }
 
-        public GrupaRadnikaPregled(GrupaRadnika? gr)
+        internal GrupaRadnikaPregled(GrupaRadnika? gr)
         {
             if (gr != null)
             {
-                IdG = gr.NazivG;
+                IdG = gr.IdG;
                 NazivG = gr.NazivG;
             }
         }
