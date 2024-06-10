@@ -3,7 +3,7 @@
     public static class DataProvider
     {
         #region Radnik
-        public async static Task<Result<bool, ErrorMessage>> dodajRadnika(RadnikPregled r, int IdGR=0, int IdZP)
+        public async static Task<Result<bool, ErrorMessage>> dodajRadnika(RadnikPregled r, int IdZP, int IdGR= 0)
         {
             ISession? s = null;
             try
@@ -1783,7 +1783,7 @@
 
         #region Drvo
 
-        public async static Task<Result<bool, ErrorMessage>> dodajDrvo(DrvoPregled r, int IdZastite=0, int IdParka)
+        public async static Task<Result<bool, ErrorMessage>> dodajDrvo(DrvoPregled r, int IdParka, int IdZastite = 0)
         {
             ISession? s = null;
             try
