@@ -147,31 +147,41 @@ namespace DatabaseAccess
             return true;
         }
 
-        public static RadnikBasic azurirajRadnika(RadnikBasic r)
+        public async static Task<Result<RadnikPregled, ErrorMessage>> azurirajRadnika(RadnikPregled p)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Radnik o = s.Load<ZelenaPovrsina.Entiteti.Radnik>(r.IdR);
-                o.Adresa = r.Adresa;
-                o.StrucnaSprema = r.StrucnaSprema;
-                o.ZaZelenilo = r.ZaZelenilo;
-                o.ZaHigijenu = r.ZaHigijenu;
-                o.ZaObjekat = r.ZaObjekat;
-                //treba i za izmenu Id zelene povrsine, ali ne znam kako
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                s.Update(o);
-                s.Flush();
+                Radnik o = s.Load<Radnik>(p.IdR);
+                o.Adresa = p.Adresa;
+                o.StrucnaSprema = p.StrucnaSprema;
+                o.ZaZelenilo = p.ZaZelenilo;
+                o.ZaHigijenu = p.ZaHigijenu;
+                o.ZaObjekat = p.ZaObjekat;
+                //treba i za izzmenu id zelene povrsine ali ne znamo kako, nismo nznnali ni za 2. deo
 
-                s.Close();
+                await s.UpdateAsync(o);
+                await s.FlushAsync();
             }
-            catch (Exception ec)
+            catch (Exception)
             {
-                //handle exceptions
+                return "Nemoguce azurirati radnika.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
-            return r;
+            return p;
         }
 
 
@@ -353,7 +363,7 @@ namespace DatabaseAccess
             return true;
         }
 
-        public async static Task<Result<bool, ErrorMessage>> obrisigrupu(int id)
+        public async static Task<Result<bool, ErrorMessage>> obrisiGrupuRadnika(int id)
         {
             ISession? s = null;
 
@@ -382,6 +392,39 @@ namespace DatabaseAccess
             }
 
             return true;
+        }
+
+
+        public async static Task<Result<GrupaRadnikaPregled, ErrorMessage>> azurirajGrupuRadnika(GrupaRadnikaPregled p)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                GrupaRadnika o = s.Load<GrupaRadnika>(p.IdG);
+                o.NazivG = p.NazivG;
+
+                await s.UpdateAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguce azurirati grupu radnika.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return p;
         }
 
 
@@ -675,31 +718,41 @@ namespace DatabaseAccess
         }
 
 
-        public static DrvoredBasic azurirajDrvored(DrvoredBasic d)
+        public async static Task<Result<DrvoredPregled, ErrorMessage>> azurirajDrvored(DrvoredPregled p)
+        {
+            ISession? s = null;
+
+            try
             {
-                try
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
                 {
-                    ISession s = DataLayer.GetSession();
-
-                    ZelenaPovrsina.Entiteti.Drvored o = s.Load<ZelenaPovrsina.Entiteti.Drvored>(d.Id);
-                    o.VrstaDrveta = d.VrstaDrveta;
-                    o.BrojStabala = d.BrojStabala;
-
-                    s.Update(o);
-                    s.Flush();
-
-                    s.Close();
-                }
-                catch (Exception ec)
-                {
-                    //handle exceptions
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
                 }
 
-                return d;
+                Drvored o = s.Load<Drvored>(p.IdZ);
+                o.VrstaDrveta = p.VrstaDrveta;
+                o.BrojStabala = p.BrojStabala;
+
+                await s.UpdateAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguce zurirati drvored.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
+            return p;
+        }
 
-            public static Result<List<DrvoredPregled>, ErrorMessage> vratiSveDrvorede()
+
+        public static Result<List<DrvoredPregled>, ErrorMessage> vratiSveDrvorede()
             {
                 List<DrvoredPregled> drvoredi = new();
                 ISession? s = null;
