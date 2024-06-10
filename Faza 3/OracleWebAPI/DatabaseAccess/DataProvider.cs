@@ -116,23 +116,35 @@ namespace DatabaseAccess
         }
 
 
-        public static void obrisiRadnika(int id)
+        public async static Task<Result<bool, ErrorMessage>> obrisiRadnika(int id)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Radnik r = s.Load<ZelenaPovrsina.Entiteti.Radnik>(id);
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                s.Delete(r);
-                s.Flush();
+                Radnik o = await s.LoadAsync<Radnik>(id);
 
-                s.Close();
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
             }
-            catch (Exception ec)
+            catch (Exception)
             {
-                //handle exceptions
+                return "Nemoguće obrisati radnika.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         public static RadnikBasic azurirajRadnika(RadnikBasic r)
@@ -206,23 +218,35 @@ namespace DatabaseAccess
             return true;
         }
 
-        public static void obrisiPark(int id)
+        public async static Task<Result<bool, ErrorMessage>> obrisiPark(int id)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(id);
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                s.Delete(p);
-                s.Flush();
+                Park o = await s.LoadAsync<Park>(id);
 
-                s.Close();
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
             }
-            catch (Exception ec)
+            catch (Exception)
             {
-                //handle exceptions
+                return "Nemoguće obrisati park.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         public static Result<List<ParkPregled>, ErrorMessage> vratiSveParkove()
@@ -328,6 +352,39 @@ namespace DatabaseAccess
 
             return true;
         }
+
+        public async static Task<Result<bool, ErrorMessage>> obrisigrupu(int id)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                GrupaRadnika o = await s.LoadAsync<GrupaRadnika>(id);
+
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguće obrisati grupu radnika.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+
 
         public static Result<List<GrupaRadnikaPregled>, ErrorMessage> vratiSveGrupe()
         {
@@ -440,23 +497,35 @@ namespace DatabaseAccess
             return true;
         }
 
-        public static void obrisiTravnjak(int id)
+        public async static Task<Result<bool, ErrorMessage>> obrisiTravnnjak(int id)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Travnjak t = s.Load<ZelenaPovrsina.Entiteti.Travnjak>(id);
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                s.Delete(t);
-                s.Flush();
+                Travnjak o = await s.LoadAsync<Travnjak>(id);
 
-                s.Close();
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
             }
-            catch (Exception ec)
+            catch (Exception)
             {
-                //handle exceptions
+                return "Nemoguće obrisati travnjak.".ToError(400);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
 
@@ -574,27 +643,39 @@ namespace DatabaseAccess
 
 
 
-            public static void obrisiDrvored(int id)
+        public async static Task<Result<bool, ErrorMessage>> obrisiDrvored(int id)
+        {
+            ISession? s = null;
+
+            try
             {
-                try
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
                 {
-                    ISession s = DataLayer.GetSession();
-
-                    ZelenaPovrsina.Entiteti.Drvored d = s.Load<ZelenaPovrsina.Entiteti.Drvored>(id);
-
-                    s.Delete(d);
-                    s.Flush();
-
-                    s.Close();
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
                 }
-                catch (Exception ec)
-                {
-                    //handle exceptions
-                }
+
+                Drvored o = await s.LoadAsync<Drvored>(id);
+
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguće obrisati drvored.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
+            return true;
+        }
 
-            public static DrvoredBasic azurirajDrvored(DrvoredBasic d)
+
+        public static DrvoredBasic azurirajDrvored(DrvoredBasic d)
             {
                 try
                 {
