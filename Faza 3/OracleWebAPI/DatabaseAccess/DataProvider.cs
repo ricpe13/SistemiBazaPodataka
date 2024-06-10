@@ -1,11 +1,9 @@
-﻿using DatabaseAccess.Entiteti;
-
-namespace DatabaseAccess
+﻿namespace DatabaseAccess
 {
     public static class DataProvider
     {
         #region Radnik
-        public async static Task<Result<bool, ErrorMessage>> dodajRadnika(RadnikPregled r)
+        public async static Task<Result<bool, ErrorMessage>> dodajRadnika(RadnikPregled r, int IdGR=0, int IdZP)
         {
             ISession? s = null;
             try
@@ -29,8 +27,16 @@ namespace DatabaseAccess
                     ZaHigijenu = r.ZaHigijenu,
                     ZaObjekat = r.ZaObjekat,
                 };
+                ZelenaPovrsina z = await s.LoadAsync<ZelenaPovrsina>(IdZP); //trebalo bi da je tako
+                o.AngazovanZaZP = z;
 
-                await s.SaveOrUpdateAsync(o);
+                if (IdGR != 0) //trebalo bi da se tako radi za zastitu
+                {
+                    GrupaRadnika g = await s.LoadAsync<GrupaRadnika>(IdGR);
+                    o.PripadaGrupi = g;
+                }
+
+                await s.SaveAsync(o);
                 await s.FlushAsync();
             }
             catch (Exception)
@@ -104,7 +110,7 @@ namespace DatabaseAccess
             }
             catch (Exception)
             {
-                return "Došlo je do greške prilikom prikupljanja informacija o odeljenjima.".ToError(400);
+                return "Došlo je do greške prilikom prikupljanja informacija o radniku.".ToError(400);
             }
             finally
             {
@@ -191,7 +197,7 @@ namespace DatabaseAccess
 
         #region Park
 
-        public async static Task<Result<bool, ErrorMessage>> dodajPark(ParkPregled park)
+        public async static Task<Result<bool, ErrorMessage>> dodajPark(ParkPregled park, int IdGR)
         {
             ISession? s = null;
             try
@@ -207,12 +213,14 @@ namespace DatabaseAccess
                 {
                     NazivGradskeOpstine = park.NazivGradskeOpstine,
                     ZonaUgrozenosti = park.ZonaUgrozenosti,
-                    TipZ = park.TipZ,//ovo proveriti
+                    TipZ = park.TipZ,
                     NazivP = park.NazivP,
                     PovrsinaP = park.PovrsinaP
                 };
+                GrupaRadnika z = await s.LoadAsync<GrupaRadnika>(IdGR); //trebalo bi da je tako
+                o.GrupaRadnika = z;
 
-                await s.SaveOrUpdateAsync(o);
+                await s.SaveAsync(o);
                 await s.FlushAsync();
             }
             catch (Exception)
@@ -330,7 +338,7 @@ namespace DatabaseAccess
 
         #region GrupaRadnika
 
-        public async static Task<Result<bool, ErrorMessage>> dodajGrupuRadnika(GrupaRadnikaPregled grupaRadnika)
+        public async static Task<Result<bool, ErrorMessage>> dodajGrupuRadnika(GrupaRadnikaPregled grupaRadnika, int IdParka, int IdSefa)
         {
             ISession? s = null;
 
@@ -347,12 +355,17 @@ namespace DatabaseAccess
                 {
                     NazivG = grupaRadnika.NazivG,
                 };
-                await s.SaveOrUpdateAsync(o);
+                Park z = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                o.Park = z;
+                Sef ss = await s.LoadAsync<Sef>(IdSefa); //trebalo bi da je tako
+                o.Sef = ss;
+
+                await s.SaveAsync(o);
                 await s.FlushAsync();
             }
             catch (Exception)
             {
-                return GetError("Nemoguće dodati prodavnicu.", 404);
+                return GetError("Nemoguće dodati grupu radnika.", 404);
             }
             finally
             {
@@ -524,7 +537,7 @@ namespace DatabaseAccess
                     PovrsinaT = travnjak.PovrsinaT,
                 };
 
-                await s.SaveOrUpdateAsync(o);
+                await s.SaveAsync(o);
                 await s.FlushAsync();
             }
             catch (Exception)
@@ -667,7 +680,7 @@ namespace DatabaseAccess
                     VrstaDrveta = drvored.VrstaDrveta,
                 };
 
-                await s.SaveOrUpdateAsync(d);
+                await s.SaveAsync(d);
                 await s.FlushAsync();
 
             }
@@ -820,6 +833,1281 @@ namespace DatabaseAccess
             }
 
 
+        #endregion
+
+
+        #region DecijeIgraliste
+
+        public async static Task<Result<bool, ErrorMessage>> dodajDecijeIgraliste(DecijeIgralistePregled r)
+        {
+            ISession? s = null;
+            try
+            {
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                DecijeIgraliste o = new()
+                {
+                    Tip = r.Tip,
+                    BrIgracaka = r.BrIgracaka,
+                    Pesak = r.Pesak,
+                    Starost = r.Starost,
+                };
+
+                await s.SaveAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return GetError("Nemoguce dodati decije igraliste.", 404);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public static Result<List<DecijeIgralistePregled>, ErrorMessage> vratiSvaDecijaIgralista()
+        {
+
+            List<DecijeIgralistePregled> decijaigralista = new();
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                IEnumerable<Entiteti.DecijeIgraliste> svaDecijaIgralista = from o in s.Query<Entiteti.DecijeIgraliste>()
+                                                          select o;
+
+                foreach (Entiteti.DecijeIgraliste r in svaDecijaIgralista)
+                {
+                    decijaigralista.Add(new DecijeIgralistePregled(r));
+                }
+
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o decijim igralistima.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return decijaigralista;
+        }
+
+
+        public static async Task<Result<DecijeIgralistePregled, ErrorMessage>> vratiDecijeIgraliste(int id)
+        {
+            DecijeIgralistePregled pp = new();
+
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.DecijeIgraliste p = await s.LoadAsync<Entiteti.DecijeIgraliste>(id);
+                pp = new DecijeIgralistePregled(p);
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o decijem igralistu.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return pp;
+        }
+
+        public async static Task<Result<bool, ErrorMessage>> obrisiDecijeIgraliste(int id)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                DecijeIgraliste o = await s.LoadAsync<DecijeIgraliste>(id);
+
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguće obrisati decije igraliste.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public async static Task<Result<DecijeIgralistePregled, ErrorMessage>> azurirajDecijeIgraliste(DecijeIgralistePregled p)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                DecijeIgraliste o = s.Load<DecijeIgraliste>(p.IdO);
+                o.BrIgracaka = p.BrIgracaka;
+                o.Pesak = p.Pesak;
+                o.Starost = p.Starost;
+
+                await s.UpdateAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguce azurirati decije igraliste.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return p;
+        }
+
+        #endregion
+
+
+        #region Fontana
+
+        public async static Task<Result<bool, ErrorMessage>> dodajFontanu(FontanaPregled r, int IdParka)
+        {
+            ISession? s = null;
+            try
+            {
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Fontana o = new()
+                {
+                    Tip = r.Tip,
+                    BrPrskalica = r.BrPrskalica,
+                    PovrsinaF = r.PovrsinaF,
+                };
+                Park z = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                o.PripadaParku = z;
+
+                await s.SaveAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return GetError("Nemoguce dodati fontanu.", 404);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public static Result<List<FontanaPregled>, ErrorMessage> vratiSveFontane()
+        {
+
+            List<FontanaPregled> fontane = new();
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                IEnumerable<Entiteti.Fontana> sveFontane = from o in s.Query<Entiteti.Fontana>()
+                                                                           select o;
+
+                foreach (Entiteti.Fontana r in sveFontane)
+                {
+                    fontane.Add(new FontanaPregled(r));
+                }
+
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o fontanama.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return fontane;
+        }
+
+
+        public static async Task<Result<FontanaPregled, ErrorMessage>> vratiFontanu(int id)
+        {
+            FontanaPregled pp = new();
+
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.Fontana p = await s.LoadAsync<Entiteti.Fontana>(id);
+                pp = new FontanaPregled(p);
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o fontani.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return pp;
+        }
+
+        public async static Task<Result<bool, ErrorMessage>> obrisiFontanu(int id)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Fontana o = await s.LoadAsync<Fontana>(id);
+
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguće obrisati fontanu.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public async static Task<Result<FontanaPregled, ErrorMessage>> azurirajFontanu(FontanaPregled p)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Fontana o = s.Load<Fontana>(p.IdO);
+                o.BrPrskalica = p.BrPrskalica;
+                
+
+                await s.UpdateAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguce azurirati fontanu.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return p;
+        }
+
+
+
+
+        #endregion
+
+
+        #region Klupa
+
+        public async static Task<Result<bool, ErrorMessage>> dodajKlupu(KlupaPregled r, int IdParka)
+        {
+            ISession? s = null;
+            try
+            {
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Klupa o = new()
+                {
+                    Tip = r.Tip,
+                    Materijal = r.Materijal,
+                };
+                Park z = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                o.PripadaParku = z;
+
+                await s.SaveAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return GetError("Nemoguce dodati klupu.", 404);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public static Result<List<KlupaPregled>, ErrorMessage> vratiSveKlupe()
+        {
+
+            List<KlupaPregled> klupe = new();
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                IEnumerable<Entiteti.Klupa> sveKlupe = from o in s.Query<Entiteti.Klupa>()
+                                                                           select o;
+
+                foreach (Entiteti.Klupa r in sveKlupe)
+                {
+                    klupe.Add(new KlupaPregled(r));
+                }
+
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o klupama.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return klupe;
+        }
+
+
+        public static async Task<Result<KlupaPregled, ErrorMessage>> vratiKlupu(int id)
+        {
+            KlupaPregled pp = new();
+
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.Klupa p = await s.LoadAsync<Entiteti.Klupa>(id);
+                pp = new KlupaPregled(p);
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o klupi.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return pp;
+        }
+
+        public async static Task<Result<bool, ErrorMessage>> obrisiKlupu (int id)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Klupa o = await s.LoadAsync<Klupa>(id);
+
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguće obrisati klupu.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+
+        #endregion
+
+        #region Skuptura
+
+        public async static Task<Result<bool, ErrorMessage>> dodajSkulpturu(SkulpturaPregled r, int IdZastite, int IdParka)
+        {
+            ISession? s = null;
+            try
+            {
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Skulptura o = new()
+                {
+                    Tip = r.Tip,
+                    Autor = r.Autor,
+                    
+                };
+                Zastita z = await s.LoadAsync<Zastita>(IdZastite); //trebalo bi da je tako
+                o.Zastita = z;
+                Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                o.PripadaParku = p;
+
+
+
+
+                await s.SaveAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return GetError("Nemoguce dodati skulpturu.", 404);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public static Result<List<SkulpturaPregled>, ErrorMessage> vratiSveSkulpture()
+        {
+
+            List<SkulpturaPregled> skulpture = new();
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                IEnumerable<Entiteti.Skulptura> sveSkulpture = from o in s.Query<Entiteti.Skulptura>()
+                                                                           select o;
+
+                foreach (Entiteti.Skulptura r in sveSkulpture)
+                {
+                    skulpture.Add(new SkulpturaPregled(r));
+                }
+
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o skulpturama.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return skulpture;
+        }
+
+
+        public static async Task<Result<SkulpturaPregled, ErrorMessage>> vratiSkulpturu(int id)
+        {
+            SkulpturaPregled pp = new();
+
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.Skulptura p = await s.LoadAsync<Entiteti.Skulptura>(id);
+                pp = new SkulpturaPregled(p);
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o skulpturi.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return pp;
+        }
+
+        public async static Task<Result<bool, ErrorMessage>> obrisiSkulpturu(int id)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguce otvoriti sesiju.".ToError(403);
+                }
+
+                Skulptura o = await s.LoadAsync<Skulptura>(id);
+
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguće obrisati skulpturu.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        #endregion
+
+        #region Spomenik
+
+        public async static Task<Result<bool, ErrorMessage>> dodajSpomenik(SpomenikPregled r, int IdZastite, int IdParka)
+        {
+            ISession? s = null;
+            try
+            {
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Spomenik o = new()
+                {
+                    Tip = r.Tip,
+                    NazivS = r.NazivS,
+                    
+                };
+                Zastita z = await s.LoadAsync<Zastita>(IdZastite); //trebalo bi da je tako
+                o.Zastita = z;
+                Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                o.PripadaParku = p;
+
+                await s.SaveAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return GetError("Nemoguce dodati spomenik.", 404);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public static Result<List<SpomenikPregled>, ErrorMessage> vratiSveSpomenike()
+        {
+
+            List<SpomenikPregled> spomenici = new();
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                IEnumerable<Entiteti.Spomenik> sviSpomenici = from o in s.Query<Entiteti.Spomenik>()
+                                                                           select o;
+
+                foreach (Entiteti.Spomenik r in sviSpomenici)
+                {
+                    spomenici.Add(new SpomenikPregled(r));
+                }
+
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o spomenicima.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return spomenici;
+        }
+
+
+        public static async Task<Result<SpomenikPregled, ErrorMessage>> vratiSpomenik(int id)
+        {
+            SpomenikPregled pp = new();
+
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.Spomenik p = await s.LoadAsync<Entiteti.Spomenik>(id);
+                pp = new SpomenikPregled(p);
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o spomenik.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return pp;
+        }
+
+        public async static Task<Result<bool, ErrorMessage>> obrisiSpomenik(int id)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Spomenik o = await s.LoadAsync<Spomenik>(id);
+
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguće obrisati spomenik.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        #endregion
+
+        #region Svetiljka
+
+        public async static Task<Result<bool, ErrorMessage>> dodajSvetiljku(SvetiljkaPregled r, int IdParka)
+        {
+            ISession? s = null;
+            try
+            {
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Svetiljka o = new()
+                {
+                    Tip = r.Tip,
+                    BrSijalica = r.BrSijalica,
+                };
+                Park z = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                o.PripadaParku = z;
+
+                await s.SaveAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return GetError("Nemoguce dodati svetiljku.", 404);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public static Result<List<SvetiljkaPregled>, ErrorMessage> vratiSveSvetiljke()
+        {
+
+            List<SvetiljkaPregled> svetiljke = new();
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                IEnumerable<Entiteti.Svetiljka> sveSvetiljke = from o in s.Query<Entiteti.Svetiljka>()
+                                                                           select o;
+
+                foreach (Entiteti.Svetiljka r in sveSvetiljke)
+                {
+                    svetiljke.Add(new SvetiljkaPregled(r));
+                }
+
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o svetiljkama.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return svetiljke;
+        }
+
+
+        public static async Task<Result<SvetiljkaPregled, ErrorMessage>> vratiSvetiljku(int id)
+        {
+            SvetiljkaPregled pp = new();
+
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.Svetiljka p = await s.LoadAsync<Entiteti.Svetiljka>(id);
+                pp = new SvetiljkaPregled(p);
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o svetiljki.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return pp;
+        }
+
+        public async static Task<Result<bool, ErrorMessage>> obrisiSvetiljku(int id)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Svetiljka o = await s.LoadAsync<Svetiljka>(id);
+
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguće obrisati svetiljku.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public async static Task<Result<SvetiljkaPregled, ErrorMessage>> azurirajSvetiljku(SvetiljkaPregled p)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Svetiljka o = s.Load<Svetiljka>(p.IdO);
+                o.BrSijalica = p.BrSijalica;
+
+                await s.UpdateAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguce azurirati svetiljku.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return p;
+        }
+
+
+
+        #endregion
+
+        #region Drvo
+
+        public async static Task<Result<bool, ErrorMessage>> dodajDrvo(DrvoPregled r, int IdZastite=0, int IdParka)
+        {
+            ISession? s = null;
+            try
+            {
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+           
+
+                Drvo o = new()
+                {
+                    Tip = r.Tip,
+                    VisinaKrosnje = r.VisinaKrosnje,
+                    Vrsta = r.Vrsta,
+                    DatumSadnje = r.DatumSadnje,
+                    PovrsinaK = r.PovrsinaK,
+                    ObimDebla = r.ObimDebla,
+                };
+
+                if (IdZastite != 0) //trebalo bi da se tako radi za zastitu
+                {
+                    Zastita z = await s.LoadAsync<Zastita>(IdZastite);
+                    o.PodZastitomDrvo = z; 
+                }
+                Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                o.PripadaParku = p;
+
+                await s.SaveAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return GetError("Nemoguce dodati drvo.", 404);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public static Result<List<DrvoPregled>, ErrorMessage> vratiSvaDrveca()
+        {
+
+            List<DrvoPregled> drva = new();
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                IEnumerable<Entiteti.Drvo> svaDrva = from o in s.Query<Entiteti.Drvo>()
+                                                               select o;
+
+                foreach (Entiteti.Drvo r in svaDrva)
+                {
+                    drva.Add(new DrvoPregled(r));
+                }
+
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o drvecu.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return drva;
+        }
+
+
+        public static async Task<Result<DrvoPregled, ErrorMessage>> vratiDrvo(int id)
+        {
+            DrvoPregled pp = new();
+
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.Drvo p = await s.LoadAsync<Entiteti.Drvo>(id);
+                pp = new DrvoPregled(p);
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o drvetu.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return pp;
+        }
+
+        public async static Task<Result<bool, ErrorMessage>> obrisiDrvo(int id)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Drvo o = await s.LoadAsync<Drvo>(id);
+
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguće obrisati drvo.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public async static Task<Result<DrvoPregled, ErrorMessage>> azurirajDrvo(DrvoPregled p)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Drvo o = s.Load<Drvo>(p.IdO);
+                o.VisinaKrosnje = p.VisinaKrosnje;
+                o.PovrsinaK = p.PovrsinaK;
+                o.ObimDebla = p.ObimDebla;
+
+                await s.UpdateAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguce azurirati drvo.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return p;
+        }
+
+
+        #endregion
+
+        #region Zastita
+
+        public async static Task<Result<bool, ErrorMessage>> dodajZastitu(ZastitaPregled r)
+        {
+            ISession? s = null;
+            try
+            {
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Zastita o = new()
+                {
+                    Institucija = r.Institucija,
+                    DatumOd = r.DatumOd,
+                    NovcanaSredstva = r.NovcanaSredstva,
+                    OpisZnacaja = r.OpisZnacaja,
+                    
+                };
+
+                await s.SaveAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return GetError("Nemoguće dodati zastitu.", 404);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+        public static Result<List<ZastitaPregled>, ErrorMessage> vratiSveZastite()
+        {
+
+            List<ZastitaPregled> zastite = new();
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                IEnumerable<Entiteti.Zastita> sveZastite = from o in s.Query<Entiteti.Zastita>()
+                                                          select o;
+
+                foreach (Entiteti.Zastita r in sveZastite)
+                {
+                    zastite.Add(new ZastitaPregled(r));
+                }
+
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o zastitama.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return zastite;
+        }
+
+
+        public static async Task<Result<ZastitaPregled, ErrorMessage>> vratiZastitu(int id)
+        {
+            ZastitaPregled pp = new();
+
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.Zastita p = await s.LoadAsync<Entiteti.Zastita>(id);
+                pp = new ZastitaPregled(p);
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o zastiti.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return pp;
+        }
+
+        public async static Task<Result<bool, ErrorMessage>> obrisiZastitu(int id)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Zastita o = await s.LoadAsync<Zastita>(id);
+
+                await s.DeleteAsync(o);
+                await s.FlushAsync();
+            }
+            catch (Exception)
+            {
+                return "Nemoguće obrisati zastitu.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
+
+
+        #endregion
+
+        #region Sef
+        //ne znam da li se sef radi isto kao i ovo ostalo
         #endregion
     }
 }
