@@ -27,7 +27,6 @@ namespace ZelenaPovrsina.DTO
                 o.StrucnaSprema = r.StrucnaSprema;
                 o.DatumRodj = r.DatumRodj;
                 o.ZaZelenilo = r.ZaZelenilo;
-                o.ZaZelenilo = r.ZaZelenilo;
                 o.ZaHigijenu = r.ZaHigijenu;
                 o.ZaObjekat = r.ZaObjekat;
                 // ZelenaPovrsina.Entiteti.ZelenaPovrsina zp = s.Load<ZelenaPovrsina.Entiteti.ZelenaPovrsina>(r.ZelenaPovrsina.Id);

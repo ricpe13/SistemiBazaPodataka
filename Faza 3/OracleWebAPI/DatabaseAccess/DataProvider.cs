@@ -1,44 +1,49 @@
-﻿namespace DatabaseAccess
+﻿using DatabaseAccess.Entiteti;
+
+namespace DatabaseAccess
 {
     public static class DataProvider
     {
         #region Radnik
-        public static void dodajRadnika(RadnikPregled r)
+        public async static Task<Result<bool, ErrorMessage>> dodajRadnika(RadnikPregled r)
         {
+            ISession? s = null;
             try
             {
-                ISession s = DataLayer.GetSession();
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                DatabaseAccess.Entiteti.Radnik o = new DatabaseAccess.Entiteti.Radnik();
+                Radnik o = new()
+                {
+                    Ime = r.Ime,
+                    Prezime = r.Prezime,
+                    Jmbg = r.Jmbg,
+                    Adresa = r.Adresa,
+                    BrRadneKnjizice = r.BrRadneKnjizice,
+                    ImeRoditelja = r.ImeRoditelja,
+                    StrucnaSprema = r.StrucnaSprema,
+                    DatumRodj = r.DatumRodj,
+                    ZaZelenilo = r.ZaZelenilo,
+                    ZaHigijenu = r.ZaHigijenu,
+                    ZaObjekat = r.ZaObjekat,
+                };
 
-                o.Ime = r.Ime;
-                o.Prezime = r.Prezime;
-                o.Jmbg = r.Jmbg;
-                o.Adresa = r.Adresa;
-                o.BrRadneKnjizice = r.BrRadneKnjizice;
-                o.ImeRoditelja = r.ImeRoditelja;
-                o.StrucnaSprema = r.StrucnaSprema;
-                o.DatumRodj = r.DatumRodj;
-                o.ZaZelenilo = r.ZaZelenilo;
-                o.ZaZelenilo = r.ZaZelenilo;
-                o.ZaHigijenu = r.ZaHigijenu;
-                o.ZaObjekat = r.ZaObjekat;
-                // ZelenaPovrsina.Entiteti.ZelenaPovrsina zp = s.Load<ZelenaPovrsina.Entiteti.ZelenaPovrsina>(r.ZelenaPovrsina.Id);
-                // o.AngazovanZaZP = zp;
-
-                s.SaveOrUpdate(o);
-
-
-
-                s.Flush();
-
-                s.Close();
+                await s.SaveOrUpdateAsync(o);
+                await s.FlushAsync();
             }
-            catch (Exception ec)
+            catch (Exception)
             {
-                MessageBox.Show(ec.FormatExceptionMessage());
-
+                return GetError("Nemoguće dodati radnika.", 404);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         public static Result<List<RadnikPregled>, ErrorMessage> vratiSveRadnike()
@@ -77,6 +82,39 @@
 
             return radnici;
         }
+
+
+        public static async Task<Result<RadnikPregled, ErrorMessage>> vratiRadnika(int id)
+        {
+            RadnikPregled pp = new();
+
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.Radnik p = await s.LoadAsync<Entiteti.Radnik>(id);
+                pp = new RadnikPregled(p);
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o odeljenjima.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return pp;
+        }
+
 
         public static void obrisiRadnika(int id)
         {
@@ -131,28 +169,41 @@
 
         #region Park
 
-        public static void dodajPark(ParkBasic park)
+        public async static Task<Result<bool, ErrorMessage>> dodajPark(ParkPregled park)
         {
+            ISession? s = null;
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Park p = new Park();
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                p.NazivP = park.NazivP;
-                p.TipZ = park.TipZ;
-                p.ZonaUgrozenosti = park.ZonaUgrozenosti;
-                p.PovrsinaP = park.PovrsinaP;
-                p.NazivGradskeOpstine = park.NazivGradskeOpstine;
+                Park o = new()
+                {
+                    NazivGradskeOpstine = park.NazivGradskeOpstine,
+                    ZonaUgrozenosti = park.ZonaUgrozenosti,
+                    TipZ = park.TipZ,//ovo proveriti
+                    NazivP = park.NazivP,
+                    PovrsinaP = park.PovrsinaP
+                };
 
-                s.Save(p); s.Flush(); s.Close();
-
-
+                await s.SaveOrUpdateAsync(o);
+                await s.FlushAsync();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show(e.FormatExceptionMessage());
+                return GetError("Nemoguće dodati park.", 404);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         public static void obrisiPark(int id)
@@ -174,26 +225,37 @@
             }
         }
 
-        public static List<ParkPregled> vratiSveParkove()
+        public static Result<List<ParkPregled>, ErrorMessage> vratiSveParkove()
         {
-            List<ParkPregled> parkovi = new List<ParkPregled>();
+            List<ParkPregled> parkovi = new();
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                IEnumerable<ZelenaPovrsina.Entiteti.Park> sviParkovi = from o in s.Query<ZelenaPovrsina.Entiteti.Park>()
-                                                                         select o;
-
-                foreach (ZelenaPovrsina.Entiteti.Park r in sviParkovi)
+                if (!(s?.IsConnected ?? false))
                 {
-                    parkovi.Add(new ParkPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti,r.TipZ,r.NazivP,r.PovrsinaP));
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
                 }
 
-                s.Close();
+                IEnumerable<Entiteti.Park> sviParkovi = from o in s.Query<Entiteti.Park>()
+                                                                         select o;
+
+                foreach (Entiteti.Park r in sviParkovi)
+                {
+                    parkovi.Add(new ParkPregled(r));
+                }
+
             }
-            catch (Exception ec)
+            catch (Exception)
             {
-                //handle exceptions
+                return "Došlo je do greške prilikom prikupljanja informacija o parkovima.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return parkovi;
@@ -219,7 +281,7 @@
             }
             catch (Exception)
             {
-                return "Došlo je do greške prilikom prikupljanja informacija o odeljenjima.".ToError(400);
+                return "Došlo je do greške prilikom prikupljanja informacija o parku.".ToError(400);
             }
             finally
             {
@@ -234,63 +296,102 @@
 
         #region GrupaRadnika
 
-        public static void dodajGrupuRadnika(GrupaRadnikaBasic grupaRadnika)
+        public async static Task<Result<bool, ErrorMessage>> dodajGrupuRadnika(GrupaRadnikaPregled grupaRadnika)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
-                ZelenaPovrsina.Entiteti.GrupaRadnika g = new ZelenaPovrsina.Entiteti.GrupaRadnika();
+                s = DataLayer.GetSession();
 
-                g.NazivG = grupaRadnika.NazivG;
-                ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(grupaRadnika.Park.Id);
-                g.Park = p;
-                s.Save(g); s.Flush(); s.Close();
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                GrupaRadnika o = new()
+                {
+                    NazivG = grupaRadnika.NazivG,
+                };
+                await s.SaveOrUpdateAsync(o);
+                await s.FlushAsync();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show(e.FormatExceptionMessage());
-
-
+                return GetError("Nemoguće dodati prodavnicu.", 404);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
-        public static List<GrupaRadnikaBasic> vratiSveGrupe()
+        public static Result<List<GrupaRadnikaPregled>, ErrorMessage> vratiSveGrupe()
         {
-            List<GrupaRadnikaBasic> grupaBasic = new List<GrupaRadnikaBasic>();
+            List<GrupaRadnikaPregled> grupa = new();
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
-                IEnumerable<GrupaRadnika> grupe = from o in s.Query<ZelenaPovrsina.Entiteti.GrupaRadnika>()
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                IEnumerable<GrupaRadnika> grupe = from o in s.Query<Entiteti.GrupaRadnika>()
                                             select o;
                 foreach (GrupaRadnika g in grupe)
                 {
-                    GrupaRadnikaBasic grupa = DTOManager.vratiGrupu(g.IdG);
-                    grupaBasic.Add(grupa);
+                    
+                    grupa.Add(new GrupaRadnikaPregled(g));
                 }
-                s.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.FormatExceptionMessage());
             }
 
-            return grupaBasic;
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o grupama radnika.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return grupa;
         }
 
-        public static GrupaRadnikaBasic vratiGrupu(int id)
+        public static async Task <Result<GrupaRadnikaPregled, ErrorMessage>> vratiGrupu(int id)
         {
-            GrupaRadnikaBasic pb = new GrupaRadnikaBasic();
+            GrupaRadnikaPregled pb = new ();
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
-                ZelenaPovrsina.Entiteti.GrupaRadnika p = s.Load<ZelenaPovrsina.Entiteti.GrupaRadnika>(id);
-                pb = new GrupaRadnikaBasic(p.IdG, p.NazivG);
+                s = DataLayer.GetSession();
 
-                s.Close();
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.GrupaRadnika p = await s.LoadAsync<Entiteti.GrupaRadnika>(id);
+                pb = new GrupaRadnikaPregled(p);
+
+               
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show(e.FormatExceptionMessage());
+                return "Došlo je do greške prilikom prikupljanja informacija o grupi radnika.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return pb;
@@ -301,29 +402,42 @@
 
         #region Travnjak
 
-        public static void dodajTravnjak(TravnjakBasic travnjak)
+        public async static Task<Result<bool, ErrorMessage>> dodajTravnjak(TravnjakPregled travnjak)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Travnjak t = new Travnjak();
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
 
-                t.TipZ = travnjak.TipZ;
-                t.AdresaZgrade = travnjak.AdresaZgrade;
-                t.PovrsinaT = travnjak.PovrsinaT;
-                t.NazivGradskeOpstine = travnjak.NazivGradskeOpstine;
-                t.ZonaUgrozenosti = travnjak.ZonaUgrozenosti;
+                Travnjak o = new()
+                {
+                    NazivGradskeOpstine = travnjak.NazivGradskeOpstine,
+                    ZonaUgrozenosti = travnjak.ZonaUgrozenosti,
+                    TipZ = travnjak.TipZ,
+                    AdresaZgrade = travnjak.AdresaZgrade,
+                    PovrsinaT = travnjak.PovrsinaT,
+                };
 
-
-                s.Save(t); s.Flush(); s.Close();
-
-
+                await s.SaveOrUpdateAsync(o);
+                await s.FlushAsync();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show(e.FormatExceptionMessage());
+                return GetError("Nemoguće dodati travnjak.", 404);
             }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
         }
 
         public static void obrisiTravnjak(int id)
@@ -346,32 +460,72 @@
         }
 
 
-        public static List<TravnjakPregled> vratiSveTravnjake()
+        public static Result<List<TravnjakPregled>, ErrorMessage> vratiSveTravnjake()
         {
-            List<TravnjakPregled> travnjaci = new List<TravnjakPregled>();
+            List<TravnjakPregled> travnjaci = new();
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                IEnumerable<ZelenaPovrsina.Entiteti.Travnjak> sviTravnjaci = from o in s.Query<ZelenaPovrsina.Entiteti.Travnjak>()
-                                                                         select o;
-
-                foreach (ZelenaPovrsina.Entiteti.Travnjak r in sviTravnjaci)
+                if (!(s?.IsConnected ?? false))
                 {
-                    travnjaci.Add(new TravnjakPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti, r.TipZ, r.AdresaZgrade, r.PovrsinaT));
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
                 }
 
-                s.Close();
+                IEnumerable<Entiteti.Travnjak> sviTravnjaci = from o in s.Query<Entiteti.Travnjak>()
+                                                                         select o;
+
+                foreach (Entiteti.Travnjak r in sviTravnjaci)
+                {
+                    travnjaci.Add(new TravnjakPregled(r));
+                }
             }
-            catch (Exception ec)
+            catch (Exception)
             {
-                //handle exceptions
+                return "Došlo je do greške prilikom prikupljanja informacija o travnjacima.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
             }
 
             return travnjaci;
         }
 
+        public static async Task<Result<TravnjakPregled, ErrorMessage>> vratiTravnjak(int id)
+        {
+            TravnjakPregled pb = new();
+            ISession? s = null;
 
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (!(s?.IsConnected ?? false))
+                {
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
+                }
+
+                Entiteti.Travnjak p = await s.LoadAsync<Entiteti.Travnjak>(id);
+                pb = new TravnjakPregled(p);
+
+
+            }
+            catch (Exception)
+            {
+                return "Došlo je do greške prilikom prikupljanja informacija o travnjaku.".ToError(400);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return pb;
+        }
 
 
         #endregion
@@ -379,32 +533,44 @@
 
         #region Drvored
 
-        public static void dodajDrvored(DrvoredBasic drvored)
+        public async static Task<Result<bool, ErrorMessage>> dodajDrvored(DrvoredPregled drvored)
+        {
+            ISession? s = null;
+
+            try
             {
-                try
+                s = DataLayer.GetSession();
+                if (!(s?.IsConnected ?? false))
                 {
-                    ISession s = DataLayer.GetSession();
-
-                    ZelenaPovrsina.Entiteti.Drvored d = new Drvored();
-                    
-                    d.TipZ = drvored.TipZ;
-                    d.Ulica = drvored.Ulica;
-                    d.Duzina = drvored.Duzina;
-                    d.VrstaDrveta = drvored.VrstaDrveta;
-                    d.BrojStabala = drvored.BrojStabala;
-                    d.NazivGradskeOpstine = drvored.NazivGradskeOpstine;
-                    d.ZonaUgrozenosti = drvored.ZonaUgrozenosti;
-
-
-                s.Save(d); s.Flush(); s.Close();
-
-
+                    return "Nemoguće otvoriti sesiju.".ToError(403);
                 }
-                catch (Exception e)
+
+                Drvored d = new()
                 {
-                    MessageBox.Show(e.FormatExceptionMessage());
-                }
+                    NazivGradskeOpstine = drvored.NazivGradskeOpstine,
+                    ZonaUgrozenosti = drvored.ZonaUgrozenosti,
+                    TipZ = drvored.TipZ,
+                    Ulica = drvored.Ulica,
+                    Duzina = drvored.Duzina,
+                    VrstaDrveta = drvored.VrstaDrveta,
+                };
+
+                await s.SaveOrUpdateAsync(d);
+                await s.FlushAsync();
+
             }
+            catch (Exception)
+            {
+                return GetError("Nemoguće dodati drvored.", 404);
+            }
+            finally
+            {
+                s?.Close();
+                s?.Dispose();
+            }
+
+            return true;
+        }
 
 
 
@@ -452,32 +618,72 @@
             }
 
 
-            public static List<DrvoredPregled> vratiSveDrvorede()
+            public static Result<List<DrvoredPregled>, ErrorMessage> vratiSveDrvorede()
             {
-                List<DrvoredPregled> drvoredi = new List<DrvoredPregled>();
-                try
+                List<DrvoredPregled> drvoredi = new();
+                ISession? s = null;
+            try
                 {
-                    ISession s = DataLayer.GetSession();
+                    s = DataLayer.GetSession();
 
-                    IEnumerable<ZelenaPovrsina.Entiteti.Drvored> sviDrvoredi = from o in s.Query<ZelenaPovrsina.Entiteti.Drvored>()
-                                                                           select o;
-
-                    foreach (ZelenaPovrsina.Entiteti.Drvored r in sviDrvoredi)
+                    if (!(s?.IsConnected ?? false))
                     {
-                        drvoredi.Add(new DrvoredPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti, r.TipZ, r.Ulica, r.Duzina, r.VrstaDrveta, r.BrojStabala));
+                        return "Nemoguće otvoriti sesiju.".ToError(403);
                     }
 
-                    s.Close();
+                    IEnumerable<Entiteti.Drvored> sviDrvoredi = from o in s.Query<Entiteti.Drvored>()
+                                                                           select o;
+
+                    foreach (Entiteti.Drvored r in sviDrvoredi)
+                    {
+                        drvoredi.Add(new DrvoredPregled(r));
+                    }
+
                 }
-                catch (Exception ec)
+                catch (Exception)
                 {
-                    //handle exceptions
+                    return "Došlo je do greške prilikom prikupljanja informacija o drvoredima.".ToError(400);
+                }
+                finally
+                {
+                    s?.Close();
+                    s?.Dispose();
                 }
 
                 return drvoredi;
             }
 
+            public static async Task<Result<DrvoredPregled, ErrorMessage>> vratiDrvored(int id)
+            {
+                DrvoredPregled pb = new();
+                ISession? s = null;
 
+                try
+                {
+                    s = DataLayer.GetSession();
+
+                    if (!(s?.IsConnected ?? false))
+                    {
+                        return "Nemoguće otvoriti sesiju.".ToError(403);
+                    }
+
+                    Entiteti.Drvored p = await s.LoadAsync<Entiteti.Drvored>(id);
+                    pb = new DrvoredPregled(p);
+
+
+                }
+                catch (Exception)
+                {
+                    return "Došlo je do greške prilikom prikupljanja informacija o drvoredu.".ToError(400);
+                }
+                finally
+                {
+                    s?.Close();
+                    s?.Dispose();
+                }
+
+                return pb;
+            }
 
 
         #endregion
