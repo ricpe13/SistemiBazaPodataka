@@ -43,6 +43,23 @@ public class GrupaRadnikaController : ControllerBase
     }
 
 
+    [HttpGet("PreuzmiGrupuRadnika/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> vratiGrupuRadnika(int id) //trebalo bi da ide IAction
+    {
+        var (isError, gruparadnika, error) = await DataProvider.vratiGrupu(id);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(gruparadnika);
+    }
+
+
     [HttpPut]
     [Route("PromeniGrupuRadnika")]
     [ProducesResponseType(StatusCodes.Status200OK)]

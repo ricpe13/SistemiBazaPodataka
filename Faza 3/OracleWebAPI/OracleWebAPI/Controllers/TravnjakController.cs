@@ -42,6 +42,24 @@ public class TravnjakController : ControllerBase
         return Ok(travnjaci);
     }
 
+
+    [HttpGet("PreuzmiTravnjak/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> vratiTravnjak(int id) //trebalo bi da ide IAction
+    {
+        var (isError, travnjak, error) = await DataProvider.vratiTravnjak(id);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(travnjak);
+    }
+
+
     [HttpDelete]
     [Route("IzbrisiTravnjak/{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

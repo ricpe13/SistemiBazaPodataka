@@ -42,6 +42,24 @@ public class SpomenikController : ControllerBase
         return Ok(spomenici);
     }
 
+
+    [HttpGet("PreuzmiSpomenik/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> vratiSpomenik(int id) //trebalo bi da ide IAction
+    {
+        var (isError, spomenik, error) = await DataProvider.vratiSpomenik(id);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(spomenik);
+    }
+
+
     [HttpDelete]
     [Route("IzbrisiSpomenik/{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

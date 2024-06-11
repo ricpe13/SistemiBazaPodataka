@@ -42,6 +42,24 @@ public class KlupaController : ControllerBase
         return Ok(klupe);
     }
 
+
+    [HttpGet("PreuzmiKlupu/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> vratiKlupu(int id) //trebalo bi da ide IAction
+    {
+        var (isError, klupa, error) = await DataProvider.vratiKlupu(id);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(klupa);
+    }
+
+
     [HttpDelete]
     [Route("IzbrisiKlupu/{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

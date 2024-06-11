@@ -43,6 +43,23 @@ public class FontanaController : ControllerBase
     }
 
 
+    [HttpGet("PreuzmiFontanu/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> vratiFontanu(int id) //trebalo bi da ide IAction
+    {
+        var (isError, fontana, error) = await DataProvider.vratiFontanu(id);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(fontana);
+    }
+
+
     [HttpPut]
     [Route("PromeniFontanu")]
     [ProducesResponseType(StatusCodes.Status200OK)]

@@ -42,6 +42,24 @@ public class ZastitaController : ControllerBase
         return Ok(zastite);
     }
 
+
+    [HttpGet("PreuzmiZastitu/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> vratiZastitu(int id) //trebalo bi da ide IAction
+    {
+        var (isError, zastita, error) = await DataProvider.vratiZastitu(id);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(zastita);
+    }
+
+
     [HttpDelete]
     [Route("IzbrisiZastitu/{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

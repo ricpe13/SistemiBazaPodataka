@@ -13,7 +13,7 @@ public class DecijeIgralisteController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<IActionResult> AddDecijeIgraliste([FromBody] DecijeIgralistePregled r)
+    public async Task<IActionResult> AddDecijeIgraliste([FromBody] DecijeIgralistePregled r) //trebalo bi da ide IAction
     {
         var data = await DataProvider.dodajDecijeIgraliste(r); //trebalo bi da ovako treba
 
@@ -41,6 +41,24 @@ public class DecijeIgralisteController : ControllerBase
 
         return Ok(decijaigralista);
     }
+
+
+    [HttpGet("PreuzmiDecijeIgraliste/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> vratiDecijeIgraliste(int id) //trebalo bi da ide IAction
+    {
+        var (isError, decijeigraliste, error) = await DataProvider.vratiDecijeIgraliste(id);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(decijeigraliste);
+    }
+
 
 
     [HttpPut]

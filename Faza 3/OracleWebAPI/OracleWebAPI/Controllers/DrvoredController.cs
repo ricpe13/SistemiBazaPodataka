@@ -43,6 +43,23 @@ public class DrvoredController : ControllerBase
     }
 
 
+    [HttpGet("PreuzmiDrvored/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> vratiDrvored(int id) //trebalo bi da ide IAction
+    {
+        var (isError, drvored, error) = await DataProvider.vratiDrvored(id);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(drvored);
+    }
+
+
     [HttpPut]
     [Route("PromeniDrvored")]
     [ProducesResponseType(StatusCodes.Status200OK)]

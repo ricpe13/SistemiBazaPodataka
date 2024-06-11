@@ -42,6 +42,24 @@ public class SkulpturaController : ControllerBase
         return Ok(skulpture);
     }
 
+
+    [HttpGet("PreuzmiSkulpturu/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> vratiSkulpturu(int id) //trebalo bi da ide IAction
+    {
+        var (isError, skulptura, error) = await DataProvider.vratiSkulpturu(id);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(skulptura);
+    }
+
+
     [HttpDelete]
     [Route("IzbrisiSkulpturu/{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
