@@ -8,6 +8,24 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class SkulpturaController : ControllerBase
 {
+    [HttpPost]
+    [Route("DodajSkulpturu")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> AddSkulptura([FromBody] SkulpturaPregled r, int IdZastite, int IdParka)
+    {
+        var data = await DataProvider.dodajSkulpturu(r, IdZastite, IdParka); //trebalo bi da ovako treba
+
+        if (data.IsError)
+        {
+            return StatusCode(data.Error.StatusCode, data.Error.Message);
+        }
+
+        return StatusCode(201, $"Uspešno dodata zastita");
+    }
+
+
     [HttpGet("PreuzmiSveSkulpture")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

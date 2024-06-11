@@ -8,6 +8,24 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class KlupaController : ControllerBase
 {
+    [HttpPost]
+    [Route("DodajKlupu")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> AddKlupa([FromBody] KlupaPregled r, int IdParka)
+    {
+        var data = await DataProvider.dodajKlupu(r, IdParka); //trebalo bi da ovako treba
+
+        if (data.IsError)
+        {
+            return StatusCode(data.Error.StatusCode, data.Error.Message);
+        }
+
+        return StatusCode(201, $"Uspešno dodata klupa");
+    }
+
+
     [HttpGet("PreuzmiSveParkove")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

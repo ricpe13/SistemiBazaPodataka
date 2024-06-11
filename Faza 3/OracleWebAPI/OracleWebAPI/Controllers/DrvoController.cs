@@ -8,6 +8,24 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class DrvoController : ControllerBase
 {
+    [HttpPost]
+    [Route("DodajDrvo")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> AddDrvo([FromBody] DrvoPregled r, int IdParka, int IdZastite = 0)
+    {
+        var data = await DataProvider.dodajDrvo(r, IdParka, IdZastite); //trebalo bi da ovako treba
+
+        if (data.IsError)
+        {
+            return StatusCode(data.Error.StatusCode, data.Error.Message);
+        }
+
+        return StatusCode(201, $"Uspešno dodato drvo");
+    }
+
+
     [HttpGet("PreuzmiSvaDrveca")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

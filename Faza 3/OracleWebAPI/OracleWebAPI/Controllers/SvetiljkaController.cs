@@ -8,6 +8,24 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class SvetiljkaController : ControllerBase
 {
+    [HttpPost]
+    [Route("DodajSvetiljku")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> AddSvetiljka([FromBody] SvetiljkaPregled r, int IdParka)
+    {
+        var data = await DataProvider.dodajSvetiljku(r, IdParka); //trebalo bi da ovako treba
+
+        if (data.IsError)
+        {
+            return StatusCode(data.Error.StatusCode, data.Error.Message);
+        }
+
+        return StatusCode(201, $"Uspešno dodata svetiljka");
+    }
+
+
     [HttpGet("PreuzmiSveSvetiljke")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

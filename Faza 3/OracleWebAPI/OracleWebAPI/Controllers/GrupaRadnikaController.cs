@@ -8,6 +8,24 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class GrupaRadnikaController : ControllerBase
 {
+    [HttpPost]
+    [Route("DodajGrupuRadnika")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> AddGrupaRadnika([FromBody] GrupaRadnikaPregled grupaRadnika, int IdParka, int IdSefa)
+    {
+        var data = await DataProvider.dodajGrupuRadnika(grupaRadnika, IdParka, IdSefa); //trebalo bi da ovako treba
+
+        if (data.IsError)
+        {
+            return StatusCode(data.Error.StatusCode, data.Error.Message);
+        }
+
+        return StatusCode(201, $"Uspešno dodata grupa radnika");
+    }
+
+
     [HttpGet("PreuzmiSveGrupeRadnike")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

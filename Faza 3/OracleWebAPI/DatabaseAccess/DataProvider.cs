@@ -3,7 +3,7 @@
     public static class DataProvider
     {
         #region Radnik
-        public async static Task<Result<bool, ErrorMessage>> dodajRadnika(RadnikPregled r, int IdZP, int IdGR= 0)
+        public async static Task<Result<bool, ErrorMessage>> dodajRadnika(RadnikPregled r, int IdZP, int IdGR=0)
         {
             ISession? s = null;
             try
