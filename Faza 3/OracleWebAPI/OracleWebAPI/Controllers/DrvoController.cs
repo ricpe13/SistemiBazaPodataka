@@ -1,0 +1,69 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using DatabaseAccess;
+using DatabaseAccess.DTOs;
+
+namespace WebAPI.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class DrvoController : ControllerBase
+{
+    [HttpGet("PreuzmiSvaDrveca")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public ActionResult vratiSvaDrveca()
+    {
+        var (isError, drvece, error) = DataProvider.vratiSvaDrveca();
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(drvece);
+    }
+
+
+    [HttpPut]
+    [Route("PromeniDrvo")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> changeDrvo([FromBody] DrvoPregled p)
+    {
+        (bool isError, var drvo, ErrorMessage? error) = await DataProvider.azurirajDrvo(p);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        if (drvo == null)
+        {
+            return BadRequest("Drvo nije validno.");
+        }
+
+        return Ok($"Uspesno azurirano drvo.");
+
+    }
+
+    [HttpDelete]
+    [Route("IzbrisiDrvo/{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> deleteDrvo(int id)
+    {
+        var data = await DataProvider.obrisiDrvo(id);
+
+        if (data.IsError)
+        {
+            return StatusCode(data.Error.StatusCode, data.Error.Message);
+        }
+
+        return StatusCode(204, $"Uspesno obrisano drvo.");
+    }
+
+
+}

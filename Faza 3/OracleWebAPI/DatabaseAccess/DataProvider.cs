@@ -553,7 +553,7 @@
             return true;
         }
 
-        public async static Task<Result<bool, ErrorMessage>> obrisiTravnnjak(int id)
+        public async static Task<Result<bool, ErrorMessage>> obrisiTravnjak(int id)
         {
             ISession? s = null;
 
@@ -2106,8 +2106,6 @@
 
         #endregion
 
-        #region Sef
-        //ne znam da li se sef radi isto kao i ovo ostalo
-        #endregion
+        
     }
 }
