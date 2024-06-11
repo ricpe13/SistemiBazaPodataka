@@ -9,7 +9,7 @@ namespace WebAPI.Controllers;
 public class FontanaController : ControllerBase
 {
     [HttpPost]
-    [Route("DodajFontanu")]
+    [Route("DodajFontanu/{IdParka}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

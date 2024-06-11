@@ -9,7 +9,7 @@ namespace WebAPI.Controllers;
 public class SkulpturaController : ControllerBase
 {
     [HttpPost]
-    [Route("DodajSkulpturu")]
+    [Route("DodajSkulpturu/{IdZastite}/{IdParka}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

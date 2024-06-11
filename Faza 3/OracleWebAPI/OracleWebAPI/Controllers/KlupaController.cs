@@ -9,7 +9,7 @@ namespace WebAPI.Controllers;
 public class KlupaController : ControllerBase
 {
     [HttpPost]
-    [Route("DodajKlupu")]
+    [Route("DodajKlupu/{IdParka}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

@@ -9,7 +9,7 @@ namespace WebAPI.Controllers;
 public class SpomenikController : ControllerBase
 {
     [HttpPost]
-    [Route("DodajSpomenik")]
+    [Route("DodajSpomenik/{IdZastite}/{IdParka}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

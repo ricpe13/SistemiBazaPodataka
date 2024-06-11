@@ -8,6 +8,24 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class DecijeIgralisteController : ControllerBase
 {
+    [HttpPost]
+    [Route("DodajDecijeIgraliste")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> AddDecijeIgraliste([FromBody] DecijeIgralistePregled r)
+    {
+        var data = await DataProvider.dodajDecijeIgraliste(r); //trebalo bi da ovako treba
+
+        if (data.IsError)
+        {
+            return StatusCode(data.Error.StatusCode, data.Error.Message);
+        }
+
+        return StatusCode(201, $"Uspešno dodato decije igraliste");
+    }
+
+
     [HttpGet("PreuzmiSvaDecijaIgralista")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

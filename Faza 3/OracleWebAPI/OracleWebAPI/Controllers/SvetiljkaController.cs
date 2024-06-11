@@ -9,7 +9,7 @@ namespace WebAPI.Controllers;
 public class SvetiljkaController : ControllerBase
 {
     [HttpPost]
-    [Route("DodajSvetiljku")]
+    [Route("DodajSvetiljku/{IdParka}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

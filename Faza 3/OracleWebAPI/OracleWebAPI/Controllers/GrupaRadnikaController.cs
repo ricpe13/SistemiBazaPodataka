@@ -9,7 +9,7 @@ namespace WebAPI.Controllers;
 public class GrupaRadnikaController : ControllerBase
 {
     [HttpPost]
-    [Route("DodajGrupuRadnika")]
+    [Route("DodajGrupuRadnika/{IdParka}/{IdSefa}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
