@@ -281,10 +281,10 @@
                     return "Nemoguće otvoriti sesiju.".ToError(403);
                 }
 
-                IEnumerable<Entiteti.Park> sviParkovi = from o in s.Query<Entiteti.Park>()
+                IEnumerable<Park> sviParkovi = from o in s.Query<Park>()
                                                                          select o;
 
-                foreach (Entiteti.Park r in sviParkovi)
+                foreach (Park r in sviParkovi)
                 {
                     parkovi.Add(new ParkPregled(r));
                 }
@@ -318,7 +318,7 @@
                     return "Nemoguće otvoriti sesiju.".ToError(403);
                 }
 
-                Entiteti.Park p = await s.LoadAsync<Entiteti.Park>(id);
+                Park p = await s.LoadAsync<Park>(id);
                 pp = new ParkPregled(p);
             }
             catch (Exception)

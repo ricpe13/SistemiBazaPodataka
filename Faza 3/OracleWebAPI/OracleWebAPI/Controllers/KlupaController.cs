@@ -26,7 +26,7 @@ public class KlupaController : ControllerBase
     }
 
 
-    [HttpGet("PreuzmiSveParkove")]
+    [HttpGet("PreuzmiSveKlupe")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

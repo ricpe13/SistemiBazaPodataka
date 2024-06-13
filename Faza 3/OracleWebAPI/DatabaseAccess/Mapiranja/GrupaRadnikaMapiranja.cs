@@ -16,7 +16,7 @@
             // HasMany(x => x.RadniciGrupe).KeyColumn("IDGRUPE").LazyLoad().Cascade.All();
             HasMany(x => x.RadniciGrupe).KeyColumn("IDGRUPE").LazyLoad().Cascade.All().Inverse();
             References(x => x.Park, "IDPARKA").Unique(); //trebalo bi da je ovako za one to one
-            HasOne(x => x.Sef).PropertyRef(x => x.GrupaRadnika);
+            HasOne(x => x.Sef).PropertyRef(x => x.GrupaRadnika).Cascade.All();
         }
     }
 }
