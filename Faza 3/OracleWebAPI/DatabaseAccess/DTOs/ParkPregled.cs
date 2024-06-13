@@ -2,9 +2,9 @@
 {
     public class ParkPregled : ZelenaPovrsinaPregled
     {
-        public string? NazivP;
-        public double? PovrsinaP;
-        public GrupaRadnikaPregled? GrupaRadnika;
+        public string? NazivP { get; set; }
+        public double? PovrsinaP { get; set; }
+        public GrupaRadnikaPregled? GrupaRadnika { get; set; }
 
         public ParkPregled()
         {
