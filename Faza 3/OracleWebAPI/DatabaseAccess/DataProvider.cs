@@ -30,7 +30,7 @@
                 ZelenaPovrsina z = await s.LoadAsync<ZelenaPovrsina>(IdZP); //trebalo bi da je tako
                 o.AngazovanZaZP = z;
 
-                if (IdGR != 0) //trebalo bi da se tako radi za zastitu
+                if (IdGR != 0) //trebalo bi da se tako radi za grupu
                 {
                     GrupaRadnika g = await s.LoadAsync<GrupaRadnika>(IdGR);
                     o.PripadaGrupi = g;
