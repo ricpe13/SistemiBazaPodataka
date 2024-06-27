@@ -122,35 +122,40 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-
-        public static RadnikBasic azurirajRadnika(RadnikBasic r)
+        public static async Task<RadnikBasic?> azurirajRadnika(RadnikBasic? r)
         {
+            ISession? session = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                session = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Radnik o = s.Load<ZelenaPovrsina.Entiteti.Radnik>(r.IdR);
-                o.Adresa = r.Adresa;
-                o.StrucnaSprema = r.StrucnaSprema;
-                o.ZaZelenilo = r.ZaZelenilo;
-                o.ZaHigijenu = r.ZaHigijenu;
-                o.ZaObjekat = r.ZaObjekat;
-                //treba i za izmenu Id zelene povrsine, ali ne znam kako
+                if (session != null && r != null)
+                {
+                    Radnik o = await session.LoadAsync<Radnik>(r.IdR);
+                    o.Adresa = r.Adresa;
+                    o.StrucnaSprema = r.StrucnaSprema;
+                    o.ZaZelenilo = r.ZaZelenilo;
+                    o.ZaHigijenu = r.ZaHigijenu;
+                    o.ZaObjekat = r.ZaObjekat;
+                    //treba i za izmenu Id zelene povrsine, ali ne znam kako
 
-                s.Update(o);
-                s.Flush();
-
-                s.Close();
+                    await session.UpdateAsync(o);
+                    await session.FlushAsync();
+                }
             }
-            catch (Exception ec)
+            catch (Exception ex)
             {
-                //handle exceptions
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
             }
 
             return r;
         }
-
-
+        
 
 
         #endregion
@@ -347,6 +352,36 @@ namespace ZelenaPovrsina.DTO
         }
 
 
+        public static async Task<GrupaRadnikaBasic?> azurirajGrupuRadnika(GrupaRadnikaBasic? r)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null && r != null)
+                {
+                    GrupaRadnika o = await session.LoadAsync<GrupaRadnika>(r.IdG);
+                    o.NazivG = r.NazivG;
+
+                    await session.UpdateAsync(o);
+                    await session.FlushAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return r;
+        }
+
+
         //public static List<GrupaRadnikaPregled> vratiSveGrupe()
         //{
         //    List<GrupaRadnikaPregled> grupeRadnika = [];
@@ -382,7 +417,7 @@ namespace ZelenaPovrsina.DTO
         //    return grupeRadnika;
         //}
 
-        //nesto nije dobro ovo vratiSveGrupe
+        //nesto nije dobro ovo vratiSveGrupe, a ovo dole je stara funkcija
 
 
 
@@ -608,28 +643,37 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-            public static DrvoredBasic azurirajDrvored(DrvoredBasic d)
+
+        public static async Task<DrvoredBasic?> azurirajDrvored(DrvoredBasic? r)
+        {
+            ISession? session = null;
+
+            try
             {
-                try
+                session = DataLayer.GetSession();
+
+                if (session != null && r != null)
                 {
-                    ISession s = DataLayer.GetSession();
+                    Drvored o = await session.LoadAsync<Drvored>(r.Id);
+                    o.VrstaDrveta = r.VrstaDrveta;
+                    o.BrojStabala = r.BrojStabala;
 
-                    ZelenaPovrsina.Entiteti.Drvored o = s.Load<ZelenaPovrsina.Entiteti.Drvored>(d.Id);
-                    o.VrstaDrveta = d.VrstaDrveta;
-                    o.BrojStabala = d.BrojStabala;
-
-                    s.Update(o);
-                    s.Flush();
-
-                    s.Close();
+                    await session.UpdateAsync(o);
+                    await session.FlushAsync();
                 }
-                catch (Exception ec)
-                {
-                    //handle exceptions
-                }
-
-                return d;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return r;
+        }
+
 
             public static List<DrvoredPregled> vratiSveDrvorede()
             {
@@ -770,25 +814,33 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-        public static DecijeIgralisteBasic azurirajDecijeIgraliste(DecijeIgralisteBasic r)
+
+        public static async Task<DecijeIgralisteBasic?> azurirajDecijeIgraliste(DecijeIgralisteBasic? r)
         {
+            ISession? session = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                session = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.DecijeIgraliste o = s.Load<ZelenaPovrsina.Entiteti.DecijeIgraliste>(r.IdO);
-                o.BrIgracaka = r.BrIgracaka;
-                o.Pesak = r.Pesak;
-                o.Starost = r.Starost;
+                if (session != null && r != null)
+                {
+                    DecijeIgraliste o = await session.LoadAsync<DecijeIgraliste>(r.IdO);
+                    o.BrIgracaka = r.BrIgracaka;
+                    o.Pesak = r.Pesak;
+                    o.Starost = r.Starost;
 
-                s.Update(o);
-                s.Flush();
-
-                s.Close();
+                    await session.UpdateAsync(o);
+                    await session.FlushAsync();
+                }
             }
-            catch (Exception ec)
+            catch (Exception ex)
             {
-                //handle exceptions
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
             }
 
             return r;
@@ -864,6 +916,37 @@ namespace ZelenaPovrsina.DTO
                 session?.Close();
             }
         }
+
+
+        public static async Task<FontanaBasic?> azurirajFontanu(FontanaBasic? r)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null && r != null)
+                {
+                    Fontana o = await session.LoadAsync<Fontana>(r.IdO);
+                    o.BrPrskalica = r.BrPrskalica;
+
+                    await session.UpdateAsync(o);
+                    await session.FlushAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return r;
+        }
+
 
 
 
@@ -1295,6 +1378,35 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static async Task<SvetiljkaBasic?> azurirajSvetiljku(SvetiljkaBasic? r)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null && r != null)
+                {
+                    Svetiljka o = await session.LoadAsync<Svetiljka>(r.IdO);
+                    o.BrSijalica = r.BrSijalica;
+
+                    await session.UpdateAsync(o);
+                    await session.FlushAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return r;
+        }
+
 
 
         public static List<SvetiljkaPregled> vratiSveSvetiljke()
@@ -1411,6 +1523,38 @@ namespace ZelenaPovrsina.DTO
                 session?.Close();
             }
         }
+
+        public static async Task<DrvoBasic?> azurirajDrvo(DrvoBasic? r)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null && r != null)
+                {
+                    Drvo o = await session.LoadAsync<Drvo>(r.IdO);
+                    o.VisinaKrosnje = r.VisinaKrosnje;
+                    o.PovrsinaK = r.PovrsinaK;
+                    o.ObimDebla = r.ObimDebla;
+
+                    await session.UpdateAsync(o);
+                    await session.FlushAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return r;
+        }
+
 
 
         public static List<DrvoPregled> vratiSvaDrveca()
