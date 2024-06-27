@@ -1,50 +1,46 @@
-﻿
-
-
-
-namespace ZelenaPovrsina
+﻿namespace ZelenaPovrsina
 {
-    #region ZelenaPovrsina
-    public class ZelenaPovrsinaPregled
-    {
-        public int Id { get; set; }
-        public string NazivGradskeOpstine { get; set; }
-        public string ZonaUgrozenosti { get; set; }
-        public string TipZ { get; set; }
-        public ZelenaPovrsinaPregled()
-        {
+    //#region ZelenaPovrsina
+    //public class ZelenaPovrsinaPregled
+    //{
+    //    public int Id { get; set; }
+    //    public string NazivGradskeOpstine { get; set; }
+    //    public string ZonaUgrozenosti { get; set; }
+    //    public string TipZ { get; set; }
+    //    public ZelenaPovrsinaPregled()
+    //    {
 
-        }
+    //    }
 
-        public ZelenaPovrsinaPregled(int id, string naziv, string zona, string tipz) : this()
-        {
-            Id = id;
-            NazivGradskeOpstine = naziv;
-            ZonaUgrozenosti = zona;
-            TipZ = tipz;
-        }
-    }
-    public class ZelenaPovrsinaBasic
-    {
-        public int Id { get; set; }
-        public string NazivGradskeOpstine { get; set; }
-        public string ZonaUgrozenosti { get; set; }
-        public string TipZ { get; set; }
-        public virtual IList<RadnikBasic> RadniciZP { get; set; }
-        public ZelenaPovrsinaBasic()
-        {
-            RadniciZP = new List<RadnikBasic>();
-        }
-        public ZelenaPovrsinaBasic(int id, string naziv, string zona, string tipz) : this()
-        {
-            Id = id;
-            NazivGradskeOpstine = naziv;
-            ZonaUgrozenosti = zona;
-            TipZ = tipz;
-        }
-    }
+    //    public ZelenaPovrsinaPregled(int id, string naziv, string zona, string tipz) : this()
+    //    {
+    //        Id = id;
+    //        NazivGradskeOpstine = naziv;
+    //        ZonaUgrozenosti = zona;
+    //        TipZ = tipz;
+    //    }
+    //}
+    //public class ZelenaPovrsinaBasic
+    //{
+    //    public int Id { get; set; }
+    //    public string NazivGradskeOpstine { get; set; }
+    //    public string ZonaUgrozenosti { get; set; }
+    //    public string TipZ { get; set; }
+    //    public virtual IList<RadnikBasic> RadniciZP { get; set; }
+    //    public ZelenaPovrsinaBasic()
+    //    {
+    //        RadniciZP = new List<RadnikBasic>();
+    //    }
+    //    public ZelenaPovrsinaBasic(int id, string naziv, string zona, string tipz) : this()
+    //    {
+    //        Id = id;
+    //        NazivGradskeOpstine = naziv;
+    //        ZonaUgrozenosti = zona;
+    //        TipZ = tipz;
+    //    }
+    //}
 
-    #endregion
+    //#endregion  //
 
     #region Radnik
     public class RadnikPregled

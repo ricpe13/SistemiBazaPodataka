@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Mapiranja
 {
-    internal class ParkMapiranja : SubclassMap<Park>
+    public class ParkMapiranja : SubclassMap<Park>
     {
         public ParkMapiranja()
         {

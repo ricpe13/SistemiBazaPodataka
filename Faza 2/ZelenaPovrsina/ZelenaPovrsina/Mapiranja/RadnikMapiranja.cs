@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Mapiranja
 {
-    internal class RadnikMapiranja : ClassMap<ZelenaPovrsina.Entiteti.Radnik>
+    public class RadnikMapiranja : ClassMap<ZelenaPovrsina.Entiteti.Radnik>
     {
         public RadnikMapiranja()
         {

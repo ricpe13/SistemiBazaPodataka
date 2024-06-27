@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Mapiranja
 {
-    internal class DrvoredMapiranja : SubclassMap<Drvored>
+    public class DrvoredMapiranja : SubclassMap<Drvored>
     {
         public DrvoredMapiranja()
         {

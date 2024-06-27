@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Mapiranja
     {
-        internal class DecijeIgralisteMapiranja : SubclassMap<DecijeIgraliste>
+        public class DecijeIgralisteMapiranja : SubclassMap<DecijeIgraliste>
         {
             public DecijeIgralisteMapiranja()
             {

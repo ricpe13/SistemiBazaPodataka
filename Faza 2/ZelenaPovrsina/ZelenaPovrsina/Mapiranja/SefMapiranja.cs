@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Mapiranja
 {
-    internal class SefMapiranja : ClassMap<ZelenaPovrsina.Entiteti.Sef>
+    public class SefMapiranja : ClassMap<ZelenaPovrsina.Entiteti.Sef>
     {
         public SefMapiranja()
         {

@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Mapiranja
 {
-    internal class FontanaMapiranja : SubclassMap<Fontana>
+    public class FontanaMapiranja : SubclassMap<Fontana>
     {
         public FontanaMapiranja()
         {

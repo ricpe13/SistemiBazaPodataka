@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZelenaPovrsina.Mapiranja
 {
-    internal class SpomenikMapiranja : SubclassMap<Spomenik>
+    public class SpomenikMapiranja : SubclassMap<Spomenik>
     {
         public SpomenikMapiranja()
         {

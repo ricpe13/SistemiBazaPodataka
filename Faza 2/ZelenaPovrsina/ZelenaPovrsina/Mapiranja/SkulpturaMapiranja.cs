@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZelenaPovrsina.Mapiranja
 {
-    internal class SkulpturaMapiranja : SubclassMap<Skulptura>
+    public class SkulpturaMapiranja : SubclassMap<Skulptura>
     {
         public SkulpturaMapiranja()
         {

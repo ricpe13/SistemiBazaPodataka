@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Mapiranja
 {
-    internal class TravnjakMapiranja : SubclassMap<Travnjak>
+    public class TravnjakMapiranja : SubclassMap<Travnjak>
     {
         public TravnjakMapiranja()
         {

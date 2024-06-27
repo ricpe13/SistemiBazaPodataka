@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Mapiranja
 {
-    internal class ZastitaMapiranja : ClassMap<ZelenaPovrsina.Entiteti.Zastita>
+    public class ZastitaMapiranja : ClassMap<ZelenaPovrsina.Entiteti.Zastita>
     {
         public ZastitaMapiranja()
         {

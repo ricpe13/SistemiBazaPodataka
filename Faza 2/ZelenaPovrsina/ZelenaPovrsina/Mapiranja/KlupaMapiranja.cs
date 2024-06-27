@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Mapiranja
 {
-    internal class KlupaMapiranja : SubclassMap<Klupa>
+    public class KlupaMapiranja : SubclassMap<Klupa>
     {
         public KlupaMapiranja()
         {

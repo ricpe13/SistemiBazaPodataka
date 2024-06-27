@@ -4,46 +4,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZelenaPovrsina.Entiteti;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ZelenaPovrsina.DTO
 {
     internal class DTOManager
     {
         #region Radnik
-        public static void dodajRadnika(RadnikBasic r)
+        
+        public static async Task<bool> dodajRadnika(RadnikBasic r)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Radnik o = new ZelenaPovrsina.Entiteti.Radnik();
+                if (s != null)
+                {
+                    Radnik o = new Radnik();
 
-                o.Ime = r.Ime;
-                o.Prezime = r.Prezime;
-                o.Jmbg = r.Jmbg;
-                o.Adresa = r.Adresa;
-                o.BrRadneKnjizice = r.BrRadneKnjizice;
-                o.ImeRoditelja = r.ImeRoditelja;
-                o.StrucnaSprema = r.StrucnaSprema;
-                o.DatumRodj = r.DatumRodj;
-                o.ZaZelenilo = r.ZaZelenilo;
-                o.ZaHigijenu = r.ZaHigijenu;
-                o.ZaObjekat = r.ZaObjekat;
-                // ZelenaPovrsina.Entiteti.ZelenaPovrsina zp = s.Load<ZelenaPovrsina.Entiteti.ZelenaPovrsina>(r.ZelenaPovrsina.Id);
-                // o.AngazovanZaZP = zp;
+                    o.Ime = r.Ime;
+                    o.Prezime = r.Prezime;
+                    o.Jmbg = r.Jmbg;
+                    o.Adresa = r.Adresa;
+                    o.BrRadneKnjizice = r.BrRadneKnjizice;
+                    o.ImeRoditelja = r.ImeRoditelja;
+                    o.StrucnaSprema = r.StrucnaSprema;
+                    o.DatumRodj = r.DatumRodj;
+                    o.ZaZelenilo = r.ZaZelenilo;
+                    o.ZaHigijenu = r.ZaHigijenu;
+                    o.ZaObjekat = r.ZaObjekat;
+                    // ZelenaPovrsina.Entiteti.ZelenaPovrsina zp = s.Load<ZelenaPovrsina.Entiteti.ZelenaPovrsina>(r.ZelenaPovrsina.Id);
+                    // o.AngazovanZaZP = zp;
 
-                s.SaveOrUpdate(o);
+                    await s.SaveAsync(o);
+                    await s.FlushAsync();
+                    return true;
+                }
 
-
-
-                s.Flush();
-
-                s.Close();
+                throw new Exception("Greska pri povezivanju sa bazom");
             }
-            catch (Exception ec)
+            catch (Exception ex)
             {
-                MessageBox.Show(ec.FormatExceptionMessage());
-
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
             }
         }
 
@@ -126,27 +135,39 @@ namespace ZelenaPovrsina.DTO
 
         #region Park
 
-        public static void dodajPark(ParkBasic park)
+        public static async Task<bool> dodajPark(ParkBasic park)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Park p = new Park();
+                if (s != null)
+                {
+                    Park p = new Park();
 
-                p.NazivP = park.NazivP;
-                p.TipZ = park.TipZ;
-                p.ZonaUgrozenosti = park.ZonaUgrozenosti;
-                p.PovrsinaP = park.PovrsinaP;
-                p.NazivGradskeOpstine = park.NazivGradskeOpstine;
+                    p.NazivP = park.NazivP;
+                    p.TipZ = park.TipZ;
+                    p.ZonaUgrozenosti = park.ZonaUgrozenosti;
+                    p.PovrsinaP = park.PovrsinaP;
+                    p.NazivGradskeOpstine = park.NazivGradskeOpstine;
 
-                s.Save(p); s.Flush(); s.Close();
+                    await s.SaveAsync(p);
+                    await s.FlushAsync();
+                    return true;
+                }
 
-
+                throw new Exception("Greska pri povezivanju sa bazom");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show(e.FormatExceptionMessage());
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
             }
         }
 
@@ -217,25 +238,41 @@ namespace ZelenaPovrsina.DTO
 
         #region GrupaRadnika
 
-        public static void dodajGrupuRadnika(GrupaRadnikaBasic grupaRadnika)
+        public static async Task<bool> dodajGrupuRadnika(GrupaRadnikaBasic v)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
-                ZelenaPovrsina.Entiteti.GrupaRadnika g = new ZelenaPovrsina.Entiteti.GrupaRadnika();
+                s = DataLayer.GetSession();
 
-                g.NazivG = grupaRadnika.NazivG;
-                ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(grupaRadnika.Park.Id);
-                g.Park = p;
-                s.Save(g); s.Flush(); s.Close();
+                if (s != null)
+                {
+                    GrupaRadnika g = new GrupaRadnika();
+
+                    g.NazivG = v.NazivG;
+                    ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(v.Park.Id);
+                    g.Park = p;
+                    s.Save(g); s.Flush(); s.Close();
+
+                    await s.SaveAsync(g);
+                    await s.FlushAsync();
+                    return true;
+                }
+
+                throw new Exception("Greska pri povezivanju sa bazom");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show(e.FormatExceptionMessage());
-
-
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
             }
         }
+
 
         public static List<GrupaRadnikaBasic> vratiSveGrupe()
         {
@@ -284,28 +321,39 @@ namespace ZelenaPovrsina.DTO
 
         #region Travnjak
 
-        public static void dodajTravnjak(TravnjakBasic travnjak)
+        public static async Task<bool> dodajTravnjak(TravnjakBasic travnjak)
         {
+            ISession? s = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                s = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Travnjak t = new Travnjak();
+                if (s != null)
+                {
+                    Travnjak t = new Travnjak();
 
-                t.TipZ = travnjak.TipZ;
-                t.AdresaZgrade = travnjak.AdresaZgrade;
-                t.PovrsinaT = travnjak.PovrsinaT;
-                t.NazivGradskeOpstine = travnjak.NazivGradskeOpstine;
-                t.ZonaUgrozenosti = travnjak.ZonaUgrozenosti;
+                    t.TipZ = travnjak.TipZ;
+                    t.AdresaZgrade = travnjak.AdresaZgrade;
+                    t.PovrsinaT = travnjak.PovrsinaT;
+                    t.NazivGradskeOpstine = travnjak.NazivGradskeOpstine;
+                    t.ZonaUgrozenosti = travnjak.ZonaUgrozenosti;
 
+                    await s.SaveAsync(t);
+                    await s.FlushAsync();
+                    return true;
+                }
 
-                s.Save(t); s.Flush(); s.Close();
-
-
+                throw new Exception("Greska pri povezivanju sa bazom");
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show(e.FormatExceptionMessage());
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
             }
         }
 
@@ -361,6 +409,46 @@ namespace ZelenaPovrsina.DTO
 
 
         #region Drvored
+
+        public static async Task<bool> dodajDrvored(DrvoredBasic drvored)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (s != null)
+                {
+                    Drvored d = new Drvored();
+
+                    d.TipZ = drvored.TipZ;
+                    d.Ulica = drvored.Ulica;
+                    d.Duzina = drvored.Duzina;
+                    d.VrstaDrveta = drvored.VrstaDrveta;
+                    d.BrojStabala = drvored.BrojStabala;
+                    d.NazivGradskeOpstine = drvored.NazivGradskeOpstine;
+                    d.ZonaUgrozenosti = drvored.ZonaUgrozenosti;
+
+                    await s.SaveAsync(d);
+                    await s.FlushAsync();
+                    return true;
+                }
+
+                throw new Exception("Greska pri povezivanju sa bazom");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+
 
         public static void dodajDrvored(DrvoredBasic drvored)
             {
@@ -460,6 +548,418 @@ namespace ZelenaPovrsina.DTO
                 return drvoredi;
             }
 
+
+
+
+        #endregion
+
+        #region DecijeIgraliste
+
+        public static async Task<bool> dodajDecijeIgraliste(DecijeIgralisteBasic r)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (s != null)
+                {
+                    DecijeIgraliste o = new DecijeIgraliste(); //ne znam sta je ovde greska
+
+                    o.Tip = r.Tip;
+                    o.BrIgracaka = r.BrIgracaka;
+                    o.Pesak = r.Pesak;
+                    o.Starost = r.Starost;
+
+                    await s.SaveAsync(o);
+                    await s.FlushAsync();
+                    return true;
+                }
+
+                throw new Exception("Greska pri povezivanju sa bazom");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+
+        public static List<RadnikPregled> vratiSvaDecijaIgralista()
+        {
+            List<DecijeIgralisteBasic> decijaigralista = new List<DecijeIgralisteBasic>();
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                IEnumerable<ZelenaPovrsina.Entiteti.DecijeIgraliste> svaDecijaIgralista = from o in s.Query<ZelenaPovrsina.Entiteti.DecijeIgraliste>()
+                                                                         select o;
+
+                foreach (ZelenaPovrsina.Entiteti.DecijeIgraliste r in svaDecijaIgralista)
+                {
+                    decijaigralista.Add(new DecijeIgralisteBasic(r.Tip, r.BrIgracaka, r.Pesak, r.Starost));
+                }
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return decijaigralista;
+        }
+
+        public static void obrisiDecijeIgraliste(int id)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                ZelenaPovrsina.Entiteti.DecijeIgraliste r = s.Load<ZelenaPovrsina.Entiteti.DecijeIgraliste>(id);
+
+                s.Delete(r);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+        }
+
+        public static DecijeIgralisteBasic azurirajDecijeIgraliste(DecijeIgralisteBasic r)
+        {
+            try
+            {
+                ISession s = DataLayer.GetSession();
+
+                ZelenaPovrsina.Entiteti.DecijeIgraliste o = s.Load<ZelenaPovrsina.Entiteti.DecijeIgraliste>(r.IdO);
+                o.BrIgracaka = r.BrIgracaka;
+                o.Pesak = r.Pesak;
+                o.Starost = r.Starost;
+
+                s.Update(o);
+                s.Flush();
+
+                s.Close();
+            }
+            catch (Exception ec)
+            {
+                //handle exceptions
+            }
+
+            return r;
+        }
+
+
+        #endregion
+
+        #region Fontana
+
+        public static async Task<bool> dodajFontanu(FontanaBasic v, int IdParka)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (s != null)
+                {
+                    Fontana d = new Fontana(); //ne znam sta je greska
+
+                    d.BrPrskalica = v.BrPrskalica;
+                    d.PovrsinaF = v.PovrsinaF;
+                    Park z = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                    d.PripadaParku = z;
+
+                    await s.SaveAsync(d);
+                    await s.FlushAsync();
+                    return true;
+                }
+
+                throw new Exception("Greska pri povezivanju sa bazom");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+
+
+
+        #endregion
+
+        #region Klupa
+
+        public static async Task<bool> dodajKlupu(KlupaBasic v, int IdParka)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (s != null)
+                {
+                    Klupa d = new Klupa(); //ne znam sta je greska
+
+                    d.RedniBroj = v.RedniBr;
+                    d.Tip = v.Tip;
+                    d.Materijal = v.Materijal;
+                    Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                    d.PripadaParku = p;
+
+
+                    await s.SaveAsync(d);
+                    await s.FlushAsync();
+                    return true;
+                }
+
+                throw new Exception("Greska pri povezivanju sa bazom");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+
+        #endregion
+
+        #region Skulptura
+
+        public static async Task<bool> dodajSkulpturu(SkulpturaBasic v, int IdZastite, int IdParka)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (s != null)
+                {
+                    Skulptura d = new Skulptura(); //opet
+
+
+                    d.Autor = v.Autor;
+                    Zastita z = await s.LoadAsync<Zastita>(IdZastite); //trebalo bi da je tako
+                    d.Zastita = z;
+                    Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                    d.PripadaParku = p;
+
+
+                    await s.SaveAsync(d);
+                    await s.FlushAsync();
+                    return true;
+                }
+
+                throw new Exception("Greska pri povezivanju sa bazom");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+
+        #endregion
+
+        #region Spomenik
+
+        public static async Task<bool> dodajSpomenik(SpomenikBasic v, int IdZastite, int IdParka)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (s != null)
+                {
+                    Spomenik d = new Spomenik();
+
+                    d.NazivS = v.NazivS;
+                    Zastita z = await s.LoadAsync<Zastita>(IdZastite); //trebalo bi da je tako
+                    d.Zastita = z;
+                    Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                    d.PripadaParku = p;
+
+                    await s.SaveAsync(d);
+                    await s.FlushAsync();
+                    return true;
+                }
+
+                throw new Exception("Greska pri povezivanju sa bazom");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+
+
+        #endregion
+
+        #region Svetiljka
+
+        public static async Task<bool> dodajSvetiljku(SvetiljkaBasic v, int IdParka)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (s != null)
+                {
+                    Svetiljka d = new Svetiljka();
+
+                    d.BrSijalica = v.BrSijalica;
+                    Park z = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                    d.PripadaParku = z;
+
+                    await s.SaveAsync(d);
+                    await s.FlushAsync();
+                    return true;
+                }
+
+                throw new Exception("Greska pri povezivanju sa bazom");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+
+
+        #endregion
+
+        #region Drvo
+
+        public static async Task<bool> dodajDrvo(DrvoBasic v, int IdParka, int IdZastite = 0)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (s != null)
+                {
+                    Drvo d = new Drvo();
+
+                    d.RedniBroj = v.RedniBr;
+                    d.Tip = v.Tip;
+                    d.VisinaKrosnje = v.VisinaKrosnje;
+                    d.Vrsta = v.Vrsta;
+                    d.DatumSadnje = v.DatumSadnje;
+                    d.PovrsinaK = v.PovrsinaK;
+                    d.ObimDebla = v.ObimDebla;
+                    //pogledati za Zastitu kako, ima ono PodZastitom
+
+                    if (IdZastite != 0) //trebalo bi da se tako radi za zastitu
+                    {
+                        Zastita z = await s.LoadAsync<Zastita>(IdZastite);
+                        d.PodZastitomDrvo = z;
+                    }
+                    Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                    d.PripadaParku = p;
+
+                    await s.SaveAsync(d);
+                    await s.FlushAsync();
+                    return true;
+                }
+
+                throw new Exception("Greska pri povezivanju sa bazom");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
+
+
+
+        #endregion
+
+        #region Zastita
+
+        public static async Task<bool> dodajZastitu(ZastitaBasic v)
+        {
+            ISession? s = null;
+
+            try
+            {
+                s = DataLayer.GetSession();
+
+                if (s != null)
+                {
+                    Zastita d = new Zastita();
+
+                    d.Institucija = v.Institucija;
+                    d.DatumOd = v.DatumOd;
+                    d.NovcanaSredstva = v.NovcanaSredstva;
+                    d.OpisZnacaja = v.OpisZnacaja;
+
+                    await s.SaveAsync(d);
+                    await s.FlushAsync();
+                    return true;
+                }
+
+                throw new Exception("Greska pri povezivanju sa bazom");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                s?.Close();
+            }
+        }
 
 
 

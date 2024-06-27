@@ -1,6 +1,6 @@
 ﻿namespace ZelenaPovrsina.Mapiranja
 {
-    internal class SvetiljkaMapiranja : SubclassMap<Svetiljka>
+    public class SvetiljkaMapiranja : SubclassMap<Svetiljka>
     {
         public SvetiljkaMapiranja()
         {
