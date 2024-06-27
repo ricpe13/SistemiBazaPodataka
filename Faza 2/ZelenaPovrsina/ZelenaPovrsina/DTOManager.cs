@@ -92,24 +92,36 @@ namespace ZelenaPovrsina.DTO
             return radnici;
         }
 
-        public static void obrisiRadnika(int id)
+        public static async Task<bool> obrisiRadnika(int id)
         {
+            ISession? session = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                session = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Radnik r = s.Load<ZelenaPovrsina.Entiteti.Radnik>(id);
+                if (session != null)
+                {
+                    Radnik a = await session.LoadAsync<Radnik>(id);
 
-                s.Delete(r);
-                s.Flush();
-
-                s.Close();
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali radnika");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete radnika");
             }
-            catch (Exception ec)
+            catch (Exception ex)
             {
-                //handle exceptions
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
             }
         }
+
 
         public static RadnikBasic azurirajRadnika(RadnikBasic r)
         {
@@ -181,22 +193,33 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-        public static void obrisiPark(int id)
+        public static async Task<bool> obrisiPark(int id)
         {
+            ISession? session = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                session = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Park p = s.Load<ZelenaPovrsina.Entiteti.Park>(id);
+                if (session != null)
+                {
+                    Park a = await session.LoadAsync<Park>(id);
 
-                s.Delete(p);
-                s.Flush();
-
-                s.Close();
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali park");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete park!");
             }
-            catch (Exception ec)
+            catch (Exception ex)
             {
-                //handle exceptions
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
             }
         }
 
@@ -289,6 +312,37 @@ namespace ZelenaPovrsina.DTO
             finally
             {
                 s?.Close();
+            }
+        }
+
+
+        public static async Task<bool> obrisiGrupuRadnika(int id)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    GrupaRadnika a = await session.LoadAsync<GrupaRadnika>(id);
+
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali grupu radnika");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete grupu radnika!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
             }
         }
 
@@ -415,22 +469,34 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-        public static void obrisiTravnjak(int id)
+
+        public static async Task<bool> obrisiTravnjak(int id)
         {
+            ISession? session = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                session = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.Travnjak t = s.Load<ZelenaPovrsina.Entiteti.Travnjak>(id);
+                if (session != null)
+                {
+                    Travnjak a = await session.LoadAsync<Travnjak>(id);
 
-                s.Delete(t);
-                s.Flush();
-
-                s.Close();
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali travnjak");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete travnjak!");
             }
-            catch (Exception ec)
+            catch (Exception ex)
             {
-                //handle exceptions
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
             }
         }
 
@@ -511,25 +577,36 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-            public static void obrisiDrvored(int id)
+
+        public static async Task<bool> obrisiDrvored(int id)
+        {
+            ISession? session = null;
+
+            try
             {
-                try
+                session = DataLayer.GetSession();
+
+                if (session != null)
                 {
-                    ISession s = DataLayer.GetSession();
+                    Drvored a = await session.LoadAsync<Drvored>(id);
 
-                    ZelenaPovrsina.Entiteti.Drvored d = s.Load<ZelenaPovrsina.Entiteti.Drvored>(id);
-
-                    s.Delete(d);
-                    s.Flush();
-
-                    s.Close();
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali drvored");
+                    return true;
                 }
-                catch (Exception ec)
-                {
-                    //handle exceptions
-                }
+                throw new Exception("Niste uspeli da obrisete drvored!");
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
+            }
+        }
 
             public static DrvoredBasic azurirajDrvored(DrvoredBasic d)
             {
@@ -662,22 +739,34 @@ namespace ZelenaPovrsina.DTO
             return decijaIgralista;
         }
 
-        public static void obrisiDecijeIgraliste(int id)
+
+        public static async Task<bool> obrisiDecijeIgraliste(int id)
         {
+            ISession? session = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                session = DataLayer.GetSession();
 
-                ZelenaPovrsina.Entiteti.DecijeIgraliste r = s.Load<ZelenaPovrsina.Entiteti.DecijeIgraliste>(id);
+                if (session != null)
+                {
+                    DecijeIgraliste a = await session.LoadAsync<DecijeIgraliste>(id);
 
-                s.Delete(r);
-                s.Flush();
-
-                s.Close();
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali decije igraliste");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete decije igraliste!");
             }
-            catch (Exception ec)
+            catch (Exception ex)
             {
-                //handle exceptions
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
             }
         }
 
@@ -745,6 +834,39 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+
+        public static async Task<bool> obrisiFontanu(int id)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    Fontana a = await session.LoadAsync<Fontana>(id);
+
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali fontanu");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete fontanu!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
+            }
+        }
+
+
+
         public static List<FontanaPregled> vratiSveFontane()
         {
             List<FontanaPregled> fontane = [];
@@ -778,6 +900,8 @@ namespace ZelenaPovrsina.DTO
 
             return fontane;
         }
+
+
 
 
         #endregion
@@ -820,6 +944,39 @@ namespace ZelenaPovrsina.DTO
                 s?.Close();
             }
         }
+
+        public static async Task<bool> obrisiKlupu(int id)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    Klupa a = await session.LoadAsync<Klupa>(id);
+
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali klupu");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete klupu!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
+            }
+        }
+
+
+
 
         public static List<KlupaPregled> vratiSveKlupe()
         {
@@ -897,6 +1054,38 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static async Task<bool> obrisiSkulpturu(int id)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    Skulptura a = await session.LoadAsync<Skulptura>(id);
+
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali skulpturu");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete skulpturu!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
+            }
+        }
+
+
+
         public static List<SkulpturaPregled> vratiSveSkulpture()
         {
             List<SkulpturaPregled> skulpture = [];
@@ -972,6 +1161,38 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static async Task<bool> obrisiSpomenik(int id)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    Spomenik a = await session.LoadAsync<Spomenik>(id);
+
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali spomenik");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete spomenik!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
+            }
+        }
+
+
+
         public static List<SpomenikPregled> vratiSveSpomenike()
         {
             List<SpomenikPregled> spomenici = [];
@@ -1043,6 +1264,38 @@ namespace ZelenaPovrsina.DTO
                 s?.Close();
             }
         }
+
+        public static async Task<bool> obrisiSvetiljku(int id)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    Svetiljka a = await session.LoadAsync<Svetiljka>(id);
+
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali svetiljku");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete svetiljku!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
+            }
+        }
+
+
 
         public static List<SvetiljkaPregled> vratiSveSvetiljke()
         {
@@ -1129,6 +1382,37 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static async Task<bool> obrisiDrvo(int id)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    Drvo a = await session.LoadAsync<Drvo>(id);
+
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali drvo");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete drvo!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
+            }
+        }
+
+
         public static List<DrvoPregled> vratiSvaDrveca()
         {
             List<DrvoPregled> drvece = [];
@@ -1199,6 +1483,36 @@ namespace ZelenaPovrsina.DTO
             finally
             {
                 s?.Close();
+            }
+        }
+
+        public static async Task<bool> obrisiZastitu(int id)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    Zastita a = await session.LoadAsync<Zastita>(id);
+
+                    await session.DeleteAsync(a);
+                    await session.FlushAsync();
+                    MessageBox.Show($"Uspesno ste obrisali zastitu");
+                    return true;
+                }
+                throw new Exception("Niste uspeli da obrisete zastitu!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+                return false;
+            }
+            finally
+            {
+                session?.Close();
             }
         }
 
