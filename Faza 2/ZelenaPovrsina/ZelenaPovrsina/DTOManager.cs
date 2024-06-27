@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZelenaPovrsina.Entiteti;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace ZelenaPovrsina.DTO
 {
@@ -58,25 +59,34 @@ namespace ZelenaPovrsina.DTO
 
         public static List<RadnikPregled> vratiSveRadnike()
         {
-            List<RadnikPregled> radnici = new List<RadnikPregled>();
+            List<RadnikPregled> radnici = [];
+            ISession? session = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                session = DataLayer.GetSession();
 
-                IEnumerable<ZelenaPovrsina.Entiteti.Radnik> sviRadnici = from o in s.Query<ZelenaPovrsina.Entiteti.Radnik>()
-                                                                            select o;
-
-                foreach (ZelenaPovrsina.Entiteti.Radnik r in sviRadnici)
+                if (session != null)
                 {
-                    radnici.Add(new RadnikPregled(r.IdR, r.Ime, r.Prezime, r.Jmbg, r.Adresa, r.BrRadneKnjizice, r.ImeRoditelja, 
+                    IEnumerable<Radnik> sviRadnici =
+                    from o in session.Query<Radnik>()
+                        select o;
+
+                    foreach (Radnik r in sviRadnici)
+                    {
+                        radnici.Add(new RadnikPregled(r.IdR, r.Ime, r.Prezime, r.Jmbg, r.Adresa, r.BrRadneKnjizice, r.ImeRoditelja,
                         r.StrucnaSprema, r.DatumRodj, r.ZaZelenilo, r.ZaHigijenu, r.ZaObjekat));
+                    }
                 }
 
-                s.Close();
             }
-            catch (Exception ec)
+            catch (Exception ex)
             {
-                //handle exceptions
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
             }
 
             return radnici;
@@ -192,24 +202,33 @@ namespace ZelenaPovrsina.DTO
 
         public static List<ParkPregled> vratiSveParkove()
         {
-            List<ParkPregled> parkovi = new List<ParkPregled>();
+            List<ParkPregled> parkovi = [];
+            ISession? session = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                session = DataLayer.GetSession();
 
-                IEnumerable<ZelenaPovrsina.Entiteti.Park> sviParkovi = from o in s.Query<ZelenaPovrsina.Entiteti.Park>()
-                                                                         select o;
-
-                foreach (ZelenaPovrsina.Entiteti.Park r in sviParkovi)
+                if (session != null)
                 {
-                    parkovi.Add(new ParkPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti,r.TipZ,r.NazivP,r.PovrsinaP));
+                    IEnumerable<Park> sviParkovi =
+                        from o in session.Query<Park>()
+                        select o;
+
+                    foreach (Park r in sviParkovi)
+                    {
+                        parkovi.Add(new ParkPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti, r.TipZ, r.NazivP, r.PovrsinaP));
+                    }
                 }
 
-                s.Close();
             }
-            catch (Exception ec)
+            catch (Exception ex)
             {
-                //handle exceptions
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
             }
 
             return parkovi;
@@ -272,6 +291,45 @@ namespace ZelenaPovrsina.DTO
                 s?.Close();
             }
         }
+
+
+        //public static List<GrupaRadnikaPregled> vratiSveGrupe()
+        //{
+        //    List<GrupaRadnikaPregled> grupeRadnika = [];
+        //    ISession? session = null;
+
+        //    try
+        //    {
+        //        session = DataLayer.GetSession();
+
+        //        if (session != null)
+        //        {
+        //            IEnumerable<GrupaRadnika> sveGrupeRadnika =
+        //                from o in session.Query<GrupaRadnika>()
+        //                select o;
+
+        //            foreach (GrupaRadnika t in sveGrupeRadnika)
+        //            {
+        //                GrupaRadnikaBasic grupa = DTOManager.vratiGrupu(g.IdG);
+        //                grupeRadnika.Add(grupa);
+        //            }
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.FormatExceptionMessage());
+        //    }
+        //    finally
+        //    {
+        //        session?.Close();
+        //    }
+
+        //    return grupeRadnika;
+        //}
+
+        //nesto nije dobro ovo vratiSveGrupe
+
 
 
         public static List<GrupaRadnikaBasic> vratiSveGrupe()
@@ -376,34 +434,39 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-
         public static List<TravnjakPregled> vratiSveTravnjake()
         {
-            List<TravnjakPregled> travnjaci = new List<TravnjakPregled>();
+            List<TravnjakPregled> travnjaci = [];
+            ISession? session = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                session = DataLayer.GetSession();
 
-                IEnumerable<ZelenaPovrsina.Entiteti.Travnjak> sviTravnjaci = from o in s.Query<ZelenaPovrsina.Entiteti.Travnjak>()
-                                                                         select o;
-
-                foreach (ZelenaPovrsina.Entiteti.Travnjak r in sviTravnjaci)
+                if (session != null)
                 {
-                    travnjaci.Add(new TravnjakPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti, r.TipZ, r.AdresaZgrade, r.PovrsinaT));
+                    IEnumerable<Travnjak> sviTravnjaci =
+                        from o in session.Query<Travnjak>()
+                        select o;
+
+                    foreach (Travnjak r in sviTravnjaci)
+                    {
+                        travnjaci.Add(new TravnjakPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti, r.TipZ, r.AdresaZgrade, r.PovrsinaT));
+                    }
                 }
 
-                s.Close();
             }
-            catch (Exception ec)
+            catch (Exception ex)
             {
-                //handle exceptions
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
             }
 
             return travnjaci;
         }
-
-
-
 
         #endregion
 
@@ -448,37 +511,6 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-
-
-        public static void dodajDrvored(DrvoredBasic drvored)
-            {
-                try
-                {
-                    ISession s = DataLayer.GetSession();
-
-                    ZelenaPovrsina.Entiteti.Drvored d = new Drvored();
-                    
-                    d.TipZ = drvored.TipZ;
-                    d.Ulica = drvored.Ulica;
-                    d.Duzina = drvored.Duzina;
-                    d.VrstaDrveta = drvored.VrstaDrveta;
-                    d.BrojStabala = drvored.BrojStabala;
-                    d.NazivGradskeOpstine = drvored.NazivGradskeOpstine;
-                    d.ZonaUgrozenosti = drvored.ZonaUgrozenosti;
-
-
-                s.Save(d); s.Flush(); s.Close();
-
-
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.FormatExceptionMessage());
-                }
-            }
-
-
-
             public static void obrisiDrvored(int id)
             {
                 try
@@ -522,33 +554,39 @@ namespace ZelenaPovrsina.DTO
                 return d;
             }
 
-
             public static List<DrvoredPregled> vratiSveDrvorede()
             {
-                List<DrvoredPregled> drvoredi = new List<DrvoredPregled>();
+                List<DrvoredPregled> drvoredi = [];
+                ISession? session = null;
+
                 try
                 {
-                    ISession s = DataLayer.GetSession();
+                    session = DataLayer.GetSession();
 
-                    IEnumerable<ZelenaPovrsina.Entiteti.Drvored> sviDrvoredi = from o in s.Query<ZelenaPovrsina.Entiteti.Drvored>()
-                                                                           select o;
-
-                    foreach (ZelenaPovrsina.Entiteti.Drvored r in sviDrvoredi)
+                    if (session != null)
                     {
-                        drvoredi.Add(new DrvoredPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti, r.TipZ, r.Ulica, r.Duzina, r.VrstaDrveta, r.BrojStabala));
+                        IEnumerable<Drvored> sviDrvoredi =
+                            from o in session.Query<Drvored>()
+                            select o;
+
+                        foreach (Drvored r in sviDrvoredi)
+                        {
+                            drvoredi.Add(new DrvoredPregled(r.IdZ, r.NazivGradskeOpstine, r.ZonaUgrozenosti, r.TipZ, r.Ulica, r.Duzina, r.VrstaDrveta, r.BrojStabala));
+                        }
                     }
 
-                    s.Close();
                 }
-                catch (Exception ec)
+                catch (Exception ex)
                 {
-                    //handle exceptions
+                    MessageBox.Show(ex.FormatExceptionMessage());
+                }
+                finally
+                {
+                    session?.Close();
                 }
 
                 return drvoredi;
             }
-
-
 
 
         #endregion
@@ -590,30 +628,38 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-
-        public static List<RadnikPregled> vratiSvaDecijaIgralista()
+        public static List<DecijeIgralistePregled> vratiSvaDecijaIgralista()
         {
-            List<DecijeIgralisteBasic> decijaigralista = new List<DecijeIgralisteBasic>();
+            List<DecijeIgralistePregled> decijaIgralista = [];
+            ISession? session = null;
+
             try
             {
-                ISession s = DataLayer.GetSession();
+                session = DataLayer.GetSession();
 
-                IEnumerable<ZelenaPovrsina.Entiteti.DecijeIgraliste> svaDecijaIgralista = from o in s.Query<ZelenaPovrsina.Entiteti.DecijeIgraliste>()
-                                                                         select o;
-
-                foreach (ZelenaPovrsina.Entiteti.DecijeIgraliste r in svaDecijaIgralista)
+                if (session != null)
                 {
-                    decijaigralista.Add(new DecijeIgralisteBasic(r.Tip, r.BrIgracaka, r.Pesak, r.Starost));
+                    IEnumerable<DecijeIgraliste> svaDecijaIgralista =
+                        from o in session.Query<DecijeIgraliste>()
+                        select o;
+
+                    foreach (DecijeIgraliste r in svaDecijaIgralista)
+                    {
+                        decijaIgralista.Add(new DecijeIgralistePregled(r.Tip, r.BrIgracaka, r.Pesak, r.Starost)); //ne znam zasto ima gresku
+                    }
                 }
 
-                s.Close();
             }
-            catch (Exception ec)
+            catch (Exception ex)
             {
-                //handle exceptions
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
             }
 
-            return decijaigralista;
+            return decijaIgralista;
         }
 
         public static void obrisiDecijeIgraliste(int id)
@@ -699,7 +745,39 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static List<FontanaPregled> vratiSveFontane()
+        {
+            List<FontanaPregled> fontane = [];
+            ISession? session = null;
 
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    IEnumerable<Fontana> sveFontane =
+                        from o in session.Query<Fontana>()
+                        select o;
+
+                    foreach (Fontana t in sveFontane)
+                    {
+                        fontane.Add(new FontanaPregled(t.Id, t.RedniBroj, t.Tip, t.BrPrskalica, t.PovrsinaF)); //nema ono za PripadaParku
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return fontane;
+        }
 
 
         #endregion
@@ -743,6 +821,39 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static List<KlupaPregled> vratiSveKlupe()
+        {
+            List<KlupaPregled> klupe = [];
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    IEnumerable<Klupa> sveKlupe =
+                        from o in session.Query<Klupa>()
+                        select o;
+
+                    foreach (Klupa t in sveKlupe)
+                    {
+                        klupe.Add(new KlupaPregled(t.Id, t.RedniBroj, t.Tip, t.Materijal)); //nema ono za PripadaParku
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return klupe;
+        }
 
         #endregion
 
@@ -786,6 +897,40 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static List<SkulpturaPregled> vratiSveSkulpture()
+        {
+            List<SkulpturaPregled> skulpture = [];
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    IEnumerable<Skulptura> sveSkulpture =
+                        from o in session.Query<Skulptura>()
+                        select o;
+
+                    foreach (Skulptura t in sveSkulpture)
+                    {
+                        skulpture.Add(new SkulpturaPregled(t.Id, t.RedniBroj, t.Tip, t.Autor)); //nema za PripadaParku i fali za Zastitu ali ne znam
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return skulpture;
+        }
+
 
         #endregion
 
@@ -827,7 +972,39 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static List<SpomenikPregled> vratiSveSpomenike()
+        {
+            List<SpomenikPregled> spomenici = [];
+            ISession? session = null;
 
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    IEnumerable<Spomenik> sviSpomenici =
+                        from o in session.Query<Spomenik>()
+                        select o;
+
+                    foreach (Spomenik t in sviSpomenici)
+                    {
+                        spomenici.Add(new SpomenikPregled(t.Id, t.RedniBroj, t.Tip, t.NazivS)); //nema ono za PripadaParku i Zastita
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return spomenici;
+        }
 
         #endregion
 
@@ -867,7 +1044,39 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static List<SvetiljkaPregled> vratiSveSvetiljke()
+        {
+            List<SvetiljkaPregled> svetiljke = [];
+            ISession? session = null;
 
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    IEnumerable<Svetiljka> sveSvetiljke =
+                        from o in session.Query<Svetiljka>()
+                        select o;
+
+                    foreach (Svetiljka t in sveSvetiljke)
+                    {
+                        svetiljke.Add(new SkulpturaPregled(t.Id, t.RedniBroj, t.Tip, t.BrSijalica)); //nema za PripadaParku i ne znam gresku
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return svetiljke;
+        }
 
         #endregion
 
@@ -883,7 +1092,7 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Drvo d = new Drvo();
+                    Drvo d = new Drvo(); //neka greska
 
                     d.RedniBroj = v.RedniBr;
                     d.Tip = v.Tip;
@@ -920,7 +1129,39 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static List<DrvoPregled> vratiSvaDrveca()
+        {
+            List<DrvoPregled> drvece = [];
+            ISession? session = null;
 
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    IEnumerable<Drvo> svaDrveca =
+                        from o in session.Query<Drvo>()
+                        select o;
+
+                    foreach (Drvo t in svaDrveca)
+                    {
+                        drvece.Add(new DrvoPregled(t.Id, t.RedniBroj, t.Tip, t.VisinaKrosnje, t.Vrsta, t.DatumSadnje, t.PovrsinaK, t.ObimDebla)); //nema za PripadaParku i fali za Zastitu ali ne znam
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return drvece;
+        }
 
         #endregion
 
@@ -961,7 +1202,39 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static List<ZastitaPregled> vratiSveZastite()
+        {
+            List<ZastitaPregled> zastite = [];
+            ISession? session = null;
 
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null)
+                {
+                    IEnumerable<Zastita> sveZastite =
+                        from o in session.Query<Zastita>()
+                        select o;
+
+                    foreach (Zastita t in sveZastite)
+                    {
+                        zastite.Add(new ZastitaPregled(t.IdZastite, t.Institucija, t.DatumOd, t.NovcanaSredstva, t.OpisZnacaja));  
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return zastite;
+        }
 
         #endregion
     }

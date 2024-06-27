@@ -544,33 +544,31 @@
         {
             BrPrskalica = brprskalica;
             PovrsinaF = povrsinaf;
-    
+        }
+    }
+
+    public class FontanaPregled : ObjekatPregled
+    {
+        public int BrPrskalica;
+        public int PovrsinaF;
+
+        public FontanaPregled()
+        {
 
         }
-
-        public class FontanaPregled : ObjekatPregled
+        public FontanaPregled(int id, int rednibr, string tip, int brprskalica, int povrsinaf) : base(id, rednibr, tip)
         {
-            public int BrPrskalica;
-            public int PovrsinaF;
-
-            public FontanaPregled()
-            {
-
-            }
-            public FontanaPregled(int id, int rednibr, string tip, int brprskalica, int povrsinaf) : base(id, rednibr, tip)
-            {
-                BrPrskalica = brprskalica;
-                PovrsinaF = povrsinaf;
+            BrPrskalica = brprskalica;
+            PovrsinaF = povrsinaf;
 
 
-            }
         }
     }
 
     #endregion
 
     #region Spomenik
-    
+
     public class SpomenikBasic:ObjekatBasic
     {
         public string NazivS;
