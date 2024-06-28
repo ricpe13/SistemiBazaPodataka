@@ -436,7 +436,7 @@
         {
 
         }
-        public KlupaBasic(int id,ParkBasic park, int rednibr, string tip, string materijal) : base(id,park, rednibr, tip)
+        public KlupaBasic(int id,ParkBasic park, int rednibr, string? tip, string materijal) : base(id,park, rednibr, tip)
         {
             Materijal = materijal;
         }
@@ -449,7 +449,7 @@
 
         }
 
-        public KlupaPregled(int id, int? idparka, int rednibr, string tip, string materijal) : base(id, idparka, rednibr, tip)
+        public KlupaPregled(int id, int? idparka, int rednibr, string? tip, string materijal) : base(id, idparka, rednibr, tip)
         {
             Materijal = materijal;
         }

@@ -1071,7 +1071,7 @@ namespace ZelenaPovrsina.DTO
 
                     foreach (Fontana t in sveFontane)
                     {
-                        fontane.Add(new FontanaPregled(t.Id, t.RedniBroj, t.Tip, t.BrPrskalica, t.PovrsinaF)); //nema ono za PripadaParku
+                        fontane.Add(new FontanaPregled(t.Id, t.PripadaParku?.IdZ, t.RedniBroj, t.Tip, t.BrPrskalica, t.PovrsinaF));
                     }
                 }
 
@@ -1130,7 +1130,7 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Klupa d = new Klupa() //ne znam sta je greska
+                    Klupa d = new Klupa()
                     { Materijal = v.Materijal };
                     d.RedniBroj = v.RedniBr;
                     d.Tip = v.Tip;
@@ -1206,7 +1206,7 @@ namespace ZelenaPovrsina.DTO
 
                     foreach (Klupa t in sveKlupe)
                     {
-                        klupe.Add(new KlupaPregled(t.Id, t.RedniBroj, t.Tip, t.Materijal)); //nema ono za PripadaParku
+                        klupe.Add(new KlupaPregled(t.Id, t.PripadaParku?.IdZ, t.RedniBroj, t.Tip, t.Materijal));
                     }
                 }
 
@@ -1266,7 +1266,8 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Skulptura d = new Skulptura(); //opet
+                    Skulptura d = new Skulptura()
+                    { Autor = v.Autor, Zastita = v.Zastita }
 
 
                     d.Autor = v.Autor;
