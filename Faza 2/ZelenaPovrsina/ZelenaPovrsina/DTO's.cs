@@ -337,11 +337,11 @@
     public class ObjekatBasic
     {
         public int IdO { get; set; }
-        public ParkBasic PripadaParku { get; set; }
+        public ParkBasic? PripadaParku { get; set; }
         public int RedniBr { get; set; }
-        public string Tip { get; set; }
+        public string? Tip { get; set; }
 
-        public ObjekatBasic(int ido, ParkBasic park, int rednibr, string tip)
+        public ObjekatBasic(int ido, ParkBasic? park, int rednibr, string tip)
         {
             IdO = ido;
             PripadaParku = park;
@@ -359,13 +359,14 @@
     public class ObjekatPregled
     {
         public int IdO { get; set; }
-        public ParkBasic PripadaParku { get; set; }
+        public int? IdParka { get; set; }
         public int RedniBr { get; set; }
-        public string Tip { get; set; }
+        public string? Tip { get; set; }
 
-        public ObjekatPregled(int ido, int rednibr, string tip)
+        public ObjekatPregled(int ido, int? idparka, int rednibr, string? tip)
         {
             IdO = ido;
+            IdParka = idparka;
             RedniBr = rednibr;
             Tip = tip;
         }
@@ -448,7 +449,7 @@
 
         }
 
-        public KlupaPregled(int id, int rednibr, string tip, string materijal) : base(id, rednibr, tip)
+        public KlupaPregled(int id, int? idparka, int rednibr, string tip, string materijal) : base(id, idparka, rednibr, tip)
         {
             Materijal = materijal;
         }
@@ -498,7 +499,7 @@
         {
 
         }
-        public DecijeIgralisteBasic(int id,ParkBasic park, int rednibr, string tip, int brigracaka, int pesak, int starost) : base(id,park, rednibr, tip)
+        public DecijeIgralisteBasic(int id, int idparka, int rednibr, string tip, int brigracaka, int pesak, int starost) : base(id, idparka, rednibr, tip)
         {
             this.BrIgracaka = brigracaka;
             this.Pesak = pesak;
@@ -517,7 +518,7 @@
         {
 
         }
-        public DecijeIgralistePregled(int id, int rednibr, string tip, int brigracaka, int pesak, int starost) : base(id, rednibr, tip)
+        public DecijeIgralistePregled(int id, int? idparka, int rednibr, string? tip, int brigracaka, int pesak, int starost) : base(id, idparka, rednibr, tip)
         {
             this.BrIgracaka = brigracaka;
             this.Pesak = pesak;
@@ -540,7 +541,7 @@
         {
 
         }
-        public FontanaBasic(int id,ParkBasic park, int rednibr, string tip, int brprskalica, int povrsinaf) : base(id,park, rednibr, tip)
+        public FontanaBasic(int id,ParkBasic park, int rednibr, string? tip, int brprskalica, int povrsinaf) : base(id,park, rednibr, tip)
         {
             BrPrskalica = brprskalica;
             PovrsinaF = povrsinaf;
@@ -556,7 +557,7 @@
         {
 
         }
-        public FontanaPregled(int id, int rednibr, string tip, int brprskalica, int povrsinaf) : base(id, rednibr, tip)
+        public FontanaPregled(int id, int? idparka, int rednibr, string? tip, int brprskalica, int povrsinaf) : base(id, idparka, rednibr, tip)
         {
             BrPrskalica = brprskalica;
             PovrsinaF = povrsinaf;
