@@ -46,5 +46,11 @@ namespace ZelenaPovrsina
             DrvorediForm forma = new DrvorediForm();
             forma.ShowDialog();
         }
+
+        private void btnObjekti_Click(object sender, EventArgs e)
+        {
+            ObjektiForm forma = new ObjektiForm();
+            forma.ShowDialog();
+        }
     }
 }

@@ -57,9 +57,9 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-        public static async Task<RadnikBasic> vratiRadnika(int id)
+        public static async Task<RadnikPregled> vratiRadnika(int id)
         {
-            RadnikBasic db = new();
+            RadnikPregled db = new();
             ISession? session = null;
 
             try
@@ -69,7 +69,7 @@ namespace ZelenaPovrsina.DTO
                 if (session != null)
                 {
                     Radnik d = await session.LoadAsync<Radnik>(id);
-                    db = new RadnikBasic(d.IdR, d.Ime, d.Prezime, d.Jmbg, d.Adresa, d.BrRadneKnjizice, d.ImeRoditelja, d.StrucnaSprema, d.DatumRodj, d.ZaZelenilo, d.ZaHigijenu, d.ZaObjekat);
+                    db = new RadnikPregled(d.IdR, d.Ime, d.Prezime, d.Jmbg, d.Adresa, d.BrRadneKnjizice, d.ImeRoditelja, d.StrucnaSprema, d.DatumRodj, d.ZaZelenilo, d.ZaHigijenu, d.ZaObjekat);
                     // fali za zelenu povrsinu i grupu, a ako se koristi Pregled onda nema errora
                 }
             }
@@ -842,7 +842,7 @@ namespace ZelenaPovrsina.DTO
 
                     foreach (DecijeIgraliste r in svaDecijaIgralista)
                     {
-                        decijaIgralista.Add(new DecijeIgralistePregled(r.Id, r.RedniBroj, r.Tip, r.BrIgracaka, r.Pesak, r.Starost));
+                        decijaIgralista.Add(new DecijeIgralistePregled(r.Id, r.RedniBroj, r.PripadaParku.IdZ, r.Tip, r.BrIgracaka, r.Pesak, r.Starost));
                     }
                 }
 
@@ -1267,7 +1267,7 @@ namespace ZelenaPovrsina.DTO
                 if (s != null)
                 {
                     Skulptura d = new Skulptura()
-                    { Autor = v.Autor, Zastita = v.Zastita }
+                    { Autor = v.Autor, Zastita = v.Zastita }; //izgleda ovde nesto nije u redu u celoj funkciji
 
 
                     d.Autor = v.Autor;
@@ -1344,7 +1344,7 @@ namespace ZelenaPovrsina.DTO
 
                     foreach (Skulptura t in sveSkulpture)
                     {
-                        skulpture.Add(new SkulpturaPregled(t.Id, t.RedniBroj, t.Tip, t.Autor)); //nema za PripadaParku i fali za Zastitu ali ne znam
+                        skulpture.Add(new SkulpturaPregled(t.Id, t.PripadaParku?.IdZ, t.RedniBroj, t.Tip, t.Autor)); //fali za Zastitu ali ne znam
                     }
                 }
 
@@ -1362,9 +1362,9 @@ namespace ZelenaPovrsina.DTO
         }
 
 
-        public static async Task<SkulpturaBasic> vratiSkulpturu(int id)
+        public static async Task<SkulpturaPregled> vratiSkulpturu(int id)
         {
-            SkulpturaBasic db = new();
+            SkulpturaPregled db = new();
             ISession? session = null;
 
             try
@@ -1374,7 +1374,7 @@ namespace ZelenaPovrsina.DTO
                 if (session != null)
                 {
                     Skulptura d = await session.LoadAsync<Skulptura>(id);
-                    db = new SkulpturaBasic(d.Id, d.RedniBroj, d.Tip, d.Autor, d.Zastita); //nema ono za PripadaParku
+                    db = new SkulpturaPregled(d.Id, d.PripadaParku.IdZ, d.RedniBroj, d.Tip, d.Autor); //fali za Zastitu, ali nemamo je ni u DTOs u SkulpturaPrelged
                 }
             }
             catch (Exception ex)
@@ -1479,7 +1479,7 @@ namespace ZelenaPovrsina.DTO
 
                     foreach (Spomenik t in sviSpomenici)
                     {
-                        spomenici.Add(new SpomenikPregled(t.Id, t.RedniBroj, t.Tip, t.NazivS)); //nema ono za PripadaParku i Zastita
+                        spomenici.Add(new SpomenikPregled(t.Id, t.PripadaParku.IdZ, t.RedniBroj, t.Tip, t.NazivS)); //nema ono za Zastita
                     }
                 }
 
@@ -1496,9 +1496,9 @@ namespace ZelenaPovrsina.DTO
             return spomenici;
         }
 
-        public static async Task<SpomenikBasic> vratiSpomenik(int id)
+        public static async Task<SpomenikPregled> vratiSpomenik(int id)
         {
-            SpomenikBasic db = new();
+            SpomenikPregled db = new();
             ISession? session = null;
 
             try
@@ -1508,7 +1508,7 @@ namespace ZelenaPovrsina.DTO
                 if (session != null)
                 {
                     Spomenik d = await session.LoadAsync<Spomenik>(id);
-                    db = new SpomenikBasic(d.Id, d.RedniBroj, d.Tip, d.NazivS, d.Zastita); //nema ono za PripadaParku
+                    db = new SpomenikPregled(d.Id, d.PripadaParku?.IdZ, d.RedniBroj, d.Tip, d.NazivS); //nema ono za Zastita
                 }
             }
             catch (Exception ex)
@@ -1641,7 +1641,7 @@ namespace ZelenaPovrsina.DTO
 
                     foreach (Svetiljka t in sveSvetiljke)
                     {
-                        svetiljke.Add(new SkulpturaPregled(t.Id, t.RedniBroj, t.Tip, t.BrSijalica)); //nema za PripadaParku i ne znam gresku
+                        svetiljke.Add(new SkulpturaPregled(t.Id, t.PripadaParku?.IdZ, t.RedniBroj, t.Tip, t.BrSijalica)); //ne znam gresku
                     }
                 }
 
@@ -1659,9 +1659,9 @@ namespace ZelenaPovrsina.DTO
         }
 
 
-        public static async Task<SvetiljkaBasic> vratiSvetiljku(int id)
+        public static async Task<SvetiljkaPregled> vratiSvetiljku(int id)
         {
-            SvetiljkaBasic db = new();
+            SvetiljkaPregled db = new();
             ISession? session = null;
 
             try
@@ -1671,7 +1671,7 @@ namespace ZelenaPovrsina.DTO
                 if (session != null)
                 {
                     Svetiljka d = await session.LoadAsync<Svetiljka>(id);
-                    db = new SvetiljkaBasic(d.Id, d.RedniBroj, d.Tip, d.BrSijalica); //nema ono za PripadaParku
+                    db = new SvetiljkaPregled(d.Id, d.PripadaParku?.IdZ, d.RedniBroj, d.Tip, d.BrSijalica); //tako uradio i kod ostalih objekata ali ovde ima gresku
                 }
             }
             catch (Exception ex)
@@ -1817,7 +1817,7 @@ namespace ZelenaPovrsina.DTO
 
                     foreach (Drvo t in svaDrveca)
                     {
-                        drvece.Add(new DrvoPregled(t.Id, t.RedniBroj, t.Tip, t.VisinaKrosnje, t.Vrsta, t.DatumSadnje, t.PovrsinaK, t.ObimDebla)); //nema za PripadaParku i fali za Zastitu ali ne znam
+                        drvece.Add(new DrvoPregled(t.Id, t.PripadaParku.IdZ, t.RedniBroj, t.Tip, t.VisinaKrosnje, t.Vrsta, t.DatumSadnje, t.PovrsinaK, t.ObimDebla)); //nema za PripadaParku i fali za Zastitu ali ne znam
                     }
                 }
 
@@ -1834,9 +1834,9 @@ namespace ZelenaPovrsina.DTO
             return drvece;
         }
 
-        public static async Task<DrvoBasic> vratiDrvo(int id)
+        public static async Task<DrvoPregled> vratiDrvo(int id)
         {
-            DrvoBasic db = new();
+            DrvoPregled db = new();
             ISession? session = null;
 
             try
@@ -1846,7 +1846,7 @@ namespace ZelenaPovrsina.DTO
                 if (session != null)
                 {
                     Drvo d = await session.LoadAsync<Drvo>(id);
-                    db = new DrvoBasic(d.Id, d.RedniBroj, d.Tip, d.VisinaKrosnje, d.Vrsta, d.DatumSadnje, d.PovrsinaK, d.ObimDebla); //nema ono za PripadaParku i Zastita
+                    db = new DrvoPregled(d.Id, d.RedniBroj, d.PripadaParku.IdZ, d.Tip, d.VisinaKrosnje, d.Vrsta, d.DatumSadnje, d.PovrsinaK, d.ObimDebla); //nema ono za PripadaParku i Zastita
                 }
             }
             catch (Exception ex)

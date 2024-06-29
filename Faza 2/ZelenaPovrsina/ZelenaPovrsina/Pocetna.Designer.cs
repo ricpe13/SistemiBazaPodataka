@@ -34,6 +34,7 @@
             btnTravnjaci = new Button();
             btnRadnici = new Button();
             btnGrupeRadnika = new Button();
+            btnObjekti = new Button();
             SuspendLayout();
             // 
             // label1
@@ -101,11 +102,23 @@
             btnGrupeRadnika.UseVisualStyleBackColor = true;
             btnGrupeRadnika.Click += btnGrupeRadnika_Click;
             // 
+            // btnObjekti
+            // 
+            btnObjekti.Font = new Font("Segoe UI", 20F);
+            btnObjekti.Location = new Point(554, 263);
+            btnObjekti.Name = "btnObjekti";
+            btnObjekti.Size = new Size(256, 52);
+            btnObjekti.TabIndex = 6;
+            btnObjekti.Text = "Objekti";
+            btnObjekti.UseVisualStyleBackColor = true;
+            btnObjekti.Click += btnObjekti_Click;
+            // 
             // Pocetna
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(915, 557);
+            Controls.Add(btnObjekti);
             Controls.Add(btnGrupeRadnika);
             Controls.Add(btnRadnici);
             Controls.Add(btnTravnjaci);
@@ -126,5 +139,6 @@
         private Button btnTravnjaci;
         private Button btnRadnici;
         private Button btnGrupeRadnika;
+        private Button btnObjekti;
     }
 }

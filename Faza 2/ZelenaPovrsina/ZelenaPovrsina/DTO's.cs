@@ -40,7 +40,7 @@
         }
     }
 
-    #endregion  //
+    #endregion  
 
     #region Radnik
     public class RadnikPregled
@@ -414,7 +414,7 @@
 
         public DrvoPregled() { }
 
-        public DrvoPregled(int ido, int rednibr, string tip, int visinaKrosnje, string vrsta, DateTime datumSadnje, double povrsinaK, double obimDebla) : base(ido, rednibr, tip)
+        public DrvoPregled(int ido, int idparka, int rednibr, string tip, int visinaKrosnje, string vrsta, DateTime datumSadnje, double povrsinaK, double obimDebla) : base(ido, idparka, rednibr, tip)
         {
             VisinaKrosnje = visinaKrosnje;
             Vrsta = vrsta;
@@ -480,7 +480,7 @@
         {
 
         }
-        public SvetiljkaPregled(int id, int rednibr, string tip, int brsijalica) : base(id, rednibr, tip)
+        public SvetiljkaPregled(int id, int idparka, int rednibr, string tip, int brsijalica) : base(id, idparka, rednibr, tip)
         {
             this.BrSijalica = brsijalica;
         }
@@ -499,7 +499,7 @@
         {
 
         }
-        public DecijeIgralisteBasic(int id, int idparka, int rednibr, string tip, int brigracaka, int pesak, int starost) : base(id, idparka, rednibr, tip)
+        public DecijeIgralisteBasic(int id, ParkBasic p, int rednibr, string tip, int brigracaka, int pesak, int starost) : base(id, p, rednibr, tip)
         {
             this.BrIgracaka = brigracaka;
             this.Pesak = pesak;
@@ -590,7 +590,7 @@
 
         public SpomenikPregled() { }
 
-        public SpomenikPregled(int id,int rednibr, string tip, string naziv):base(id,rednibr,tip)
+        public SpomenikPregled(int id, int? idparka, int rednibr, string? tip, string naziv) : base(id, idparka, rednibr, tip)
         {
             NazivS = naziv;
         }
@@ -610,7 +610,7 @@
         {
 
         }
-        public SkulpturaBasic(int id,ParkBasic park,int rbr, string tip, string autor, ZastitaBasic zastita) : base(id,park,rbr,tip)
+        public SkulpturaBasic(int id, ParkBasic park, int rbr, string tip, string autor, ZastitaBasic zastita) : base(id, park, rbr, tip)
         {
             Autor = autor;
             Zastita = zastita;
@@ -623,7 +623,7 @@
 
         public SkulpturaPregled() { }
 
-        public SkulpturaPregled(int id,int rbr,string t,string autor) : base(id,rbr,t)
+        public SkulpturaPregled(int id, int? idparka, int rbr, string? t, string autor) : base(id, idparka, rbr, t)
         {
             Autor = autor;
         }

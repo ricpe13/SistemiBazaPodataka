@@ -51,7 +51,7 @@
             groupBox1.Controls.Add(listView1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(280, 611);
+            groupBox1.Size = new Size(298, 611);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Lista objekata";
@@ -63,7 +63,7 @@
             listView1.GridLines = true;
             listView1.Location = new Point(6, 22);
             listView1.Name = "listView1";
-            listView1.Size = new Size(265, 583);
+            listView1.Size = new Size(269, 583);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -71,6 +71,7 @@
             // columnHeader1
             // 
             columnHeader1.Text = "ID";
+            columnHeader1.Width = 40;
             // 
             // columnHeader2
             // 
@@ -87,10 +88,11 @@
             // 
             columnHeader4.Text = "Tip";
             columnHeader4.TextAlign = HorizontalAlignment.Center;
+            columnHeader4.Width = 80;
             // 
             // button1
             // 
-            button1.Location = new Point(330, 64);
+            button1.Location = new Point(364, 47);
             button1.Name = "button1";
             button1.Size = new Size(176, 36);
             button1.TabIndex = 1;
@@ -99,7 +101,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(330, 118);
+            button2.Location = new Point(364, 101);
             button2.Name = "button2";
             button2.Size = new Size(176, 33);
             button2.TabIndex = 2;
@@ -126,16 +128,16 @@
             // 
             // button5
             // 
-            button5.Location = new Point(330, 370);
+            button5.Location = new Point(534, 256);
             button5.Name = "button5";
-            button5.Size = new Size(176, 39);
+            button5.Size = new Size(176, 38);
             button5.TabIndex = 5;
             button5.Text = "Skulpture";
             button5.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
-            button6.Location = new Point(330, 310);
+            button6.Location = new Point(534, 198);
             button6.Name = "button6";
             button6.Size = new Size(176, 43);
             button6.TabIndex = 6;
@@ -144,7 +146,7 @@
             // 
             // button7
             // 
-            button7.Location = new Point(330, 426);
+            button7.Location = new Point(746, 199);
             button7.Name = "button7";
             button7.Size = new Size(176, 42);
             button7.TabIndex = 7;
@@ -153,7 +155,7 @@
             // 
             // button8
             // 
-            button8.Location = new Point(330, 535);
+            button8.Location = new Point(330, 333);
             button8.Name = "button8";
             button8.Size = new Size(176, 34);
             button8.TabIndex = 8;
@@ -162,7 +164,7 @@
             // 
             // button9
             // 
-            button9.Location = new Point(330, 483);
+            button9.Location = new Point(746, 257);
             button9.Name = "button9";
             button9.Size = new Size(176, 37);
             button9.TabIndex = 9;
