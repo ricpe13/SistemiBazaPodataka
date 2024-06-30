@@ -1270,9 +1270,9 @@ namespace ZelenaPovrsina.DTO
                     { Autor = v.Autor, Zastita = v.Zastita }; //izgleda ovde nesto nije u redu u celoj funkciji
 
 
-                    d.Autor = v.Autor;
-                    Zastita z = await s.LoadAsync<Zastita>(IdZastite); //trebalo bi da je tako
-                    d.Zastita = z;
+                    //d.Autor = v.Autor;
+                    //Zastita z = await s.LoadAsync<Zastita>(IdZastite); //trebalo bi da je tako
+                    //d.Zastita = z;
                     Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
                     d.PripadaParku = p;
 
@@ -1404,9 +1404,9 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Spomenik d = new Spomenik();
+                    Spomenik d = new Spomenik()
+                    { NazivS = v.NazivS };
 
-                    d.NazivS = v.NazivS;
                     Zastita z = await s.LoadAsync<Zastita>(IdZastite); //trebalo bi da je tako
                     d.Zastita = z;
                     Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
@@ -1539,9 +1539,9 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Svetiljka d = new Svetiljka();
+                    Svetiljka d = new Svetiljka()
+                    { BrSijalica = v.BrSijalica};
 
-                    d.BrSijalica = v.BrSijalica;
                     Park z = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
                     d.PripadaParku = z;
 
@@ -1671,7 +1671,7 @@ namespace ZelenaPovrsina.DTO
                 if (session != null)
                 {
                     Svetiljka d = await session.LoadAsync<Svetiljka>(id);
-                    db = new SvetiljkaPregled(d.Id, d.PripadaParku?.IdZ, d.RedniBroj, d.Tip, d.BrSijalica); //tako uradio i kod ostalih objekata ali ovde ima gresku
+                    db = new SvetiljkaPregled(d.Id, d.PripadaParku?.IdZ, d.RedniBroj, d.Tip, d.BrSijalica);
                 }
             }
             catch (Exception ex)

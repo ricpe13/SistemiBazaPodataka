@@ -480,7 +480,7 @@
         {
 
         }
-        public SvetiljkaPregled(int id, int idparka, int rednibr, string tip, int brsijalica) : base(id, idparka, rednibr, tip)
+        public SvetiljkaPregled(int id, int? idparka, int rednibr, string? tip, int brsijalica) : base(id, idparka, rednibr, tip)
         {
             this.BrSijalica = brsijalica;
         }
