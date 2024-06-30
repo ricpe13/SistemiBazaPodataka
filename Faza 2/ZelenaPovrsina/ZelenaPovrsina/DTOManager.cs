@@ -955,7 +955,7 @@ namespace ZelenaPovrsina.DTO
 
         #region Fontana
 
-        public static async Task<bool> dodajFontanu(FontanaBasic v, int IdParka)
+        public static async Task<bool> dodajFontanu(FontanaBasic v)
         {
             ISession? s = null;
 
@@ -965,11 +965,11 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
+                    Park z = await s.LoadAsync<Park>(v.PripadaParku?.Id);
                     Fontana d = new Fontana();
 
                     d.BrPrskalica = v.BrPrskalica;
                     d.PovrsinaF = v.PovrsinaF;
-                    Park z = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
                     d.PripadaParku = z;
 
                     await s.SaveAsync(d);
@@ -1120,7 +1120,7 @@ namespace ZelenaPovrsina.DTO
 
         #region Klupa
 
-        public static async Task<bool> dodajKlupu(KlupaBasic v, int IdParka)
+        public static async Task<bool> dodajKlupu(KlupaBasic v)
         {
             ISession? s = null;
 
@@ -1130,11 +1130,11 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
+                    Park p = await s.LoadAsync<Park>(v.PripadaParku?.Id);
                     Klupa d = new Klupa()
                     { Materijal = v.Materijal };
                     d.RedniBroj = v.RedniBr;
                     d.Tip = v.Tip;
-                    Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
                     d.PripadaParku = p;
 
 
@@ -1256,7 +1256,7 @@ namespace ZelenaPovrsina.DTO
 
         #region Skulptura
 
-        public static async Task<bool> dodajSkulpturu(SkulpturaBasic v, int IdZastite, int IdParka)
+        public static async Task<bool> dodajSkulpturu(SkulpturaBasic v)
         {
             ISession? s = null;
 
@@ -1266,14 +1266,11 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
+                    Zastita z = await s.LoadAsync<Zastita>(v.Zastita.IdZastite);
+                    Park p = await s.LoadAsync<Park>(v.PripadaParku?.Id);
                     Skulptura d = new Skulptura()
-                    { Autor = v.Autor, Zastita = v.Zastita }; //izgleda ovde nesto nije u redu u celoj funkciji
+                    { Autor = v.Autor, Zastita = z }; 
 
-
-                    //d.Autor = v.Autor;
-                    //Zastita z = await s.LoadAsync<Zastita>(IdZastite); //trebalo bi da je tako
-                    //d.Zastita = z;
-                    Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
                     d.PripadaParku = p;
 
 
@@ -1394,7 +1391,7 @@ namespace ZelenaPovrsina.DTO
 
         #region Spomenik
 
-        public static async Task<bool> dodajSpomenik(SpomenikBasic v, int IdZastite, int IdParka)
+        public static async Task<bool> dodajSpomenik(SpomenikBasic v)
         {
             ISession? s = null;
 
@@ -1404,12 +1401,12 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
+                    Zastita z = await s.LoadAsync<Zastita>(v.Zastita.IdZastite);
+                    Park p = await s.LoadAsync<Park>(v.PripadaParku?.Id);
                     Spomenik d = new Spomenik()
                     { NazivS = v.NazivS };
 
-                    Zastita z = await s.LoadAsync<Zastita>(IdZastite); //trebalo bi da je tako
                     d.Zastita = z;
-                    Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
                     d.PripadaParku = p;
 
                     await s.SaveAsync(d);
@@ -1529,7 +1526,7 @@ namespace ZelenaPovrsina.DTO
 
         #region Svetiljka
 
-        public static async Task<bool> dodajSvetiljku(SvetiljkaBasic v, int IdParka)
+        public static async Task<bool> dodajSvetiljku(SvetiljkaBasic v)
         {
             ISession? s = null;
 
@@ -1539,10 +1536,10 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
+                    Park z = await s.LoadAsync<Park>(v.PripadaParku?.Id);
                     Svetiljka d = new Svetiljka()
                     { BrSijalica = v.BrSijalica};
 
-                    Park z = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
                     d.PripadaParku = z;
 
                     await s.SaveAsync(d);
@@ -1641,7 +1638,7 @@ namespace ZelenaPovrsina.DTO
 
                     foreach (Svetiljka t in sveSvetiljke)
                     {
-                        svetiljke.Add(new SkulpturaPregled(t.Id, t.PripadaParku?.IdZ, t.RedniBroj, t.Tip, t.BrSijalica)); //ne znam gresku
+                        svetiljke.Add(new SvetiljkaPregled(t.Id, t.PripadaParku?.IdZ, t.RedniBroj, t.Tip, t.BrSijalica));
                     }
                 }
 
@@ -1690,7 +1687,7 @@ namespace ZelenaPovrsina.DTO
 
         #region Drvo
 
-        public static async Task<bool> dodajDrvo(DrvoBasic v, int IdParka, int IdZastite = 0)
+        public static async Task<bool> dodajDrvo(DrvoBasic v, int IdZastite = 0)
         {
             ISession? s = null;
 
@@ -1700,7 +1697,9 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Drvo d = new Drvo(); //neka greska
+                    Park p = await s.LoadAsync<Park>(v.PripadaParku?.Id);
+                    Zastita z = await s.LoadAsync<Zastita>(v.Zastita.IdZastite);
+                    Drvo d = new Drvo();
 
                     d.RedniBroj = v.RedniBr;
                     d.Tip = v.Tip;
@@ -1709,14 +1708,8 @@ namespace ZelenaPovrsina.DTO
                     d.DatumSadnje = v.DatumSadnje;
                     d.PovrsinaK = v.PovrsinaK;
                     d.ObimDebla = v.ObimDebla;
-                    //pogledati za Zastitu kako, ima ono PodZastitom
 
-                    if (IdZastite != 0) //trebalo bi da se tako radi za zastitu
-                    {
-                        Zastita z = await s.LoadAsync<Zastita>(IdZastite);
-                        d.PodZastitomDrvo = z;
-                    }
-                    Park p = await s.LoadAsync<Park>(IdParka); //trebalo bi da je tako
+                    d.PodZastitomDrvo = z;
                     d.PripadaParku = p;
 
                     await s.SaveAsync(d);
