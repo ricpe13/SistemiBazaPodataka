@@ -11,8 +11,8 @@ namespace ZelenaPovrsina.Mapiranja
         public SkulpturaMapiranja()
         {
             Table("SKULPTURA");
-            Abstract();
-            //KeyColumn("IDO");
+            //Abstract();
+            KeyColumn("IDO");
             Map(x => x.Autor, "AUTOR");
             References(x => x.Zastita).Column("IDZASTITE").LazyLoad();
 

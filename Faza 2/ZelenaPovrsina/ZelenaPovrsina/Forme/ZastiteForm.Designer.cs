@@ -37,27 +37,35 @@
             columnHeader5 = new ColumnHeader();
             btnDodajZastitu = new Button();
             btnObrisiZastitu = new Button();
+            btnIzmeni = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = Color.Blue;
             groupBox1.Controls.Add(listView1);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            groupBox1.ForeColor = Color.White;
+            groupBox1.Location = new Point(17, 20);
+            groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(496, 528);
+            groupBox1.Padding = new Padding(4, 5, 4, 5);
+            groupBox1.Size = new Size(709, 880);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Zastite";
             // 
             // listView1
             // 
+            listView1.BackColor = Color.LightGray;
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5 });
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
-            listView1.Location = new Point(6, 22);
+            listView1.Location = new Point(9, 37);
+            listView1.Margin = new Padding(4, 5, 4, 5);
             listView1.Name = "listView1";
-            listView1.Size = new Size(469, 482);
+            listView1.Size = new Size(668, 801);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -92,32 +100,59 @@
             // 
             // btnDodajZastitu
             // 
-            btnDodajZastitu.Location = new Point(538, 45);
+            btnDodajZastitu.BackColor = Color.Blue;
+            btnDodajZastitu.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            btnDodajZastitu.ForeColor = Color.White;
+            btnDodajZastitu.Location = new Point(769, 75);
+            btnDodajZastitu.Margin = new Padding(4, 5, 4, 5);
             btnDodajZastitu.Name = "btnDodajZastitu";
-            btnDodajZastitu.Size = new Size(212, 46);
+            btnDodajZastitu.Size = new Size(303, 77);
             btnDodajZastitu.TabIndex = 1;
-            btnDodajZastitu.Text = "Dodaj zastitu";
-            btnDodajZastitu.UseVisualStyleBackColor = true;
+            btnDodajZastitu.Text = "Dodaj";
+            btnDodajZastitu.UseVisualStyleBackColor = false;
+            btnDodajZastitu.Click += btnDodajZastitu_Click;
             // 
             // btnObrisiZastitu
             // 
-            btnObrisiZastitu.Location = new Point(538, 116);
+            btnObrisiZastitu.BackColor = Color.Blue;
+            btnObrisiZastitu.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            btnObrisiZastitu.ForeColor = Color.White;
+            btnObrisiZastitu.Location = new Point(769, 291);
+            btnObrisiZastitu.Margin = new Padding(4, 5, 4, 5);
             btnObrisiZastitu.Name = "btnObrisiZastitu";
-            btnObrisiZastitu.Size = new Size(212, 44);
+            btnObrisiZastitu.Size = new Size(303, 73);
             btnObrisiZastitu.TabIndex = 2;
-            btnObrisiZastitu.Text = "Obrisi zastitu";
-            btnObrisiZastitu.UseVisualStyleBackColor = true;
+            btnObrisiZastitu.Text = "Obrisi";
+            btnObrisiZastitu.UseVisualStyleBackColor = false;
+            btnObrisiZastitu.Click += btnObrisiZastitu_Click;
+            // 
+            // btnIzmeni
+            // 
+            btnIzmeni.BackColor = Color.Blue;
+            btnIzmeni.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            btnIzmeni.ForeColor = Color.White;
+            btnIzmeni.Location = new Point(769, 185);
+            btnIzmeni.Margin = new Padding(4, 5, 4, 5);
+            btnIzmeni.Name = "btnIzmeni";
+            btnIzmeni.Size = new Size(303, 77);
+            btnIzmeni.TabIndex = 3;
+            btnIzmeni.Text = "Izmeni";
+            btnIzmeni.UseVisualStyleBackColor = false;
             // 
             // ZastiteForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(948, 552);
+            BackColor = Color.Maroon;
+            ClientSize = new Size(1354, 920);
+            Controls.Add(btnIzmeni);
             Controls.Add(btnObrisiZastitu);
             Controls.Add(btnDodajZastitu);
             Controls.Add(groupBox1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "ZastiteForm";
             Text = "Zastite";
+            Load += ZastiteForm_Load;
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -133,5 +168,6 @@
         private ColumnHeader columnHeader5;
         private Button btnDodajZastitu;
         private Button btnObrisiZastitu;
+        private Button btnIzmeni;
     }
 }

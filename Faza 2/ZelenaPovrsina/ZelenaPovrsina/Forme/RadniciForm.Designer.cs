@@ -46,27 +46,32 @@
             columnHeader14 = new ColumnHeader();
             button2 = new Button();
             btnDodajRadnika = new Button();
+            btnIzmeni = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = Color.Blue;
             groupBox1.Controls.Add(listView1);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            groupBox1.ForeColor = Color.White;
+            groupBox1.Location = new Point(12, 22);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1236, 594);
+            groupBox1.Size = new Size(1203, 565);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Lista radnika";
             // 
             // listView1
             // 
+            listView1.BackColor = Color.LightGray;
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7, columnHeader8, columnHeader9, columnHeader10, columnHeader11, columnHeader12, columnHeader13, columnHeader14 });
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
-            listView1.Location = new Point(6, 22);
+            listView1.Location = new Point(6, 18);
             listView1.Name = "listView1";
-            listView1.Size = new Size(1195, 566);
+            listView1.Size = new Size(1272, 566);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -155,34 +160,57 @@
             // 
             // button2
             // 
-            button2.Location = new Point(1254, 177);
+            button2.BackColor = Color.Blue;
+            button2.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(1367, 386);
             button2.Name = "button2";
-            button2.Size = new Size(135, 41);
+            button2.Size = new Size(102, 30);
             button2.TabIndex = 2;
-            button2.Text = "Obrisi radnika";
-            button2.UseVisualStyleBackColor = true;
+            button2.Text = "Obrisi ";
+            button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
             // btnDodajRadnika
             // 
-            btnDodajRadnika.Location = new Point(1248, 114);
+            btnDodajRadnika.BackColor = Color.Blue;
+            btnDodajRadnika.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            btnDodajRadnika.ForeColor = Color.White;
+            btnDodajRadnika.Location = new Point(1367, 349);
             btnDodajRadnika.Name = "btnDodajRadnika";
-            btnDodajRadnika.Size = new Size(135, 34);
+            btnDodajRadnika.Size = new Size(102, 31);
             btnDodajRadnika.TabIndex = 3;
-            btnDodajRadnika.Text = "Dodaj radnika";
-            btnDodajRadnika.UseVisualStyleBackColor = true;
+            btnDodajRadnika.Text = "Dodaj ";
+            btnDodajRadnika.UseVisualStyleBackColor = false;
             btnDodajRadnika.Click += btnDodajRadnika_Click;
+            // 
+            // btnIzmeni
+            // 
+            btnIzmeni.BackColor = Color.Blue;
+            btnIzmeni.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            btnIzmeni.ForeColor = Color.White;
+            btnIzmeni.Location = new Point(1367, 421);
+            btnIzmeni.Margin = new Padding(2, 2, 2, 2);
+            btnIzmeni.Name = "btnIzmeni";
+            btnIzmeni.Size = new Size(102, 31);
+            btnIzmeni.TabIndex = 1;
+            btnIzmeni.Text = "Izmeni";
+            btnIzmeni.UseVisualStyleBackColor = false;
+            btnIzmeni.Click += button1_Click;
             // 
             // RadniciForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1452, 618);
+            BackColor = Color.Maroon;
+            ClientSize = new Size(1503, 618);
+            Controls.Add(btnIzmeni);
             Controls.Add(btnDodajRadnika);
             Controls.Add(button2);
             Controls.Add(groupBox1);
             Name = "RadniciForm";
             Text = "RADNICI";
+            Load += RadniciForm_Load_1;
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -207,5 +235,6 @@
         private ColumnHeader columnHeader14;
         private Button button2;
         private Button btnDodajRadnika;
+        private Button btnIzmeni;
     }
 }

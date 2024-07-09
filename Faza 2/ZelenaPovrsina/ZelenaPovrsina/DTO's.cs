@@ -127,11 +127,11 @@
 
     public class GrupaRadnikaPregled
     {
-        public int Idg;
+        public int IdG;
         public string NazivG;
         public GrupaRadnikaPregled(int idg, string nazivG)
         {
-            Idg = idg;
+            IdG = idg;
             NazivG = nazivG;
         }
         public GrupaRadnikaPregled()
@@ -219,6 +219,7 @@
         {
             NazivP = nazivp;
             PovrsinaP = povrsinap;
+            ZonaUgrozenosti = zona;
         }
     }
 
@@ -234,7 +235,7 @@
 
         }
 
-        public ParkBasic(int id, string naziv, string zona, string tipz, string nazivp, double povrsinap) : base(id, naziv, zona, tipz)
+        public ParkBasic(int id, string naziv, string zona,   string tipz, string nazivp, double povrsinap) : base(id, naziv, zona, tipz)
         {
             NazivP = nazivp;
             PovrsinaP = povrsinap;

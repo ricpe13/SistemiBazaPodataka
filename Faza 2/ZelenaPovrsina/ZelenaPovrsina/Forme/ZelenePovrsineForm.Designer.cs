@@ -41,22 +41,29 @@
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = Color.Blue;
             groupBox1.Controls.Add(listView1);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            groupBox1.ForeColor = Color.White;
+            groupBox1.Location = new Point(17, 20);
+            groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(376, 640);
+            groupBox1.Padding = new Padding(4, 5, 4, 5);
+            groupBox1.Size = new Size(537, 1067);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Lista zelenih povrsina";
             // 
             // listView1
             // 
+            listView1.BackColor = Color.LightGray;
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
             listView1.FullRowSelect = true;
             listView1.GridLines = true;
-            listView1.Location = new Point(6, 22);
+            listView1.Location = new Point(9, 37);
+            listView1.Margin = new Padding(4, 5, 4, 5);
             listView1.Name = "listView1";
-            listView1.Size = new Size(357, 612);
+            listView1.Size = new Size(508, 1017);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -85,32 +92,42 @@
             // 
             // button4
             // 
-            button4.Location = new Point(488, 34);
+            button4.BackColor = Color.Blue;
+            button4.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            button4.ForeColor = Color.White;
+            button4.Location = new Point(697, 57);
+            button4.Margin = new Padding(4, 5, 4, 5);
             button4.Name = "button4";
-            button4.Size = new Size(161, 48);
+            button4.Size = new Size(230, 80);
             button4.TabIndex = 4;
-            button4.Text = "Dodaj zelenu povrsinu";
-            button4.UseVisualStyleBackColor = true;
+            button4.Text = "Dodaj";
+            button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
             // 
             // button5
             // 
-            button5.Location = new Point(488, 99);
+            button5.BackColor = Color.Blue;
+            button5.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            button5.ForeColor = Color.White;
+            button5.Location = new Point(697, 165);
+            button5.Margin = new Padding(4, 5, 4, 5);
             button5.Name = "button5";
-            button5.Size = new Size(161, 48);
+            button5.Size = new Size(230, 80);
             button5.TabIndex = 5;
-            button5.Text = "Obrisi zelenu povrsinu";
-            button5.UseVisualStyleBackColor = true;
+            button5.Text = "Obrisi";
+            button5.UseVisualStyleBackColor = false;
             button5.Click += button5_Click;
             // 
             // ZelenePovrsineForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(724, 637);
+            BackColor = Color.Maroon;
+            ClientSize = new Size(1034, 1062);
             Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(groupBox1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "ZelenePovrsineForm";
             Text = "ZELENE POVRSINE";
             groupBox1.ResumeLayout(false);

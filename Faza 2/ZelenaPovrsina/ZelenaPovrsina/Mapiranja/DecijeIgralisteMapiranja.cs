@@ -8,7 +8,7 @@
 
                 KeyColumn("IDO");
 
-                Map(x => x.BrIgracaka, "BRIGRACAKKA");
+                Map(x => x.BrIgracaka, "BRIGRACAKA");
                 Map(x => x.Pesak, "PESAK");
                 Map(x => x.Starost, "STAROST");
             }

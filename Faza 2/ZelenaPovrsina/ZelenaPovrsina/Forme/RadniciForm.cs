@@ -17,7 +17,7 @@ namespace ZelenaPovrsina.Forme
             InitializeComponent();
         }
 
-        private void RadniciForm_Load(object sender, EventArgs e)
+        private void RadniciForm_Load_1(object sender, EventArgs e)
         {
             popuniPodacimaRadnici();
         }
@@ -33,14 +33,11 @@ namespace ZelenaPovrsina.Forme
 
             foreach (RadnikPregled r in podaci)
             {
-                ListViewItem item = new ListViewItem(new string[] { r.IdR.ToString(), r.Ime, r.Prezime, r.Jmbg, r.Adresa, r.BrRadneKnjizice.ToString(), r.ImeRoditelja, r.StrucnaSprema, r.DatumRodj.ToString(), r.ZaZelenilo.ToString(), r.ZaHigijenu.ToString(), r.ZaObjekat.ToString()});
+                ListViewItem item = new ListViewItem(new string[] { r.IdR.ToString(), r.Ime, r.Prezime, r.Jmbg, r.Adresa, r.BrRadneKnjizice.ToString(), r.ImeRoditelja, r.StrucnaSprema, r.DatumRodj.ToString(), r.ZaZelenilo.ToString(), r.ZaHigijenu.ToString(), r.ZaObjekat.ToString() });
                 //NE ZNAM KAKO ZA IDGRUPE I ZELENE POVRSINE
                 listView1.Items.Add(item);
 
             }
-
-
-
             listView1.Refresh();
         }
 
@@ -55,7 +52,7 @@ namespace ZelenaPovrsina.Forme
             popuniPodacimaRadnici();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count == 0)
             {
@@ -71,15 +68,31 @@ namespace ZelenaPovrsina.Forme
 
             if (result == DialogResult.OK)
             {
-                DTOManager.obrisiRadnika(idRadnik);
+                await DTOManager.obrisiRadnika(idRadnik);
                 MessageBox.Show("Brisanje radnika je uspesno obavljeno!");
                 this.popuniPodacimaRadnici();
             }
             else
             {
-
+                MessageBox.Show("Brisanje radnika nije obavljeno!");
             }
         }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite radnika kog želite da izmenite!");
+                return;
+            }
+
+            int id = Int32.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+            RadnikPregled d = await DTOManager.vratiRadnika(id);
+            IzmeniRadnikaForma forma = new IzmeniRadnikaForma(d, this);
+            forma.ShowDialog();
+        }
+
+        
     }
 }
 

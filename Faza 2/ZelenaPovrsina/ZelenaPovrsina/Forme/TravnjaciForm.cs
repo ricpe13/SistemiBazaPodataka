@@ -17,7 +17,7 @@ namespace ZelenaPovrsina.Forme
             InitializeComponent();
         }
 
-        private void TravnjaciForm_Load(object sender, EventArgs e)
+        private void TravnjaciForm_Load_1(object sender, EventArgs e)
         {
             popuniPodacimaTravnjaci();
         }
@@ -80,6 +80,20 @@ namespace ZelenaPovrsina.Forme
             {
 
             }
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite travnjak koji želite da izmenite!");
+                return;
+            }
+
+            int idT = Int32.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+            TravnjakPregled t = await DTOManager.vratiTravnjak(idT);
+            IzmeniTravnjakForm forma = new IzmeniTravnjakForm(t, this);
+            forma.ShowDialog();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace ZelenaPovrsina.Entiteti
 {
-    public abstract class Objekat
+    public class Objekat
     {
         public virtual int Id { get; set; }
         public virtual Park? PripadaParku { get; set; }

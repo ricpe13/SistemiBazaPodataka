@@ -52,5 +52,11 @@ namespace ZelenaPovrsina
             ObjektiForm forma = new ObjektiForm();
             forma.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ZastiteForm forma = new ZastiteForm();
+            forma.ShowDialog();
+        }
     }
 }

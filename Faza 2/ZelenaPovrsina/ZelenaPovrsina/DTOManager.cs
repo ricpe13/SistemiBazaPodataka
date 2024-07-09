@@ -70,7 +70,6 @@ namespace ZelenaPovrsina.DTO
                 {
                     Radnik d = await session.LoadAsync<Radnik>(id);
                     db = new RadnikPregled(d.IdR, d.Ime, d.Prezime, d.Jmbg, d.Adresa, d.BrRadneKnjizice, d.ImeRoditelja, d.StrucnaSprema, d.DatumRodj, d.ZaZelenilo, d.ZaHigijenu, d.ZaObjekat);
-                    // fali za zelenu povrsinu i grupu, a ako se koristi Pregled onda nema errora
                 }
             }
             catch (Exception ex)
@@ -163,11 +162,10 @@ namespace ZelenaPovrsina.DTO
                 if (session != null && r != null)
                 {
                     Radnik o = await session.LoadAsync<Radnik>(r.IdR);
+                    o.Ime = r.Ime;
+                    o.Prezime = r.Prezime;
                     o.Adresa = r.Adresa;
-                    o.StrucnaSprema = r.StrucnaSprema;
-                    o.ZaZelenilo = r.ZaZelenilo;
-                    o.ZaHigijenu = r.ZaHigijenu;
-                    o.ZaObjekat = r.ZaObjekat;
+                    o.BrRadneKnjizice = r.BrRadneKnjizice;
                     //treba i za izmenu Id zelene povrsine, ali ne znam kako
 
                     await session.UpdateAsync(o);
@@ -292,6 +290,37 @@ namespace ZelenaPovrsina.DTO
             return parkovi;
         }
 
+        public static async Task<ParkBasic> azurirajPark(ParkBasic? db)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if(session != null && db != null)
+                {
+                    Park p = await session.LoadAsync<Park>(db.Id);
+                    p.NazivP = db.NazivP;
+                    p.NazivGradskeOpstine = db.NazivGradskeOpstine;
+                    p.ZonaUgrozenosti = db.ZonaUgrozenosti;
+                    p.PovrsinaP = db.PovrsinaP;
+
+                    await session.UpdateAsync(p);
+                    await session.FlushAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return db;
+        }
         public static async Task<ParkBasic> vratiPark(int id)
         {
             ParkBasic db = new();
@@ -390,7 +419,7 @@ namespace ZelenaPovrsina.DTO
         }
 
 
-        public static async Task<GrupaRadnikaBasic?> azurirajGrupuRadnika(GrupaRadnikaBasic? r)
+        public static async Task<GrupaRadnikaPregled?> azurirajGrupuRadnika(GrupaRadnikaPregled? r)
         {
             ISession? session = null;
 
@@ -454,9 +483,9 @@ namespace ZelenaPovrsina.DTO
             return grupeRadnika;
         }
 
-        public static async Task<GrupaRadnikaBasic> vratiGrupuRadnika(int id)
+        public static async Task<GrupaRadnikaPregled> vratiGrupuRadnika(int id)
         {
-            GrupaRadnikaBasic db = new();
+            GrupaRadnikaPregled db = new();
             ISession? session = null;
 
             try
@@ -466,7 +495,7 @@ namespace ZelenaPovrsina.DTO
                 if (session != null)
                 {
                     GrupaRadnika d = await session.LoadAsync<GrupaRadnika>(id);
-                    db = new GrupaRadnikaBasic(d.IdG, d.NazivG);
+                    db = new GrupaRadnikaPregled(d.IdG, d.NazivG);
                 }
             }
             catch (Exception ex)
@@ -522,7 +551,37 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
+        public static async Task<TravnjakPregled> azurirajTravnjak(TravnjakPregled? db)
+        {
+            ISession? session = null;
 
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null && db != null)
+                {
+                    Travnjak p = await session.LoadAsync<Travnjak>(db.Id);
+                    p.AdresaZgrade = db.AdresaZgrade;
+                    p.NazivGradskeOpstine = db.NazivGradskeOpstine;
+                    p.ZonaUgrozenosti = db.ZonaUgrozenosti;
+                    p.PovrsinaT = db.PovrsinaT;
+
+                    await session.UpdateAsync(p);
+                    await session.FlushAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return db;
+        }
         public static async Task<bool> obrisiTravnjak(int id)
         {
             ISession? session = null;
@@ -588,9 +647,9 @@ namespace ZelenaPovrsina.DTO
         }
 
 
-        public static async Task<TravnjakBasic> vratiTravnjak(int id)
+        public static async Task<TravnjakPregled> vratiTravnjak(int id)
         {
-            TravnjakBasic db = new();
+            TravnjakPregled db = new();
             ISession? session = null;
 
             try
@@ -600,7 +659,7 @@ namespace ZelenaPovrsina.DTO
                 if (session != null)
                 {
                     Travnjak d = await session.LoadAsync<Travnjak>(id);
-                    db = new TravnjakBasic(d.IdZ, d.NazivGradskeOpstine, d.ZonaUgrozenosti, d.TipZ, d.AdresaZgrade, d.PovrsinaT);
+                    db = new TravnjakPregled(d.IdZ, d.NazivGradskeOpstine, d.ZonaUgrozenosti, d.TipZ, d.AdresaZgrade, d.PovrsinaT);
                 }
             }
             catch (Exception ex)
@@ -703,6 +762,7 @@ namespace ZelenaPovrsina.DTO
                 if (session != null && r != null)
                 {
                     Drvored o = await session.LoadAsync<Drvored>(r.Id);
+                    o.Duzina = r.Duzina;
                     o.VrstaDrveta = r.VrstaDrveta;
                     o.BrojStabala = r.BrojStabala;
 
@@ -790,7 +850,7 @@ namespace ZelenaPovrsina.DTO
 
         #region DecijeIgraliste
 
-        public static async Task<bool> dodajDecijeIgraliste(DecijeIgralisteBasic r)
+        public static async Task<bool> dodajDecijeIgraliste(DecijeIgralisteBasic r, int park)
         {
             ISession? s = null;
 
@@ -800,11 +860,13 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
+                    Park p = await s.LoadAsync<Park>(park);
                     DecijeIgraliste o = new DecijeIgraliste();
                     o.Tip = r.Tip;
                     o.BrIgracaka = r.BrIgracaka;
                     o.Pesak = r.Pesak;
                     o.Starost = r.Starost;
+                    o.PripadaParku = p;
 
 
                     await s.SaveAsync(o);
@@ -891,7 +953,7 @@ namespace ZelenaPovrsina.DTO
         }
 
 
-        public static async Task<DecijeIgralisteBasic?> azurirajDecijeIgraliste(DecijeIgralisteBasic? r)
+        public static async Task<DecijeIgralistePregled?> azurirajDecijeIgraliste(DecijeIgralistePregled? r)
         {
             ISession? session = null;
 
@@ -935,7 +997,7 @@ namespace ZelenaPovrsina.DTO
                 if (session != null)
                 {
                     DecijeIgraliste d = await session.LoadAsync<DecijeIgraliste>(id);
-                    db = new DecijeIgralistePregled(d.Id, d.PripadaParku?.IdZ, d.RedniBroj, d.Tip, d.BrIgracaka, d.Pesak, d.Starost);
+                    db = new DecijeIgralistePregled(d.Id,d.PripadaParku.IdZ, d.RedniBroj, d.Tip, d.BrIgracaka, d.Pesak, d.Starost);
                 }
             }
             catch (Exception ex)
@@ -955,7 +1017,7 @@ namespace ZelenaPovrsina.DTO
 
         #region Fontana
 
-        public static async Task<bool> dodajFontanu(FontanaBasic v)
+        public static async Task<bool> dodajFontanu(FontanaBasic v, int park)
         {
             ISession? s = null;
 
@@ -965,13 +1027,13 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Park z = await s.LoadAsync<Park>(v.PripadaParku?.Id);
+                    Park z = await s.LoadAsync<Park>(park);
                     Fontana d = new Fontana();
 
                     d.BrPrskalica = v.BrPrskalica;
                     d.PovrsinaF = v.PovrsinaF;
                     d.PripadaParku = z;
-
+                    d.Tip = v.Tip;
                     await s.SaveAsync(d);
                     await s.FlushAsync();
                     return true;
@@ -1022,7 +1084,7 @@ namespace ZelenaPovrsina.DTO
         }
 
 
-        public static async Task<FontanaBasic?> azurirajFontanu(FontanaBasic? r)
+        public static async Task<FontanaPregled?> azurirajFontanu(FontanaPregled? r)
         {
             ISession? session = null;
 
@@ -1034,6 +1096,7 @@ namespace ZelenaPovrsina.DTO
                 {
                     Fontana o = await session.LoadAsync<Fontana>(r.IdO);
                     o.BrPrskalica = r.BrPrskalica;
+                    o.PovrsinaF = r.PovrsinaF;
 
                     await session.UpdateAsync(o);
                     await session.FlushAsync();
@@ -1120,7 +1183,7 @@ namespace ZelenaPovrsina.DTO
 
         #region Klupa
 
-        public static async Task<bool> dodajKlupu(KlupaBasic v)
+        public static async Task<bool> dodajKlupu(KlupaBasic v, int idp)
         {
             ISession? s = null;
 
@@ -1130,7 +1193,7 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Park p = await s.LoadAsync<Park>(v.PripadaParku?.Id);
+                    Park p = await s.LoadAsync<Park>(idp);
                     Klupa d = new Klupa()
                     { Materijal = v.Materijal };
                     d.RedniBroj = v.RedniBr;
@@ -1251,12 +1314,40 @@ namespace ZelenaPovrsina.DTO
             return db;
         }
 
+        public static async Task<KlupaPregled?> azurirajKlupu(KlupaPregled? k)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null && k != null)
+                {
+                    Klupa o = await session.LoadAsync<Klupa>(k.IdO);
+                    o.Materijal = k.Materijal;
+
+                    await session.UpdateAsync(o);
+                    await session.FlushAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return k;
+        }
 
         #endregion
 
         #region Skulptura
 
-        public static async Task<bool> dodajSkulpturu(SkulpturaBasic v)
+        public static async Task<bool> dodajSkulpturu(SkulpturaBasic v, int park, int zastita)
         {
             ISession? s = null;
 
@@ -1266,10 +1357,10 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Zastita z = await s.LoadAsync<Zastita>(v.Zastita.IdZastite);
-                    Park p = await s.LoadAsync<Park>(v.PripadaParku?.Id);
+                    Zastita z = await s.LoadAsync<Zastita>(zastita);
+                    Park p = await s.LoadAsync<Park>(park);
                     Skulptura d = new Skulptura()
-                    { Autor = v.Autor, Zastita = z }; 
+                    { Autor = v.Autor, Zastita = z, Tip = v.Tip }; 
 
                     d.PripadaParku = p;
 
@@ -1386,12 +1477,41 @@ namespace ZelenaPovrsina.DTO
             return db;
         }
 
+        public static async Task<SkulpturaPregled?> azurirajSkulpturu(SkulpturaPregled? r)
+        {
+            ISession? session = null;
+
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null && r != null)
+                {
+                    Skulptura o = await session.LoadAsync<Skulptura>(r.IdO);
+                    o.Autor = r.Autor;
+
+                    await session.UpdateAsync(o);
+                    await session.FlushAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return r;
+        }
+
 
         #endregion
 
         #region Spomenik
 
-        public static async Task<bool> dodajSpomenik(SpomenikBasic v)
+        public static async Task<bool> dodajSpomenik(SpomenikBasic v, int park, int zastita)
         {
             ISession? s = null;
 
@@ -1401,10 +1521,10 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Zastita z = await s.LoadAsync<Zastita>(v.Zastita.IdZastite);
-                    Park p = await s.LoadAsync<Park>(v.PripadaParku?.Id);
+                    Zastita z = await s.LoadAsync<Zastita>(zastita);
+                    Park p = await s.LoadAsync<Park>(park);
                     Spomenik d = new Spomenik()
-                    { NazivS = v.NazivS };
+                    { NazivS = v.NazivS, Tip = v.Tip};
 
                     d.Zastita = z;
                     d.PripadaParku = p;
@@ -1520,13 +1640,40 @@ namespace ZelenaPovrsina.DTO
             return db;
         }
 
+        public static async Task<SpomenikPregled?> azurirajSpomenik(SpomenikPregled? r)
+        {
+            ISession? session = null;
 
+            try
+            {
+                session = DataLayer.GetSession();
+
+                if (session != null && r != null)
+                {
+                    Spomenik o = await session.LoadAsync<Spomenik>(r.IdO);
+                    o.NazivS = r.NazivS;
+
+                    await session.UpdateAsync(o);
+                    await session.FlushAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.FormatExceptionMessage());
+            }
+            finally
+            {
+                session?.Close();
+            }
+
+            return r;
+        }
 
         #endregion
 
         #region Svetiljka
 
-        public static async Task<bool> dodajSvetiljku(SvetiljkaBasic v)
+        public static async Task<bool> dodajSvetiljku(SvetiljkaBasic v,int park)
         {
             ISession? s = null;
 
@@ -1536,9 +1683,9 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Park z = await s.LoadAsync<Park>(v.PripadaParku?.Id);
+                    Park z = await s.LoadAsync<Park>(park);
                     Svetiljka d = new Svetiljka()
-                    { BrSijalica = v.BrSijalica};
+                    { BrSijalica = v.BrSijalica, Tip=v.Tip};
 
                     d.PripadaParku = z;
 
@@ -1590,7 +1737,7 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-        public static async Task<SvetiljkaBasic?> azurirajSvetiljku(SvetiljkaBasic? r)
+        public static async Task<SvetiljkaPregled?> azurirajSvetiljku(SvetiljkaPregled? r)
         {
             ISession? session = null;
 
@@ -1687,7 +1834,7 @@ namespace ZelenaPovrsina.DTO
 
         #region Drvo
 
-        public static async Task<bool> dodajDrvo(DrvoBasic v, int IdZastite = 0)
+        public static async Task<bool> dodajDrvo(DrvoBasic v, int park, int zastita)
         {
             ISession? s = null;
 
@@ -1697,8 +1844,8 @@ namespace ZelenaPovrsina.DTO
 
                 if (s != null)
                 {
-                    Park p = await s.LoadAsync<Park>(v.PripadaParku?.Id);
-                    Zastita z = await s.LoadAsync<Zastita>(v.Zastita.IdZastite);
+                    Park p = await s.LoadAsync<Park>(park);
+                    Zastita z = await s.LoadAsync<Zastita>(zastita);
                     Drvo d = new Drvo();
 
                     d.RedniBroj = v.RedniBr;
@@ -1760,7 +1907,7 @@ namespace ZelenaPovrsina.DTO
             }
         }
 
-        public static async Task<DrvoBasic?> azurirajDrvo(DrvoBasic? r)
+        public static async Task<DrvoPregled?> azurirajDrvo(DrvoPregled? r)
         {
             ISession? session = null;
 

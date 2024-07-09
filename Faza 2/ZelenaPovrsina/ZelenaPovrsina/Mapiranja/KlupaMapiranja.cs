@@ -5,8 +5,8 @@
         public KlupaMapiranja()
         {
             Table("KLUPA");
-            Abstract();
-            //KeyColumn("IDO");
+            //Abstract();
+            KeyColumn("IDO");
             Map(x => x.Materijal, "MATERIJAL");
 
 

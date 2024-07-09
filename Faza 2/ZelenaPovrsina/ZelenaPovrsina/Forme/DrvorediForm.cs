@@ -79,5 +79,44 @@ namespace ZelenaPovrsina.Forme
 
             }
         }
+
+        private void DrvorediForm_Load(object sender, EventArgs e)
+        {
+            popuniPodacimaDrvorede();
+        }
+
+        public void popuniPodacimaDrvorede()
+        {
+
+
+            listView1.Items.Clear();
+            List<DrvoredPregled> podaci = DTOManager.vratiSveDrvorede();
+
+
+
+            foreach (DrvoredPregled r in podaci)
+            {
+                ListViewItem item = new ListViewItem(new string[] { r.Id.ToString(), r.Ulica, r.Duzina.ToString(), r.VrstaDrveta, r.BrojStabala.ToString() });
+                listView1.Items.Add(item);
+
+            }
+
+
+
+            listView1.Refresh();
+        }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Izaberite drvored koji biste želeli da izmenite!");
+                return;
+            }
+            int idD = Int32.Parse(listView1.SelectedItems[0].SubItems[0].Text);
+            DrvoredBasic d = await DTOManager.vratiDrvored(idD);
+            IzmeniDrvoredForm forma = new IzmeniDrvoredForm(d, this);
+            forma.ShowDialog();
+        }
     }
 }

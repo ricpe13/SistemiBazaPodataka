@@ -42,72 +42,95 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(19, 33);
+            label1.BackColor = Color.Blue;
+            label1.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(10, 55);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(91, 15);
+            label1.Size = new Size(184, 23);
             label1.TabIndex = 0;
             label1.Text = "Gradska opstina";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(11, 71);
+            label2.BackColor = Color.Blue;
+            label2.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(10, 118);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(99, 15);
+            label2.Size = new Size(199, 23);
             label2.TabIndex = 1;
             label2.Text = "Zona ugrozenosti";
             // 
             // txtOpstina
             // 
-            txtOpstina.Location = new Point(116, 30);
+            txtOpstina.Location = new Point(246, 51);
+            txtOpstina.Margin = new Padding(4, 5, 4, 5);
             txtOpstina.Name = "txtOpstina";
-            txtOpstina.Size = new Size(148, 23);
+            txtOpstina.Size = new Size(210, 31);
             txtOpstina.TabIndex = 2;
             // 
             // txtZona
             // 
-            txtZona.Location = new Point(116, 68);
+            txtZona.Location = new Point(246, 114);
+            txtZona.Margin = new Padding(4, 5, 4, 5);
             txtZona.Name = "txtZona";
-            txtZona.Size = new Size(148, 23);
+            txtZona.Size = new Size(210, 31);
             txtZona.TabIndex = 3;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(29, 111);
+            label3.BackColor = Color.Blue;
+            label3.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(10, 185);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(81, 15);
+            label3.Size = new Size(162, 23);
             label3.TabIndex = 4;
             label3.Text = "Adresa zgrade";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(7, 147);
+            label4.BackColor = Color.Blue;
+            label4.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(10, 245);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(103, 15);
+            label4.Size = new Size(218, 23);
             label4.TabIndex = 5;
             label4.Text = "Povrsina travnjaka";
             // 
             // txtAdresa
             // 
-            txtAdresa.Location = new Point(116, 108);
+            txtAdresa.Location = new Point(246, 181);
+            txtAdresa.Margin = new Padding(4, 5, 4, 5);
             txtAdresa.Name = "txtAdresa";
-            txtAdresa.Size = new Size(145, 23);
+            txtAdresa.Size = new Size(210, 31);
             txtAdresa.TabIndex = 6;
             // 
             // txtPT
             // 
-            txtPT.Location = new Point(116, 147);
+            txtPT.Location = new Point(246, 246);
+            txtPT.Margin = new Padding(4, 5, 4, 5);
             txtPT.Name = "txtPT";
-            txtPT.Size = new Size(146, 23);
+            txtPT.Size = new Size(210, 31);
             txtPT.TabIndex = 7;
             // 
             // btnDodajT
             // 
-            btnDodajT.Location = new Point(128, 191);
+            btnDodajT.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDodajT.ForeColor = Color.Blue;
+            btnDodajT.Location = new Point(299, 355);
+            btnDodajT.Margin = new Padding(4, 5, 4, 5);
             btnDodajT.Name = "btnDodajT";
-            btnDodajT.Size = new Size(110, 25);
+            btnDodajT.Size = new Size(157, 33);
             btnDodajT.TabIndex = 8;
             btnDodajT.Text = "Dodaj travnjak";
             btnDodajT.UseVisualStyleBackColor = true;
@@ -115,9 +138,10 @@
             // 
             // DodajTravnjakForma
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(578, 395);
+            BackColor = Color.Maroon;
+            ClientSize = new Size(826, 658);
             Controls.Add(btnDodajT);
             Controls.Add(txtPT);
             Controls.Add(txtAdresa);
@@ -127,6 +151,7 @@
             Controls.Add(txtOpstina);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "DodajTravnjakForma";
             Text = "DodajTravnjakForma";
             ResumeLayout(false);
